@@ -1,5 +1,11 @@
 class ChangeNumberFormatInDailyUpdate < ActiveRecord::Migration
-  def change
-  	change_column :daily_updates, :number, :string
+
+  def self.up
+    change_column :daily_updates, :number, :string 
   end
+
+  def self.down
+    change_column :daily_updates, :number, :integer
+  end
+
 end
