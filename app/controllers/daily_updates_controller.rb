@@ -21,8 +21,13 @@ class DailyUpdatesController < ApplicationController
 
   def create
     @daily_update = DailyUpdate.new(daily_update_params)
-    @daily_update.save
-    respond_with(@daily_update)
+    if @daily_update.save
+      flash[:notice] = "Update successfully created"
+      redirect_to new_daily_update_path
+    else
+      flash[:alert] = "Error!"
+      redirect_to new_daily_update_path
+    end
   end
 
   def update
