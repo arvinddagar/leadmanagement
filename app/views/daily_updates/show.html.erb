@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Business:</strong>
+  <%= @daily_update.business %>
+</p>
+
+<p>
+  <strong>Contact person:</strong>
+  <%= @daily_update.contact_person %>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @daily_update.number %>
+</p>
+
+<p>
+  <strong>Designation:</strong>
+  <%= @daily_update.designation %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @daily_update.status %>
+</p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @daily_update.summary %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @daily_update.address %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @daily_update.email %>
+</p>
+
+<%= link_to 'Edit', edit_daily_update_path(@daily_update) %> |
+<%= link_to 'Back', daily_updates_path %>

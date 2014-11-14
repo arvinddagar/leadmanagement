@@ -1,0 +1,49 @@
+<%= form_for(@daily_update) do |f| %>
+  <% if @daily_update.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@daily_update.errors.count, "error") %> prohibited this daily_update from being saved:</h2>
+
+      <ul>
+      <% @daily_update.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :business %><br>
+    <%= f.text_field :business %>
+  </div>
+  <div class="field">
+    <%= f.label :contact_person %><br>
+    <%= f.text_field :contact_person %>
+  </div>
+  <div class="field">
+    <%= f.label :number %><br>
+    <%= f.text_field :number %>
+  </div>
+  <div class="field">
+    <%= f.label :designation %><br>
+    <%= f.text_field :designation %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :summary %><br>
+    <%= f.text_area :summary %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
