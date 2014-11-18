@@ -1,44 +1,37 @@
+<table class="table">
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Business:</strong>
+
+<tr><td>  <strong>Business:</strong></td><td>
   <%= @daily_update.business %>
-</p>
-
-<p>
-  <strong>Contact person:</strong>
+</td></tr>
+<tr><td>  <strong>Contact person:</strong></td><td>
   <%= @daily_update.contact_person %>
-</p>
-
-<p>
-  <strong>Number:</strong>
+</td></tr>
+<tr><td>
+  <strong>Number:</strong></td><td>
   <%= @daily_update.number %>
-</p>
-
-<p>
-  <strong>Designation:</strong>
+</td></tr>
+<tr><td>
+  <strong>Designation:</strong></td><td>
   <%= @daily_update.designation %>
-</p>
-
-<p>
-  <strong>Status:</strong>
+</td></tr>
+<tr><td>
+  <strong>Status:</strong></td><td>
   <%= @daily_update.status %>
-</p>
-
-<p>
-  <strong>Summary:</strong>
+</td></tr>
+<tr><td>
+  <strong>Summary:</strong></td><td>
   <%= @daily_update.summary %>
-</p>
-
-<p>
-  <strong>Address:</strong>
+</td></tr>
+<tr><td>
+  <strong>Address:</strong></td><td>
   <%= @daily_update.address %>
-</p>
-
-<p>
-  <strong>Email:</strong>
+</td></tr>
+<tr><td>
+  <strong>Email:</strong></td><td>
   <%= @daily_update.email %>
-</p>
-
+</td></tr>
+</table>
 <%= link_to 'Edit', edit_daily_update_path(@daily_update) %> |
 <%= link_to 'Back', daily_updates_path %>

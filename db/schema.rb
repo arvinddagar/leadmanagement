@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141114120500) do
+ActiveRecord::Schema.define(version: 20141118104600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20141114120500) do
   create_table "daily_updates", force: true do |t|
     t.string   "business"
     t.string   "contact_person"
-    t.integer  "number"
+    t.string   "number"
     t.string   "designation"
     t.string   "status"
     t.text     "summary"
@@ -41,6 +41,17 @@ ActiveRecord::Schema.define(version: 20141114120500) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "lead_statuses", force: true do |t|
+    t.string   "state"
+    t.integer  "user_id"
+    t.integer  "daily_update_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "lead_statuses", ["daily_update_id"], name: "index_lead_statuses_on_daily_update_id", using: :btree
+  add_index "lead_statuses", ["user_id"], name: "index_lead_statuses_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

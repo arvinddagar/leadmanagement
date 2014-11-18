@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  state: MyString
+  user_id: 
+  daily_update_id: 
+
+two:
+  state: MyString
+  user_id: 
+  daily_update_id: 

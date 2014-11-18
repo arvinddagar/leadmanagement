@@ -31,6 +31,7 @@ class DailyUpdatesController < ApplicationController
   end
 
   def update
+    binding.pry
     @daily_update.update(daily_update_params)
     respond_with(@daily_update)
   end
