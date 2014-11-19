@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>DataApp</title>
+    <title>Lead Management System</title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
@@ -44,7 +44,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">Lead Management System</a>
         </div>
         <div class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" role="form">
@@ -70,13 +70,11 @@
     </div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-   
-
-    <div class="container">
+    <div class="container" >
       <!-- Example row of columns -->
       <div class="row">
-          <div class="notice"><%= notice %></div>
-          <div class="alert"><%= alert %></div>
+          <div class="notice" style="margin-top:50px;"><%= notice %></div>
+          <div class="alert" style="margin-top:50px;"><%= alert %></div>
           <%= yield %>
         </div>
       <hr>

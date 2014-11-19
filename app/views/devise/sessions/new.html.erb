@@ -1,10 +1,10 @@
 <div class="container">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name),:html => { :class=>"form-signin" ,:role=>"form"}) do |f| %>
-  <h2 class="form-signin-heading">Please sign in</h2>
+  <h5>Sign In</h5>
   <div>
   <%= f.email_field :email,:class=>"form-control", :placeholder=>"Email address", autofocus: true %></div>
 
-  <div>
+  <div style="margin-top:5px;">
     <%= f.password_field :password, :class=>"form-control", :placeholder=>"Password", required: true,autocomplete: "off" %></div>
 
   <% if devise_mapping.rememberable? -%>

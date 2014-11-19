@@ -8,15 +8,18 @@ class DailyUpdatesController < ApplicationController
   end
 
   def show
+    @lead_status = @daily_update.lead_status
     respond_with(@daily_update)
   end
 
   def new
     @daily_update = DailyUpdate.new
+    @daily_update.lead_status.build 
     respond_with(@daily_update)
   end
 
   def edit
+   @lead_status = @daily_update.lead_status
   end
 
   def create
@@ -32,7 +35,8 @@ class DailyUpdatesController < ApplicationController
 
   def update
     @daily_update.update(daily_update_params)
-    respond_with(@daily_update)
+    #respond_with(@daily_update)
+    redirect_to edit_daily_update_path(@daily_update)
   end
 
   def destroy
@@ -46,6 +50,7 @@ class DailyUpdatesController < ApplicationController
     end
 
     def daily_update_params
-      params.require(:daily_update).permit(:business, :contact_person, :number, :designation, :status, :summary, :address, :email)
+      params.require(:daily_update).permit(:business, :contact_person, :number, :designation, :status, :summary, :address, :email,lead_status_attributes: [:state,
+                                                   :comment,:user_id])
     end
 end

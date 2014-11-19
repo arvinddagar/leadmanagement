@@ -4,3 +4,13 @@
 
 <%= link_to 'Show', @daily_update %> |
 <%= link_to 'Back', daily_updates_path %>
+<h3>This Client Status Till Now</h3>
+<table class='table'>
+	<tr><th>Status</th><th> Comment </th><th>Updated By</th></tr>
+<% @lead_status.each do |ls|%>
+	<tr>
+	<td><%= ls.state %></td>
+	<td><%= ls.comment %></td>
+	<td><%= ls.user.email if ls.user.present? %></td></tr>
+<%end%>
+</table>

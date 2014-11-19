@@ -15,20 +15,25 @@
     <%= f.text_field :business , placeholder: 'Business', :class=>"form-control" %>
   
     <%= f.text_field :contact_person  , placeholder: 'Contact Person' , :class=>"form-control"%>
-
     <%= f.text_field :number , placeholder: 'Number', :class=>"form-control" %>
 
     <%= f.text_field :designation, placeholder: 'Designation', :class=>"form-control" %>
  
-    <%#= f.select(:status ,DailyUpdate::PERSON_TYPES,{}, :class=>"form-control")%>
-  
-    <%= f.text_field :status, placeholder: 'status', :class=>"form-control" %>
-  
- 
     <%= f.text_field :address, placeholder: 'Address', :class=>"form-control" %>
  
     <%= f.text_field :email , placeholder: 'Email', :class=>"form-control"%>
-    <%= f.text_area :summary , placeholder: 'Summary', :class=>"form-control"%>
+    <%#= f.select(:status ,DailyUpdate::PERSON_TYPES,{}, :class=>"form-control")%>
+    
+        <%= f.fields_for :lead_status, @daily_update.lead_status.build do |q| %>
+          <%= q.select :state, LeadStatus::PERSON_TYPES, {}, :class=>"form-control" %>
+          <%= q.text_area :comment, placeholder: 'comment', :class=>"form-control" %>
+          <%= q.hidden_field :user_id, value: current_user.id%>
+        <% end %>
+
+    <%#= f.text_field :status, placeholder: 'status', :class=>"form-control" %>
+  
+ 
+    <%#= f.text_area :summary , placeholder: 'Summary', :class=>"form-control"%>
   </div>
   <div class="actions">
     <%= f.submit  " Submit " , :class=>"btn btn-default"%>
