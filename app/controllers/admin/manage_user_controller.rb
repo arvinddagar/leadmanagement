@@ -25,23 +25,17 @@ class Admin::ManageUserController < ApplicationController
  	 	@user = User.find(params[:id])
  	 	if @user.active
  	 	    @user.active = false
-
- 	 	#     	respond_to do |format|
-    #   format.html
-    #   format.json { render json: @category_wise_data }
-    # end
-
-
+ 	 	    @user.save
  	 	    respond_to do |format|
  	 	    	format.json {render json: "user deactivated"}
  	 	    end
  	 	else
  	 		@user.active = true
+ 	 		@user.save
  	 		respond_to do |format|
  	 	    	format.json  {render json: "user activated"}
  	 	    end
  	 	end
- 	 	@user.save
     end
 
 	def new
