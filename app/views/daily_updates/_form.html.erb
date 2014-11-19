@@ -13,6 +13,8 @@
 
   <div class="form-group">
     <%= f.text_field :business , placeholder: 'Business', :class=>"form-control" %>
+    <%= f.hidden_field :user_id ,value: current_user.id %>
+
   
     <%= f.text_field :contact_person  , placeholder: 'Contact Person' , :class=>"form-control"%>
     <%= f.text_field :number , placeholder: 'Number', :class=>"form-control" %>

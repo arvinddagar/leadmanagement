@@ -47,12 +47,21 @@
           <a class="navbar-brand" href="#">Lead Management System</a>
         </div>
         <div class="navbar-collapse collapse">
+	       <div >
+          </div>
           <form class="navbar-form navbar-right" role="form">
-	        <% if user_signed_in? %>
+         <% if user_signed_in? %>
+    
+            <% if current_user.admin? %>
+              <%= link_to "User Management" , admin_manage_user_index_path %> |
+               <%= link_to "Lead Management" , admin_daily_updates_index_path %>
+            <%else%>
+            <%end%>
               Signed in as <%= current_user.email %>. Not you?
               <div class="form-group">  
                 <%= link_to "Sign out", destroy_user_session_path,:method => :delete ,:class=>"btn btn-success"%>
             </div>
+            
             <% else %>
             <%= link_to "Sign up", new_user_registration_path %> or
             <%= link_to "Sign in", new_user_session_path %>

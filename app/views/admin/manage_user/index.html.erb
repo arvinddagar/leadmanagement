@@ -1,0 +1,28 @@
+<h3>This Client Status Till Now</h3>
+<table class='table'>
+	<tr><th>Email</th><th> Role </th><th>Change permission</th></tr>
+<% @user.each do |ls|%>
+	<tr>
+	<td><%= ls.email %></td>
+	<td></td>
+	<td><%= check_box_tag 'Deactivate', 'Deactivate', !ls.active , :class=> 'deactivate' , :val => ls.id%><%#= check_box_tag :active, checked: false,  "Dactivate Account",:class=> 'deactivate', :val => ls.id%><% if !ls.active %> Activate Account <%else%> Deactivate Account<%end%></td></tr>
+<%end%>
+</table>
+<%= link_to 'Create new User' , new_admin_manage_user_path %>
+
+<script>
+// it is for merchant wise filter
+
+   $('.deactivate').on('change', function() {
+   // alert( $(this).attr('val'));
+    $.ajax('/admin/deactivate', {
+        type: 'get',
+        dataType: 'html',
+        data: {id: $(this).attr('val') },
+        success: function(data, textStatus, jqXHR) {
+        alert(data);
+        location.reload();
+        }
+      });
+  });
+  </script>

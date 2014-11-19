@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   
 
+  
+
   resources :daily_updates
 
 
-  devise_for :users
+  devise_for :users , controllers: { sessions: "sessions" }
 
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -12,7 +14,17 @@ Rails.application.routes.draw do
   root 'daily_updates#index'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+  namespace :admin do
+    resources :manage_user
+    resources :users
+    get 'deactivate' => 'manage_user#deactivate', :as=>'deactivate'
+    get 'daily_updates/index'
+  end
 
+  as :admin do
+    post 'admin/new_users' => 'admin/users#create'
+  # your other :admin routes here
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
