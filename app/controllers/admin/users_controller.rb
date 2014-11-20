@@ -21,7 +21,6 @@ class Admin::UsersController < ApplicationController
 	def update
 		@user = User.find(params[:id])
 		@user.update_attributes(user_params)
-		binding.pry
 		redirect_to admin_manage_user_index_path
 	end
 
