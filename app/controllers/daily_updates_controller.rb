@@ -3,7 +3,7 @@ class DailyUpdatesController < ApplicationController
   before_action :authenticate_user!
   respond_to :html
   def index
-    @daily_updates = DailyUpdate.all
+    @daily_updates = DailyUpdate.order("created_at DESC").page(params[:page]).per(10)    
     respond_with(@daily_updates)
   end
 
@@ -28,8 +28,8 @@ class DailyUpdatesController < ApplicationController
       flash[:notice] = "Update successfully created"
       redirect_to new_daily_update_path
     else
-      flash[:alert] = "Error!"
-      redirect_to new_daily_update_path
+      render :new
+      # flash[:alert] = "Please Fill business and Number field Correctly"
     end
   end
 

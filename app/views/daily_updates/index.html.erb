@@ -1,13 +1,16 @@
 <div class="container">
 <h1>Listing Daily Updates</h1>
 
+
+<div style="float:right;"><%= link_to 'New Daily update', new_daily_update_path , :class=>"btn btn-primary"%></div>
+
 <table class='table'>
   <thead>
     <tr>
       <th>Business</th>
       <th>Contact person</th>
       <th>Number</th>
-      <th>Designation</th>
+      <th>Created At</th>
       <th>Status</th>
       <th>Comment</th>
       <th>Address</th>
@@ -21,7 +24,7 @@
         <td><%= daily_update.business %></td>
         <td><%= daily_update.contact_person %></td>
         <td><%= daily_update.number %></td>
-        <td><%= daily_update.designation %></td>
+        <td><%= daily_update.created_at.to_date %></td>
         <td><%= daily_update.lead_status.last.state if daily_update.lead_status.present? %></td>
         <td><%= daily_update.lead_status.last.comment if daily_update.lead_status.present? %></td>
         <td><%= daily_update.address %></td>
@@ -32,6 +35,7 @@
     <% end %>
   </tbody>
 </table>
+  <%= paginate @daily_updates %>
 
-<%= link_to 'New Daily update', new_daily_update_path %>
+<%#= link_to 'New Daily update', new_daily_update_path %>
 </div>
