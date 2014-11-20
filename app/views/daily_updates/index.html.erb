@@ -2,7 +2,7 @@
 <h1>Listing Daily Updates</h1>
 
 <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form"} do |f| %>
- <%= f.label :Created_at_eq %>
+ <%= f.label 'Filter By Date' %>
  <%= f.date_field :created_at_eq , :class=>'form-control'%>
   <div class="actions"><%= f.submit "Search" %></div>
 <% end %>
@@ -34,7 +34,7 @@
         <td><%= daily_update.lead_status.last.comment if daily_update.lead_status.present? %></td>
         <td><%= daily_update.address.truncate(25) %></td>
         <td><%= link_to 'Show', daily_update %></td>
-        <td><%= link_to 'Edit', edit_daily_update_path(daily_update) %></td>
+        <td><%= link_to 'Update', edit_daily_update_path(daily_update) %></td>
         <td><%= link_to 'Destroy', daily_update, method: :delete, data: { confirm: 'Are you sure?' }  if current_user.admin?%></td>
       </tr>
     <% end %>

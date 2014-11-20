@@ -4,7 +4,7 @@ class DailyUpdatesController < ApplicationController
   respond_to :html
   def index
     @search = DailyUpdate.search(params[:q])
-    @daily_updates = @search.result.order("created_at DESC").page(params[:page]).per(10)    
+    @daily_updates = @search.result.order("created_at DESC").page(params[:page]).per(25)    
   
 
     # @daily_updates = DailyUpdate.order("created_at DESC").page(params[:page]).per(10)    
