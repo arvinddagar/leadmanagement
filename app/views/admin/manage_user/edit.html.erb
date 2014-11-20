@@ -1,0 +1,15 @@
+<h2>Edit New User</h2>
+
+<%= form_for(@user, url: admin_user_path , method: 'put') do |f| %>
+  <%#= devise_error_messages! %>
+ <div><%= f.label :name %><br />
+  <%= f.text_field :name %></div>
+
+  <div><%= f.label :email %><br/>
+  <%= f.email_field :email, autofocus: true %></div>
+
+
+  <div><%= f.submit "Update" %></div>
+<% end %>
+
+

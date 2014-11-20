@@ -8,7 +8,7 @@
 	<tr>
 	<td><%= ls.email %></td>
 	<td></td>
-	<td><%= check_box_tag 'Deactivate', 'Deactivate', !ls.active , :class=> 'deactivate' , :val => ls.id%><%#= check_box_tag :active, checked: false,  "Dactivate Account",:class=> 'deactivate', :val => ls.id%><% if !ls.active %> Activate Account <%else%> Deactivate Account<%end%></td></tr>
+	<td><%= check_box_tag 'Deactivate', 'Deactivate', !ls.active , :class=> 'deactivate' , :val => ls.id%><%#= check_box_tag :active, checked: false,  "Dactivate Account",:class=> 'deactivate', :val => ls.id%><% if !ls.active %> Activate Account <%else%> Deactivate Account<%end%></td><td><%= link_to "Edit" , edit_admin_manage_user_path(ls)%></td></tr>
 <%end%>
 </table>
 
