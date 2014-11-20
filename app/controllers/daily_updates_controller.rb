@@ -3,7 +3,11 @@ class DailyUpdatesController < ApplicationController
   before_action :authenticate_user!
   respond_to :html
   def index
-    @daily_updates = DailyUpdate.order("created_at DESC").page(params[:page]).per(10)    
+    @search = DailyUpdate.search(params[:q])
+    @daily_updates = @search.result.order("created_at DESC").page(params[:page]).per(10)    
+  
+
+    # @daily_updates = DailyUpdate.order("created_at DESC").page(params[:page]).per(10)    
     respond_with(@daily_updates)
   end
 
@@ -50,7 +54,7 @@ class DailyUpdatesController < ApplicationController
     end
 
     def daily_update_params
-      params.require(:daily_update).permit(:business, :contact_person, :number, :designation, :status, :summary, :address, :email,lead_status_attributes: [:state,
+      params.require(:daily_update).permit(:business, :category_id,:contact_person,:user_id, :number, :designation, :status, :summary, :address, :email,lead_status_attributes: [:state,
                                                    :comment,:user_id])
     end
 end

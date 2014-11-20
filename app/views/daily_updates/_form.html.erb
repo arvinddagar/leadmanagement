@@ -1,4 +1,8 @@
+
+<style type="text/css">
+</style>
 <%= form_for(@daily_update, :html=>{:class=>"form-inline", :role=>"form"}) do |f| %>
+  
   <% if @daily_update.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@daily_update.errors.count, "error") %> prohibited this daily_update from being saved:</h2>
@@ -12,29 +16,59 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.text_field :business , placeholder: 'Business', :class=>"form-control" %>
-    <%= f.hidden_field :user_id ,value: current_user.id %>
-
-  
-    <%= f.text_field :contact_person  , placeholder: 'Contact Person' , :class=>"form-control"%>
-    <%= f.text_field :number , placeholder: 'Number', :class=>"form-control" %>
-
-    <%= f.text_field :designation, placeholder: 'Designation', :class=>"form-control" %>
- 
-    <%= f.text_field :address, placeholder: 'Address', :class=>"form-control" %>
- 
-    <%= f.text_field :email , placeholder: 'Email', :class=>"form-control"%>
+    <table>
+      <tr>
+        <th>Category</th>
+        <th>Business</th>
+        <th>Contact Person</th>
+        <th>Number</th>
+        <th>Designation</th>
+        
+      </tr>
+    <tr>
+      <td>
+        <%= f.select :category_id, Category.all.collect { |c| [c.name, c.id] },{:include_blank => true}, :class=>"form-control" ,:style=> 'width:100%;'%>
+      </td>
+      <td>
+        <%= f.text_field :business , placeholder: 'Business', :class=>"form-control" %>
+      </td>
+      
+        <%= f.hidden_field :user_id ,value: current_user.id %>
+      
+      <td>
+        <%= f.text_field :contact_person  , placeholder: 'Contact Person' , :class=>"form-control"%>
+      </td>
+      <td>
+        <%= f.text_field :number , placeholder: 'Number', :class=>"form-control" ,:style=> 'width:100%;'%>
+      </td>
+      <td>
+        <%= f.text_field :designation, placeholder: 'Designation', :class=>"form-control",:style=> 'width:100%;' %>
+      </td>
+    </tr>
+    <tr>
+      <th>Address</th><th>Email</th><th>Status</th><th>Comment</th>
+    </tr>
+    <tr>
+      <td>
+       <%= f.text_field :address, placeholder: 'Address', :class=>"form-control" %>
+      </td>
+      <td>
+       <%= f.text_field :email , placeholder: 'Email', :class=>"form-control"%>
+      </td>
+      <td>
     <%#= f.select(:status ,DailyUpdate::PERSON_TYPES,{}, :class=>"form-control")%>
     
         <%= f.fields_for :lead_status, @daily_update.lead_status.build do |q| %>
-          <%= q.select :state, LeadStatus::PERSON_TYPES, {}, :class=>"form-control" %>
-          <%= q.text_area :comment, placeholder: 'comment', :class=>"form-control" %>
+          <%= q.select :state, LeadStatus::PERSON_TYPES, {}, :class=>"form-control" ,:style=> 'width:100%;'%>
+        </td>
+        <td colspan='3'>
+          <%= q.text_area :comment, placeholder: 'comment', :class=>"form-control" , :cols => 50,:style=>"margin-top:20px;" %>
+        </td>
           <%= q.hidden_field :user_id, value: current_user.id%>
         <% end %>
 
     <%#= f.text_field :status, placeholder: 'status', :class=>"form-control" %>
-  
- 
+  </tr></table>
     <%#= f.text_area :summary , placeholder: 'Summary', :class=>"form-control"%>
   </div>
   <div class="actions">

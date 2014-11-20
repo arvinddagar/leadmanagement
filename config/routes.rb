@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   
 
+
   resources :daily_updates
 
 
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :manage_user
     resources :users
+    resources :categories
     get 'deactivate' => 'manage_user#deactivate', :as=>'deactivate'
     get 'daily_updates/index'
   end
