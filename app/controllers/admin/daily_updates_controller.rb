@@ -5,7 +5,7 @@ class Admin::DailyUpdatesController < ApplicationController
   	redirect_to daily_updates_path if !current_user.admin?
   end
   def index
-  	@daily_updates = DailyUpdate.order("updated_at").page(params[:page]).per(25)    
+  	@daily_updates = DailyUpdate.order("created_at").page(params[:page]).per(25)    
   end
 
 end
