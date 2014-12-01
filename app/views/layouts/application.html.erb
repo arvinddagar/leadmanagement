@@ -44,7 +44,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Lead Management System</a>
+          <!-- <a class="navbar-brand" href="#">Lead Management System</a> -->
+          <%= link_to "Lead Management System",  root_path , :class=>"navbar-brand"%>
         </div>
         <div class="navbar-collapse collapse">
 	       <div >
@@ -53,8 +54,12 @@
          <% if user_signed_in? %>
     
             <% if current_user.admin? %>
-              <%= link_to "User Management" , admin_manage_user_index_path,  :style=>"color:#ffffff;text-decoration:none;" %> |
-               <%= link_to "Lead Management" , admin_daily_updates_index_path,:style=>"color:#ffffff;text-decoration:none;" %>
+              <%= link_to "User Management" , admin_manage_user_index_path,  :style=>"color:#ffffff;text-decoration:none;" %> 
+               <%= link_to " | Lead Management" , admin_daily_updates_index_path,:style=>"color:#ffffff;text-decoration:none;" %>
+               
+               <%= link_to " | Categories" , admin_categories_path,:style=>"color:#ffffff;text-decoration:none;" %>
+               
+
             <%else%>
             <%end%>
               Signed in as <%= current_user.email %>. Not you?
@@ -63,7 +68,7 @@
             </div>
             
             <% else %>
-            <%= link_to "Sign up", new_user_registration_path %> or
+            <%#= link_to "Sign up", new_user_registration_path %> 
             <%= link_to "Sign in", new_user_session_path %>
             <% end %>
             <!-- <div class="form-group">
