@@ -4,6 +4,11 @@
 <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form"} do |f| %>
  <%= f.label 'Filter By Date' %>
  <%= f.date_field :created_at_eq , :class=>'form-control'%>
+ <%= f.label 'Business'%>
+ <%= f.text_field :business_cont , :class=>'form-control'%>
+ <%= f.label 'Contact Number'%>
+ <%= f.text_field :number_cont , :class=>'form-control'%>
+ 
   <div class="actions"><%= f.submit "Search" %></div>
 <% end %>
 
