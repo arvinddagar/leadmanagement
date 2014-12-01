@@ -1,3 +1,4 @@
+<%= render 'flash'%>
 <div class="container">
 <h1>Listing Daily Updates</h1>
 
@@ -8,6 +9,8 @@
  <%= f.text_field :business_cont , :class=>'form-control'%>
  <%= f.label 'Contact Number'%>
  <%= f.text_field :number_cont , :class=>'form-control'%>
+ <%= f.label 'Category'%>
+ <%= f.select :category_id_eq ,Category.all.map.each {|e| [e.name,e.id]},{}, :class=>'form-control'%>
  
   <div class="actions"><%= f.submit "Search" %></div>
 <% end %>

@@ -87,8 +87,12 @@
     <div class="container" >
       <!-- Example row of columns -->
       <div class="row">
+        <%if notice.present?%>
           <div class="notice" style="margin-top:50px;"><%= notice %></div>
+          <%end%>
+          <% if alert.present?%>
           <div class="alert" style="margin-top:50px;"><%= alert %></div>
+          <%end%>
           <%= yield %>
         </div>
       <hr>
