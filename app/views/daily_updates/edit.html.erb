@@ -1,7 +1,31 @@
 <h1>Editing Daily Update</h1>
-
 <%= render 'form' %>
-
+<%= button_tag 'Schedule meeting',:class=>"togg"%>
+<div class="toggl">
+  <%= form_tag(schedule_meeting_path, :method=>'post', :multipart => true) do %>
+ <p>
+   Date:<br />
+   <%= date_field_tag "meeting_date" %>
+ </p>
+ <p>
+   Time: <br />
+   <%= time_field_tag "meeting_time" %>
+ </p>
+ <p>
+   Venue<br />
+   <%= text_area_tag "venue", "", :size=>"20x5" %>
+ </p>
+ <p>
+   Notes<br />
+   <%= text_area_tag "notes", "", :size=>"20x5" %>
+ </p>
+ <%= hidden_field_tag :daily_update_id , params[:id]%>
+ <%= hidden_field_tag :assigned_to , 1%>
+ <p>
+   <%= submit_tag 'Submit' %>
+ </p>
+<% end %> 
+</div>
 <%= link_to 'Show', @daily_update %> |
 <%= link_to 'Back', daily_updates_path %>
 <h3>This Client Status Till Now</h3>
@@ -17,3 +41,13 @@
 <td><%= ls.updated_at %></td></tr>
 <%end%>
 </table>
+
+<script>
+  $( document ).ready(function() {
+   $( ".toggl" ).hide();
+  });
+$( ".togg" ).click(function() {
+  $( ".toggl" ).show();
+});
+ </script>
+
