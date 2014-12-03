@@ -6,7 +6,7 @@
 	<tr><th>Email</th><th> Role </th><th>Change permission</th></tr></thead>
 <% @user.each do |ls|%>
 	<tr>
-	<td><%= ls.email %></td>
+	<td><%= link_to ls.email,user_daily_updates_path(:id=>ls.id) %></td>
 	<td></td>
 	<td><%= check_box_tag 'Deactivate', 'Deactivate', !ls.active , :class=> 'deactivate' , :val => ls.id%><%#= check_box_tag :active, checked: false,  "Dactivate Account",:class=> 'deactivate', :val => ls.id%><% if !ls.active %> Activate Account <%else%> Deactivate Account<%end%></td><td><%= link_to "Edit" , edit_admin_manage_user_path(ls)%></td></tr>
 <%end%>

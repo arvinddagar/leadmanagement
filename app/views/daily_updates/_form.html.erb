@@ -56,7 +56,6 @@
        <%= f.text_field :email , placeholder: 'Email', :class=>"form-control"%>
       </td>
       <td>
-    <%#= f.select(:status ,DailyUpdate::PERSON_TYPES,{}, :class=>"form-control")%>
     
         <%= f.fields_for :lead_status, @daily_update.lead_status.build do |q| %>
           <%= q.select :state, LeadStatus::PERSON_TYPES, {}, :class=>"form-control" ,:style=> 'width:100%;'%>
@@ -66,8 +65,6 @@
         </td>
           <%= q.hidden_field :user_id, value: current_user.id%>
         <% end %>
-
-    <%#= f.text_field :status, placeholder: 'status', :class=>"form-control" %>
   </tr></table>
     <%#= f.text_area :summary , placeholder: 'Summary', :class=>"form-control"%>
   </div>

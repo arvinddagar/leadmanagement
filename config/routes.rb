@@ -22,9 +22,13 @@ Rails.application.routes.draw do
     get 'deactivate' => 'manage_user#deactivate', :as=>'deactivate'
     get 'daily_updates/index'
   end
-
+ 
   as :admin do
     post 'admin/new_users' => 'admin/users#create'
+    post 'user_daily_updates' => 'admin/daily_updates#user_daily_updates'
+    post 'schedule_meeting'=>'admin/daily_updates#schedule_meeting'
+    get 'user_daily_updates' => 'admin/daily_updates#user_daily_updates'
+    get 'meetings'=>'admin/daily_updates#meetings'
   # your other :admin routes here
   end
   # Example of regular route:

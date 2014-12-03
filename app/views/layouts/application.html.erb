@@ -54,11 +54,10 @@
          <% if user_signed_in? %>
     
             <% if current_user.admin? %>
-              <%= link_to "User Management" , admin_manage_user_index_path,  :style=>"color:#ffffff;text-decoration:none;" %> 
-               <%= link_to " | Lead Management" , admin_daily_updates_index_path,:style=>"color:#ffffff;text-decoration:none;" %>
-               
-               <%= link_to " | Categories" , admin_categories_path,:style=>"color:#ffffff;text-decoration:none;" %>
-               
+
+             <%= link_to "Meetings" , meetings_path,:style=>"color:#ffffff;text-decoration:none;" %>
+              <%= link_to "| User Management" , admin_manage_user_index_path,  :style=>"color:#ffffff;text-decoration:none;" %> 
+               <%= link_to "| Lead Management" , admin_daily_updates_index_path,:style=>"color:#ffffff;text-decoration:none;" %>
 
             <%else%>
             <%end%>
