@@ -1,25 +1,25 @@
 
-<table class='table'>
-  <thead>
-    <tr>
-      <th>Meeting Date</th>
-      <th>Meeting Time</th>
-      <th>Venue</th>
-      <th>Notes</th>
-      <th>Assigned to</th>
-      <th ></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @meetings.each do |meeting| %>
-      <tr>
-        <td><%= meeting.meeting_date %></td>
-        <td><%= meeting.meeting_time %></td>
-        <td><%= meeting.venue %></td>
-        <td><%= meeting.notes%></td>
-        <td><%= User.find(meeting.assigned_to).email %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <table class='table'>
+            <thead>
+              <tr>
+                <th>Meeting Date</th>
+                <th>Meeting Time</th>
+                <th>Venue</th>
+                <th>Notes</th>
+                <th>Assigned to</th>
+                <th ></th>
+              </tr>
+            </thead>
+          
+            <tbody><section id="main-content">
+              <% @meetings.each do |meeting| %>
+                <tr>
+                  <td><%= meeting.meeting_date %></td>
+                  <td><%= meeting.meeting_time.strftime('%R') %></td>
+                  <td><%= meeting.venue %></td>
+                  <td><%= meeting.notes%></td>
+                  <td><%= User.find(meeting.assigned_to).email %></td>
+                </tr>
+              <% end %>
+            </tbody>
+        
