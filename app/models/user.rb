@@ -4,4 +4,5 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :daily_updates
+  ROLES = ["Admin", "Executive","Manager"]
 end

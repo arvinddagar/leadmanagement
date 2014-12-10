@@ -1,35 +1,47 @@
+<section id="main-content">
+  <section class="wrapper">
+    <h3><i class="fa fa-angle-right"></i>Add New Category</h3>
+    <div class="row">
+      <div class="col-md-12">
+      </div>
+      <div class="col-md-12 mt">
+        <div class="content-panel" >
+          <style type="text/css">
+          </style>
+          <%= form_for([:admin,@category], :html=>{:class=>"form-inline", :role=>"form"}) do |f| %>
+            <% if @category.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+                <ul>
+                <% @category.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+                </ul>
+              </div>
+            <% end %>
+          
+            <div class="form-group">
+              <table>
+                <tr>
+                  <th class="f-label">name</th>
+                </tr>
+                <tr>
+                  <td>
+                    <%= f.text_field :name,  :class=>"form-control",:style=> 'width:100%; margin-left:10px;' %>
+                  </td>
+                </tr>
+              </table>
+            </div>
 
-<style type="text/css">
-</style>
-<%= form_for([:admin,@category], :html=>{:class=>"form-inline", :role=>"form"}) do |f| %>
-  
-  <% if @category.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
-
-      <ul>
-      <% @category.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+            <div class="actions">
+              <%= f.submit  " Submit " , :class=>"btn btn-primary",:style=>"margin-left:10px;"%>
+            </div>
+          <% end %>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
+  </section>   
+</section>
 
-  <div class="form-group">
-    <table>
-      <tr>
-        <th>name</th>
-      </tr>
-    <tr>
-      <td>
-        <%= f.text_field :name,  :class=>"form-control" %>
-      </td>
 
-    <%#= f.text_field :status, placeholder: 'status', :class=>"form-control" %>
-  </tr></table>
-    <%#= f.text_area :summary , placeholder: 'Summary', :class=>"form-control"%>
-  </div>
-  <div class="actions">
-    <%= f.submit  " Submit " , :class=>"btn btn-default"%>
-  </div>
-<% end %>

@@ -1,0 +1,58 @@
+<% if current_user.admin==true%>
+<aside>
+  <div id="sidebar"  class="nav-collapse ">
+    <ul class="sidebar-menu" id="nav-accordion">
+      <p class="centered"><%=image_tag "logo-shad.png",:class=>"img-circle",:style=>"width:160px; height:150px;" %></p>
+     <h5 class="centered"></h5>
+      <li class="mt">
+        <i class="fa fa-dashboard"></i>
+        <span><%= link_to "Meetings" , meetings_path %></span>
+      </li>
+      <li class="sub-menu">
+        <i class="fa fa-book"></i>
+        <span><%= link_to "User Management" , admin_manage_user_index_path%></span>
+        <ul class="sub">
+          <li><a  href="login.html">Login</a></li>
+        </ul>
+      </li>
+      <li class="sub-menu">
+        <i class="fa fa-th"></i>
+        <span><%= link_to "Lead Management" , admin_daily_updates_index_path%></span>
+      </li>
+      <li class="sub-menu">
+        <i class="fa fa-th"></i>
+        <span><%= link_to "Client Management" , client_management_path%></span>
+      </li>
+      <li class="sub-menu">
+        <i class="fa fa-th"></i>
+        <span><%= link_to "Account Management" , index_contract_path%></span>
+      </li>
+      <li class="sub-menu">
+        <i class="fa fa-th"></i>
+        <span><%= link_to "Categories" , admin_categories_path%></span>
+      </li>
+       
+    </ul>
+  </div>
+</aside>
+<%else%>
+<aside>
+  <div id="sidebar"  class="nav-collapse ">
+    <ul class="sidebar-menu" id="nav-accordion">
+      <p class="centered"><%=image_tag "ui-sam.jpg",:class=>"img-circle",:style=>"width:160px; height:150px;"%></p>
+     <h5 class="centered"></h5>
+      <li class="mt">
+        <i class="fa fa-dashboard"></i>
+        <span><%= link_to "New records" , new_daily_update_path %></span>
+      </li>
+      <li class="sub-menu">
+        <i class="fa fa-book"></i>
+        <span><%= link_to "View records" , daily_updates_path %></span>
+      </li>
+      <li class="sub-menu">
+        <span><%= link_to "Meetings" , meetings_path %></span>
+      </li>
+    </ul>
+  </div>
+</aside>
+<%end%>

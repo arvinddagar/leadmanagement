@@ -1,20 +1,27 @@
-<h2>Create New User</h2>
-
-<%= form_for(@user, url: admin_users_path , method: 'post') do |f| %>
-  <%#= devise_error_messages! %>
- <div><%= f.label :name %><br />
-  <%= f.text_field :name %></div>
-
-  <div><%= f.label :email %><br/>
-  <%= f.email_field :email, autofocus: true %></div>
-
-  <div><%= f.label :password %> <% if @validatable %><i>(<%= @minimum_password_length %> characters minimum)</i><% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
-
-  <div><%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
-
-  <div><%= f.submit "Create" %></div>
-<% end %>
-
-
+<section id="main-content">
+  <section class="wrapper">
+    <h3><i class="fa fa-angle-right"></i>Create New User</h3>
+    <div class="row">
+      <div class="col-md-12">
+      </div>
+      <div class="col-md-12 mt">
+        <div class="content-panel" >
+          <%= form_for(@user, url: admin_users_path , method: 'post') do |f| %>
+            <div><%= f.label :name,:class=>"f-label" %><br />
+            <%= f.text_field :name , :class=>"form-control" ,:style=> 'width:30%; margin-left:10px;'%></div>
+            <div><%= f.label :email ,:class=>"f-label"%><br/>
+            <%= f.email_field :email, autofocus: true ,:class=>"form-control" ,:style=> 'width:30%; margin-left:10px;'%></div>          
+            <div><%= f.label :password ,:class=>"f-label"%> <% if @validatable %><i>(<%= @minimum_password_length %> characters minimum)</i><% end %><br />
+              <%= f.password_field :password, autocomplete: "off",:class=>"form-control" ,:style=> 'width:30%; margin-left:10px;' %></div>          
+            <div><%= f.label :password_confirmation ,:class=>"f-label"%><br />
+              <%= f.password_field :password_confirmation, autocomplete: "off",:class=>"form-control" ,:style=> 'width:30%; margin-left:10px;' %></div>
+              <%= f.label :role ,:class=>"f-label"%><br />
+               <%= f.select :role, User::ROLES, {:include_blank=>"select"}, :class=>"form-control" ,:style=> 'width:30%; margin-left:10px;'%> <br>
+            <div><%= f.submit "Create", :class=>"btn btn-primary",:style=>"margin-left:10px;" %></div>
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>   
+</section>

@@ -42,7 +42,7 @@
                   <td><%= daily_update.contact_person %></td>
                   <td><%= daily_update.number %></td>
                   <td><%= daily_update.designation %></td>
-                  <td><%= daily_update.status %></td>
+                  <td><%= daily_update.lead_status.last.state if daily_update.lead_status.present? %></td>
                   <td><%= daily_update.summary %></td>
                   <td><%= daily_update.address %></td>
                   <td><%= daily_update.email %></td>

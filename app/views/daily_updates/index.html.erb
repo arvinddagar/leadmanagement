@@ -1,49 +1,58 @@
-<div class="container">
-<h1>Listing Daily Updates</h1>
-
-<%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form"} do |f| %>
- <%= f.label 'Filter By Date' %>
- <%= f.date_field :created_at_eq , :class=>'form-control'%>
- <%= f.label 'Business'%>
- <%= f.text_field :business_cont , :class=>'form-control'%>
- <%= f.label 'Contact Number'%>
- <%= f.text_field :number_cont , :class=>'form-control'%>
- 
-  <div class="actions"><%= f.submit "Search" %></div>
-<% end %>
-
-<div style="float:right;"><%= link_to 'New Daily update', new_daily_update_path , :class=>"btn btn-primary"%></div>
-
-<table class='table'>
-  <thead>
-    <tr>
-      <th>Business</th>
-      <th>Contact person</th>
-      <th>Number</th>
-      <th>Status</th>
-      <th>Comment</th>
-      <th>Address</th>
-      <th>Created At</th>
-      <th ></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @daily_updates.each do |daily_update| %>
-      <tr>
-        <td><%= daily_update.business %></td>
-        <td><%= daily_update.contact_person %></td>
-        <td><%= daily_update.number %></td>
-        <td><%= daily_update.lead_status.first.state if daily_update.lead_status.present? %></td>
-        <td><%= daily_update.lead_status.first.comment if daily_update.lead_status.present? %></td>
-        <td><%= daily_update.address.truncate(25) %></td>
-        <td><%= daily_update.created_at.to_date %></td>
-        <td><%= link_to 'Show', daily_update %> | <%= link_to 'Update', edit_daily_update_path(daily_update) %> <%= link_to '| Destroy', daily_update, method: :delete, data: { confirm: 'Are you sure?' }  if current_user.admin?%></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-  <%= paginate @daily_updates %>
-
-<%#= link_to 'New Daily update', new_daily_update_path %>
-</div>
+<section id="main-content">
+  <section class="wrapper">
+    <h3><i class="fa fa-angle-right"></i>Listing Records</h3>
+    <div class="row">
+      <div class="col-md-12">
+      </div>
+      <div class="col-md-12 mt">
+        <div class="content-panel">
+          <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form"} do |f| %>
+           <%= f.label 'Filter By Date' , :class=>'f-label'%>
+           <%= f.date_field :created_at_eq , :class=>'form-control'%>
+           <%= f.label 'Business', :class=>'f-label'%>
+           <%= f.text_field :business_cont , :class=>'form-control'%>
+           <%= f.label 'Contact Number', :class=>'f-label'%>
+           <%= f.text_field :number_cont , :class=>'form-control'%></br>
+           <%= f.label 'Category', :class=>'f-label'%>
+           <%= f.select :category_id_eq ,Category.all.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control'%>
+           <%= f.label 'Added by', :class=>'f-label'%>
+           <%= f.select :user_id_eq ,User.all.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control'%>
+           <%= f.label 'Contact Person', :class=>'f-label'%>
+           <%= f.text_field :contact_person_eq , :class=>'form-control'%>
+            <div class="actions" align="center"><%= f.submit "Search" %></div>
+          <% end %>
+          
+          <div style="float:right;"><%= link_to 'New Record', new_daily_update_path , :class=>"btn btn-primary",:style=>"margin-right:10px"%></div>
+          
+          <table class='table'>
+            <thead>
+              <tr>
+                <th>Business</th>
+                <th>Contact person</th>
+                <th>Number</th>
+                <th>Status</th>
+                <th>Comment</th>
+                <th>Address</th>
+                <th >Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @daily_updates.each do |daily_update| %>
+                <tr>
+                  <td><%= daily_update.business %></td>
+                  <td><%= daily_update.contact_person %></td>
+                  <td><%= daily_update.number %></td>
+                  <td><%= daily_update.lead_status.first.state if daily_update.lead_status.present? %></td>
+                  <td><%= daily_update.lead_status.first.comment if daily_update.lead_status.present? %></td>
+                  <td><%= daily_update.address.truncate(25) %></td>
+                  <td><%= link_to 'Show', daily_update %> | <%= link_to 'Update', edit_daily_update_path(daily_update) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= paginate @daily_updates %>
+        </div>
+      </div>
+    </div>
+  </section>   
+</section>

@@ -1,50 +1,64 @@
-<table class="table">
-<p id="notice"><%= notice %></p>
+<section id="main-content">
+  <section class="wrapper">
+    <h3><i class="fa fa-angle-right"></i><%= notice %></h3>
+    <div class="row">
+      <div class="col-md-12">
+      </div>
+      <div class="col-md-12 mt">
+        <div class="content-panel">
+          <table class="table">
+          <p id="notice"><%= notice %></p>
+          
+          
+          <tr><td>  <strong>Business:</strong></td><td>
+            <%= @daily_update.business %>
+          </td></tr>
+          <tr><td>  <strong>Contact person:</strong></td><td>
+            <%= @daily_update.contact_person %>
+          </td></tr>
+          <tr><td>
+            <strong>Number:</strong></td><td>
+            <%= @daily_update.number %>
+          </td></tr>
+          <tr><td>
+            <strong>Designation:</strong></td><td>
+            <%= @daily_update.designation %>
+          </td></tr>
+          <tr><td>
+            <strong>Status:</strong></td><td>
+            <%= @daily_update.status %>
+          </td></tr>
+          <tr><td>
+            <strong>Summary:</strong></td><td>
+            <%= @daily_update.summary %>
+          </td></tr>
+          <tr><td>
+            <strong>Address:</strong></td><td>
+            <%= @daily_update.address %>
+          </td></tr>
+          <tr><td>
+            <strong>Email:</strong></td><td>
+            <%= @daily_update.email %>
+          </td></tr>
+          </table>
+          <%= link_to 'Edit', edit_daily_update_path(@daily_update) %> |
+          <%= link_to 'Back', daily_updates_path %>
+          
+          <h3>This Client Status Till Now</h3>
+          <table class='table'>
+            <tr><th>Status</th><th> Comment </th><th>Updated By</th><th>Updated At</th></tr>
+          <% @lead_status.each do |ls|%>
+            <tr>
+            <td><%= ls.state %></td>
+            <td><%= ls.comment %></td>
+            <td><%= ls.user.name if ls.user.present? %></td>
+            <td><%= ls.updated_at.strftime("%d/%m/%Y") if ls.updated_at.present? %></td></tr>
+          <%end%>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>   
+</section>
 
-
-<tr><td>  <strong>Business:</strong></td><td>
-  <%= @daily_update.business %>
-</td></tr>
-<tr><td>  <strong>Contact person:</strong></td><td>
-  <%= @daily_update.contact_person %>
-</td></tr>
-<tr><td>
-  <strong>Number:</strong></td><td>
-  <%= @daily_update.number %>
-</td></tr>
-<tr><td>
-  <strong>Designation:</strong></td><td>
-  <%= @daily_update.designation %>
-</td></tr>
-<tr><td>
-  <strong>Status:</strong></td><td>
-  <%= @daily_update.status %>
-</td></tr>
-<tr><td>
-  <strong>Summary:</strong></td><td>
-  <%= @daily_update.summary %>
-</td></tr>
-<tr><td>
-  <strong>Address:</strong></td><td>
-  <%= @daily_update.address %>
-</td></tr>
-<tr><td>
-  <strong>Email:</strong></td><td>
-  <%= @daily_update.email %>
-</td></tr>
-</table>
-<%= link_to 'Edit', edit_daily_update_path(@daily_update) %> |
-<%= link_to 'Back', daily_updates_path %>
-
-<h3>This Client Status Till Now</h3>
-<table class='table'>
-  <tr><th>Status</th><th> Comment </th><th>Updated By</th><th>Updated At</th></tr>
-<% @lead_status.each do |ls|%>
-  <tr>
-  <td><%= ls.state %></td>
-  <td><%= ls.comment %></td>
-  <td><%= ls.user.name if ls.user.present? %></td>
-  <td><%= ls.updated_at %></td></tr>
-<%end%>
-</table>
-
+ 

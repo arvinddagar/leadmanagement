@@ -1,0 +1,54 @@
+<section id="main-content">
+  <section class="wrapper">
+    <h3><i class="fa fa-angle-right"></i>Meetings</h3>
+    <div class="row">
+        <div class="col-md-12">
+        </div>
+      <div class="col-md-12 mt">
+        <div class="content-panel">
+         <div class="toggl">
+            <%= form_tag(update_meetings_path, :method=>'post', :multipart => true) do %>
+            <table class="table">
+           <tr>
+              <td>
+                Date:
+              </td>
+              <td>
+                <%= @meeting.meeting_date%>
+              </td>            
+            </tr>
+            <tr>
+              <td> Time:</td>
+              <td><%= @meeting.meeting_time.strftime("%I:%M%p") if @meeting.meeting_time.present? %></td> 
+           </tr>
+           <tr>
+              <td>Venue:</td>
+             <td><%= @meeting.venue %></td>
+           </tr>
+           <tr>
+              <td>Notes:</td>
+              <td><%= @meeting.notes %></td>
+           </tr>
+           <tr>
+              <td>Assigned to :</td>
+              <td><%= User.find(@meeting.assigned_to).email %></td>
+           </tr>
+            <tr>
+              <td>Status:</td>
+             <td><%=text_field_tag :status, @meeting.status %></td>
+           </tr>
+
+           <%= hidden_field_tag :id , params[:id]%>
+           <tr>
+           <td></td>
+            <td> <%= submit_tag 'Submit' %></td>
+           </tr>
+           </table>
+          <% end %>
+          <%= link_to "Back",meetings_path%> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>   
+</section>

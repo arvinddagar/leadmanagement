@@ -1,0 +1,26 @@
+<html lang="en">
+  <section id="container" >
+    <header class="header black-bg">
+      <div class="sidebar-toggle-box">
+        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation">
+        </div>
+      </div>
+      <a class="logo" href="daily_updates/index">Lead Management System
+      </a>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <% if user_signed_in? %>
+            <li style="margin-top:20px"> Signed in as <%= current_user.email %>. Not you? </li>
+            <li><%= link_to "Sign out", destroy_user_session_path,:method => :delete  ,:class=>"logout"%></>
+          <% else %>
+            <li><%= link_to "Sign in", new_user_session_path ,:class=>"logout" %></li>
+          <% end %>
+          </ul>
+      </div>
+    </header>
+  </section>  
+</html> 
+
+
+
+         

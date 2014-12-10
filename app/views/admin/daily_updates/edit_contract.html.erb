@@ -1,0 +1,82 @@
+<section id="main-content">
+  <section class="wrapper">
+    <h3><i class="fa fa-angle-right"></i>Accounts</h3>
+    <div class="row">
+        <div class="col-md-12">
+        </div>
+      <div class="col-md-12 mt">
+        <div class="content-panel">
+          <%= form_tag("/update_contract") do %>
+          <%@client=DailyUpdate.includes(:lead_status).where('lead_statuses.state =?', 'Client').references(:lead_status)%>
+          <table>
+          <tr>
+          	<td>Client</td>
+          	<td><%=select_tag "client_id", options_for_select(@client.collect{ |u| [ "#{u.business}(#{u.contact_person}:#{u.number})",u.id]})%></td>
+          </tr>
+
+          <tr>
+          	<td>
+          		Domain
+          	</td>
+          	<td>
+          		<%=text_field_tag :domain_name ,@contract.domain_name%>
+          	</td>
+
+          </tr>
+          <tr>
+          	<td>
+          		Plan
+          	</td>
+          	<td>
+          		<%= select_tag 'plan', options_for_select([
+      	          ['Select',''],
+      	          ['1 month','1 month'],
+      	          ['2 month','2 month'],
+      	          ['3 month','3 month'],
+      	          ['quaterly','quaterly'],
+      	          ['half yearly','half yearly'],['yearly','yearly']
+      	          ],@contract.plan),:style=>"width: 122px;"%>
+          	</td>
+          		
+          </tr>
+           	 <tr>
+          	<td>
+          		Renewal date
+          	</td>
+          	<td>
+          		<%=text_field_tag :renewal_date,@contract.renewal_date %>
+          	</td>
+          </tr>
+          	 <tr>
+          	<td>
+          		Status
+          	</td>
+          	<td>
+          		<%=text_field_tag :status ,@contract.status%>
+          	</td>
+          	<%=hidden_field_tag :id,params[:id]%>
+          </tr>
+          <tr><td> <%=submit_tag"save"%></td></tr>
+           	 </table>
+          <% end %>
+         
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>   
+</section>
+<script>
+$( "#plan" ).change(function() {
+    $.ajax('/fetch_plans',{
+    	type: 'get',
+        dataType: 'html',
+        data: {plans: $(this).val()},
+        success: function(data, textStatus, jqXHR)
+          {
+          	
+            $('#renewal_date').val(data);
+          }
+    });
+});
+</script>
