@@ -8,7 +8,7 @@
         <div class="content-panel">
           <%= form_tag("/update_contract") do %>
           <%@client=DailyUpdate.includes(:lead_status).where('lead_statuses.state =?', 'Client').references(:lead_status)%>
-          <table>
+          <table class="table">
           <tr>
           	<td>Client</td>
           	<td><%=select_tag "client_id", options_for_select(@client.collect{ |u| [ "#{u.business}(#{u.contact_person}:#{u.number})",u.id]})%></td>
