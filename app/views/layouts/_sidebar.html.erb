@@ -35,6 +35,30 @@
     </ul>
   </div>
 </aside>
+<%elsif current_user.role=="Manager"%>
+<aside>
+  <div id="sidebar"  class="nav-collapse ">
+    <ul class="sidebar-menu" id="nav-accordion">
+      <p class="centered"><%=image_tag "ui-sam.jpg",:class=>"img-circle",:style=>"width:160px; height:150px;"%></p>
+     <h5 class="centered"></h5>
+      <li class="mt">
+        <i class="fa fa-dashboard"></i>
+        <span><%= link_to "New records" , new_daily_update_path %></span>
+      </li>
+      <li class="sub-menu">
+        <i class="fa fa-book"></i>
+        <span><%= link_to "View records" , daily_updates_path %></span>
+      </li>
+      <li class="sub-menu">
+        <span><%= link_to "Meetings" , meetings_path %></span>
+      </li>
+      <li class="sub-menu">
+        <i class="fa fa-th"></i>
+        <span><%= link_to "Account Management" , index_contract_path%></span>
+      </li>
+    </ul>
+  </div>
+</aside>
 <%else%>
 <aside>
   <div id="sidebar"  class="nav-collapse ">
