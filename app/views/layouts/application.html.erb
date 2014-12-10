@@ -15,14 +15,56 @@
   </head>
 
   <body>
+
     <%if current_user.present?%>
       <%= render 'layouts/header'%>
       <%= render 'layouts/sidebar'%>
     <%end%>
+
+
+    
+          <form class="navbar-form navbar-right" role="form">
+         <% if user_signed_in? %>
+    
+            <% if current_user.admin? %>
+
+             <%= link_to "Meetings" , meetings_path,:style=>"color:#ffffff;text-decoration:none;" %>
+              <%= link_to "| User Management" , admin_manage_user_index_path,  :style=>"color:#ffffff;text-decoration:none;" %> 
+               <%= link_to "| Lead Management" , admin_daily_updates_index_path,:style=>"color:#ffffff;text-decoration:none;" %>
+
+            <%else%>
+            <%end%>
+              Signed in as <%= current_user.email %>. Not you?
+              <div class="form-group">  
+                <%= link_to "Sign out", destroy_user_session_path,:method => :delete ,:class=>"btn btn-success"%>
+            </div>
+            
+            <% else %>
+            <%#= link_to "Sign up", new_user_registration_path %> 
+            <%= link_to "Sign in", new_user_session_path %>
+            <% end %>
+            <!-- <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button> -->
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+
     <div class="container" >
       <div class="row">
+        <%if notice.present?%>
           <div class="notice" style="margin-top:50px;"><%= notice %></div>
+          <%end%>
+          <% if alert.present?%>
           <div class="alert" style="margin-top:50px;"><%= alert %></div>
+          <%end%>
           <%= yield %>
       </div>
       <hr>
