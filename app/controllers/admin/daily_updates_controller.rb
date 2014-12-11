@@ -28,7 +28,7 @@ class Admin::DailyUpdatesController < ApplicationController
   end
   def update_meetings
     @meeting=ScheduleMeeting.find(params[:id])
-    @meeting.update(:status=>params[:status])
+    @meeting.update(:status=>params[:status],:mom=>params[:mom])
     redirect_to :back
   end
    def client_management
