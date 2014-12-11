@@ -51,10 +51,8 @@ def fetch_plans
   @renewal_date=  Time.now + 1.month
   elsif params[:plans]=="2 month"
     @renewal_date=  Time.now + 2.month
-  elsif params[:plans]=="3 month"
+  elsif params[:plans]=="quaterly"
     @renewal_date=  Time.now + 3.month
-   elsif params[:plans]=="quaterly"
-     @renewal_date= Time.now + 4.month
     elsif params[:plans]=="half yearly"
     @renewal_date=  Time.now + 6.month
      else params[:plans]=="yearly"
