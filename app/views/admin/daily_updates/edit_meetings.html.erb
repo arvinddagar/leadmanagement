@@ -34,10 +34,6 @@
               <td><%= User.find(@meeting.assigned_to).email %></td>
            </tr>
             <tr>
-              <td>Status:</td>
-             <td><%=text_area_tag :status, @meeting.status %></td>
-           </tr>
-            <tr>
               <td>Mom:</td>
              <td><%=text_area_tag :mom, @meeting.mom %></td>
            </tr>
