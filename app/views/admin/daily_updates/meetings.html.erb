@@ -36,7 +36,7 @@
                   <td><%= meeting.meeting_date.strftime("%d-%m-%y") if meeting.meeting_date.present? %></td>
                   <td><%= meeting.meeting_time.strftime('%I:%M%p') if meeting.meeting_time.present? %></td>
                   <td style="width:20px"><%= meeting.venue %></td>
-                  <td style="width:20px"><%= meeting.notes%></td>
+                  <td style="width:30px"><%= meeting.notes%></td>
                   <%if meeting.assigned_to.present?%>
                   <td><%= User.find(meeting.assigned_to).name %></td>
                   <%end%>
