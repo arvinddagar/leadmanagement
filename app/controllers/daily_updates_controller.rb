@@ -5,7 +5,6 @@ class DailyUpdatesController < ApplicationController
   def index
     
      @search = DailyUpdate.search(params[:q])
-     binding.pry
      @daily_updates = @search.result.includes(:lead_status).where('lead_statuses.state !=?', 'Client').references(:lead_status).page(params[:page]).per(25)
      respond_with(@daily_updates)
   end
