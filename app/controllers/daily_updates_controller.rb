@@ -3,9 +3,9 @@ class DailyUpdatesController < ApplicationController
   before_action :authenticate_user!
   respond_to :html
   def index
-    @d=DailyUpdate.includes(:lead_status).where('lead_statuses.state !=?', 'Client').references(:lead_status)
-     @search = @d.search(params[:q])
-     @daily_updates = @search.result.page(params[:page]).per(25)
+    #@d=DailyUpdate.includes(:lead_status).where('lead_statuses.state !=?', 'Client').references(:lead_status)
+     @search = DailyUpdate.search(params[:q])
+     @daily_updates = @search.result.order("created_at DESC").page(params[:page]).per(25)
      respond_with(@daily_updates)
   end
 
