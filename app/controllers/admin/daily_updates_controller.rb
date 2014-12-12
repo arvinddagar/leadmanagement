@@ -18,9 +18,9 @@ class Admin::DailyUpdatesController < ApplicationController
   def meetings
     @search = ScheduleMeeting.search(params[:q])
     if current_user.admin== true or current_user.role=="Manager" or current_user=="Admin"
-      @meetings=@search.result.order(:meeting_date)
+      @meetings=@search.result.order(meeting_date: :desc)
     else
-      @meetings=@search.result.where(:assigned_to=>current_user.id).order(:meeting_date)
+      @meetings=@search.result.where(:assigned_to=>current_user.id).order(meeting_date: :desc)
     end
     respond_with(@meetings)
   end
