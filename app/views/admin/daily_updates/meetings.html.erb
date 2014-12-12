@@ -38,10 +38,10 @@
                   <td style="width:20px"><%= meeting.venue %></td>
                   <td style="width:30px"><%= meeting.notes%></td>
                   <%if meeting.assigned_to.present?%>
-                  <td><%= User.find(meeting.assigned_to).name %></td>
+                    <td><%= User.find(meeting.assigned_to).name %></td>
                   <%end%>
                   <td><%= meeting.status%></td>
-                  <td><%=link_to "Update status" ,edit_meetings_path(:id=>meeting)%></td>
+                  <td><%=link_to "Show" ,show_meetings_path(:id=>meeting)%> | <%=link_to "Update status" ,edit_meetings_path(:id=>meeting)%></td>
                 </tr>
               <% end %>
             </tbody>

@@ -6,6 +6,7 @@ class DailyUpdate < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :category
 	accepts_nested_attributes_for :lead_status
+	has_many :schedule_meeting
 	# PERSON_TYPES = ["Status","first", "second", "third"]
 	ransacker :created_at do
       Arel.sql('date(created_at)')

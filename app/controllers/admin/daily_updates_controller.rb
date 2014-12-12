@@ -42,6 +42,9 @@ class Admin::DailyUpdatesController < ApplicationController
     @add_contract=AddContract.new
 
   end
+  def show_meetings
+   @meeting=ScheduleMeeting.find(params[:id])
+  end
   def create_contract
     @add_contract=AddContract.create(:client_id=>params[:client_id],:client_name=>params[:client_name],:renewal_date=>params[:renewal_date],:plan=>params[:plan],:status=>params[:status],:domain_name=>params[:domain_name])
     redirect_to :back

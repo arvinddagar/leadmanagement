@@ -16,6 +16,7 @@ Rails.application.routes.draw do
      get 'index_contract' => 'admin/daily_updates#index_contract'
      get 'edit_contract' => 'admin/daily_updates#edit_contract'
      post 'update_contract' => 'admin/daily_updates#update_contract'
+     get 'show_meetings' => 'admin/daily_updates#show_meetings'
   as :admin do
     post 'admin/new_users' => 'admin/users#create'
     post 'user_daily_updates' => 'admin/daily_updates#user_daily_updates'
