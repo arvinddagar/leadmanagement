@@ -26,6 +26,8 @@ Rails.application.routes.draw do
      get 'edit_meetings'=>'admin/daily_updates#edit_meetings'
      post 'update_meetings'=>'admin/daily_updates#update_meetings'
      get 'client_management' => 'admin/daily_updates#client_management'
+      get 'payment_history' => 'admin/daily_updates#payment_history'
+       post 'create_payment' => 'admin/daily_updates#create_payment'
     
   end
 end
