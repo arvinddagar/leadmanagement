@@ -62,7 +62,7 @@ def fetch_plans
      else params[:plans]=="yearly"
     @renewal_date=  Time.now + 12.month   
   end
-   render :json =>@renewal_date.strftime("%d-%m-%Y")
+   render :json =>@renewal_date
 end
 def index_contract
   @contracts=AddContract.all
