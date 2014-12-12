@@ -49,8 +49,9 @@
       <th class="f-label">Email</th>
       <% if @daily_update.status==nil%>
       <%else%>
-      <th class="f-label">Status</th>
-      <th class="f-label">Comment</th>
+      <th class="f-label" >Status</th>
+       <th class="f-label">Schedule next call</th>
+      <th class="f-label" >Comment</th>
       <%end%>
     </tr>
     <tr>
@@ -68,6 +69,11 @@
         <%= f.fields_for :lead_status, @daily_update.lead_status.build do |q| %>
           <%= q.select :state, LeadStatus::PERSON_TYPES, {:include_blank=>"select"}, :class=>"form-control" ,:style=> 'width:100%;'%>
         </td>
+        <td class="f-label">
+          <%= q.date_field :schedule_next_call,  :class=>"form-control" %>
+        </td>
+        
+        
         <td colspan='3' class="f-label">
           <%= q.text_area :comment, placeholder: 'comment', :class=>"form-control" , :cols => 50,:style=>"margin-top:20px;" %>
         </td>

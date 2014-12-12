@@ -52,6 +52,9 @@ class DailyUpdatesController < ApplicationController
     @daily_update.destroy
     respond_with(@daily_update)
   end
+  def scheduled_call
+    @records=DailyUpdate.all
+  end
 
   private
     def set_daily_update
@@ -60,6 +63,6 @@ class DailyUpdatesController < ApplicationController
 
     def daily_update_params
       params.require(:daily_update).permit(:business,:status, :category_id,:contact_person,:user_id, :number, :designation, :status, :summary, :address, :email,lead_status_attributes: [:state,
-                                                   :comment,:user_id])
+                                                   :comment,:user_id,:schedule_next_call])
     end
 end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get 'daily_updates/index'
   end
    get 'new_contract' => 'admin/daily_updates#new_contract'
+   get 'scheduled_call' => 'daily_updates#scheduled_call'
      post 'create_contract' => 'admin/daily_updates#create_contract'
      get 'fetch_plans' => 'admin/daily_updates#fetch_plans'
      get 'index_contract' => 'admin/daily_updates#index_contract'
