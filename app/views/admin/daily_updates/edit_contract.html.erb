@@ -48,7 +48,10 @@
           		  Status
           	  </td>
           	  <td>
-          		  <%=text_field_tag :status ,@contract.status%>
+          		   <%= select_tag 'status', options_for_select([
+                    ['active','active'],
+                    ['expired','expired']
+                    ],@contract.status),:style=>"width: 122px;"%>
           	  </td>
           	  <%=hidden_field_tag :id,params[:id]%>
             </tr>

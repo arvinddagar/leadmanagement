@@ -3,10 +3,16 @@ class ApplicationController < ActionController::Base
 
  def after_sign_in_path_for(resource)
     if resource.admin? 
+    	renewal_date
        daily_updates_path
     else
        new_daily_update_path
     end
  end
+def renewal_date
 
+	@contract=AddContract.where('renewal_date < ?', Date.today.strftime("%d-%m-%d")).update_all(:status=>"expired")
+  
 end
+end
+

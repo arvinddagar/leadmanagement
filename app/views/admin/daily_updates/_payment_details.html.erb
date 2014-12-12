@@ -1,0 +1,33 @@
+<table class="table">
+<h3>Payment details till now</h3>
+  <th> Collection Date</th>
+  <th>Amount</th>
+  <th>Transaction Type</th>
+  <th> Cheque No</th>
+  <th>Bank Name</th>
+  <th>Cheque Date</th>
+  <%@payment_history.each do |payment|%>
+  <tr>
+    <td><%= payment.collection_date.strftime("%d-%m-%y") if payment.collection_date.present?%></td>
+    <td><%= payment.amount%></td>
+    <td><%= payment.transaction_type%></td>
+    <%if payment.transaction_type=="Cheque" %>
+      <td><%= payment.cheque_no%></td>
+    <%else%>
+      <td>N.A</td>
+    <%end%>
+    <%if payment.transaction_type=="Cheque"  %>
+      <td><%= payment.bank_name%></td>
+    <%else%>
+      <td>N.A</td>
+    <%end%>
+    <%if payment.transaction_type=="Cheque" %>
+      <td><%= payment.cheque_date%></td>
+    <%else%>
+      <td>N.A</td>
+    <%end%>
+    </tr>
+  <%end%>
+  <tr></tr>
+	
+</table>

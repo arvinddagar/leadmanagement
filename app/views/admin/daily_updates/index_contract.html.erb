@@ -28,6 +28,7 @@
                   <td><%= contract.plan %></td>
                   <td><%= contract.status %></td>
                  <td><%= link_to 'Update contract', edit_contract_path(:id=>contract) %>
+                 <td><%= link_to 'Payment history' ,payment_history_path(:id=>contract.id)%>
                  </td>
                 </tr>
               <% end %>

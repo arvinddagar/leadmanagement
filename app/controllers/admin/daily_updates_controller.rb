@@ -7,6 +7,7 @@ class Admin::DailyUpdatesController < ApplicationController
   end
 
   def index
+    
   	@search = DailyUpdate.search(params[:q])
     @daily_updates = @search.result.order("created_at DESC").page(params[:page]).per(25)
     respond_with(@daily_updates)    
@@ -17,9 +18,9 @@ class Admin::DailyUpdatesController < ApplicationController
   def meetings
     @search = ScheduleMeeting.search(params[:q])
     if current_user.admin== true or current_user.role=="Manager" or current_user=="Admin"
-      @meetings=@search.result
+      @meetings=@search.result.order(:meeting_date)
     else
-      @meetings=@search.result.where(:assigned_to=>current_user.id)
+      @meetings=@search.result.where(:assigned_to=>current_user.id).order(:meeting_date)
     end
     respond_with(@meetings)
   end
@@ -71,5 +72,13 @@ def edit_contract
   @contract=AddContract.find(params[:id])
   @contract.update(:client_id=>params[:client_id],:client_name=>params[:client_name],:renewal_date=>params[:renewal_date],:plan=>params[:plan],:status=>params[:status],:domain_name=>params[:domain_name])
   redirect_to :index_contract
+  end
+
+  def payment_history
+   @payment_history=PaymentHistory.where(:add_contract_id=>params[:id]).order("created_at DESC")
+  end
+  def create_payment
+     @payment=PaymentHistory.create(:collection_date=>params[:collection_date],:amount=>params[:amount],:cheque_no=>params[:cheque_no],:bank_name=>params[:bank_name],:cheque_date=>params[:cheque_date],:transaction_type=>params[:transaction_type],:add_contract_id=>params[:add_contract_id])
+    redirect_to :back
   end
 end
