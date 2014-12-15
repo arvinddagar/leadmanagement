@@ -52,7 +52,7 @@
             <td><%= ls.state %></td>
             <td><%= ls.comment %></td>
             <td><%= ls.user.name if ls.user.present? %></td>
-            <td><%= ls.updated_at.strftime("%d/%m/%Y") if ls.updated_at.present? %></td></tr>
+            <td><%= ls.updated_at.strftime("%d-%m-%Y") if ls.updated_at.present? %></td></tr>
           <%end%>
           </table>
         </div>
