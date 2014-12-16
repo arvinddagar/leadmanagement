@@ -51,7 +51,7 @@
                      
                         <td colspan="2"><%= DailyUpdate.find(daily_update.id).lead_status.last.state %></td>
                         <td colspan="2"><%= DailyUpdate.find(daily_update.id).lead_status.last.comment %></td>
-                        <td colspan="2" id="<%=daily_update.id%>"><%=render  :partial=> "call", locals: {:id => daily_update.id}%>|<%= link_to 'Show', daily_update %> | <%= link_to 'Update record', edit_daily_update_path(daily_update) %></td>
+                        <td colspan="2" id="<%=daily_update.id%>"><%=render  :partial=> "call", locals: {:id => daily_update.id}%>|<%= link_to 'Show', daily_update %> | <%= link_to 'Update', edit_daily_update_path(daily_update) %></td>
                       </tr>
                     <%end%>
                   <%#end%>
