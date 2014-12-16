@@ -6,7 +6,7 @@
       <div class="col-md-12">
       </div>
       <div class="col-md-12 mt">
-        <div class="content-panel">
+        <div class="content-panel" style="width:995px; margin-left:-20px;">
           <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form"} do |f| %>
            <%= f.label 'Filter By Date' , :class=>'f-label'%>
            <%= f.date_field :created_at_eq , :class=>'form-control'%>
