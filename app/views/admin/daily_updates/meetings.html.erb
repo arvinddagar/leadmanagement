@@ -40,8 +40,8 @@
                   <%if meeting.assigned_to.present?%>
                     <td><%= User.find(meeting.assigned_to).name %></td>
                   <%end%>
-                  <td><%= meeting.status%></td>
-                  <td><%=link_to "Show" ,show_meetings_path(:id=>meeting)%> | <%=link_to "Update status" ,edit_meetings_path(:id=>meeting)%></td>
+                  <td><%= meeting.mom%></td>
+                  <td><%=render  :partial=> "update_status", locals: {:id => meeting.id}%><%=link_to "Show" ,show_meetings_path(:id=>meeting)%></td>
                 </tr>
               <% end %>
             </tbody>

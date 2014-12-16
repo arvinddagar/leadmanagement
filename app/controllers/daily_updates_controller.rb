@@ -60,6 +60,10 @@ class DailyUpdatesController < ApplicationController
     @call=LeadStatus.create(:state=>params[:state],:daily_update_id=>params[:daily_update_id],:comment=>params[:comment],:schedule_next_call=>params[:schedule_next_call],:schedule_next_call_time=>params[:schedule_next_call_time])
     redirect_to :back
   end
+  def fetch_daily
+    @d=ScheduleMeeting.find(params[:daily_up]).daily_update_id
+     render :json =>@d
+  end
   private
     def set_daily_update
       @daily_update = DailyUpdate.find(params[:id])

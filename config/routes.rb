@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get 'scheduled_call' => 'daily_updates#scheduled_call'
     post 'create_contract' => 'admin/daily_updates#create_contract'
     get 'fetch_plans' => 'admin/daily_updates#fetch_plans'
+    get 'fetch_daily' => 'daily_updates#fetch_daily'
     get 'index_contract' => 'admin/daily_updates#index_contract'
     get 'edit_contract' => 'admin/daily_updates#edit_contract'
     post 'update_contract' => 'admin/daily_updates#update_contract'

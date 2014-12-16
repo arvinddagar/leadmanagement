@@ -28,8 +28,15 @@ class Admin::DailyUpdatesController < ApplicationController
     @meeting=ScheduleMeeting.find(params[:id])
   end
   def update_meetings
+  if params[:commit]=="Save Only Mom"
     @meeting=ScheduleMeeting.find(params[:id])
     @meeting.update(:mom=>params[:mom])
+  else
+     @meeting=ScheduleMeeting.find(params[:id])
+    @meeting.update(:mom=>params[:mom])
+    @schedule=ScheduleMeeting.new(:meeting_date=>params[:meeting_date],:notes=>params[:notes],:assigned_to=>params[:assigned_to],:meeting_time=>params[:meeting_time],:venue=>params[:venue],:daily_update_id=>params[:daily_update_id])
+    @schedule.save
+  end
     redirect_to :back
   end
    def client_management

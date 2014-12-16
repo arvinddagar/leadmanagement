@@ -1,0 +1,71 @@
+<button type="button" class="btn announce" data-toggle="modal" data-target="#myModal" id="<%=id%>">
+Update 
+</button>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Meeting status</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_tag(update_meetings_path, :method=>'post', :multipart => true) do %>
+          <table class="table">
+            <tr>
+              <td>Mom:</td>
+              <td><%=text_area_tag :mom %></td>
+            </tr>
+            <%= hidden_field_tag :id%>         
+            </br>
+            <div class="toggl">
+            <tr>
+              <td>Date:</td>
+              <td><%= date_field_tag "meeting_date" %></td>
+            </tr>
+            <tr>
+              <td> Time: </td>
+              <td><%= time_field_tag "meeting_time" %></td>
+            </tr>
+            <tr>
+              <td> Venue</td>
+              <td><%= text_area_tag "venue", "", :size=>"20x5" %></td>
+            </tr>
+            <tr>
+              <td> Notes</td>
+              <td><%= text_area_tag "notes", "", :size=>"20x5" %></td>
+            </tr>
+            <tr>
+              <td> Assigned to:</td>
+              <td><%= select_tag "assigned_to", options_from_collection_for_select(User.all, "id", "email"),:class=>"form-control",:style=>"width:30%"%></td>
+            </tr>
+            <%= hidden_field_tag :daily_update_id %>
+            <tr>
+              <td></td>
+              <td><%= submit_tag 'Save Only Mom',:class=>"btn btn-primary" %> <%= submit_tag 'Save both' ,:class=>"btn btn-primary"%></td>
+            </tr>
+          </table>
+        <% end %> 
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+ $(document).ready(function(){
+   $(".announce").click(function(){
+     
+     $('#id').val($(this).attr('id'));
+      $.ajax('/fetch_daily',{
+      type: 'get',
+        dataType: 'html',
+        data: {daily_up: $(this).attr('id')},
+        success: function(data, textStatus, jqXHR)
+          {
+            
+           $('#daily_update_id').val(data);
+          }
+    });
+
+   });
+});
+  
+</script>
