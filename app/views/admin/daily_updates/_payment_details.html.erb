@@ -8,7 +8,7 @@
   <th>Cheque Date</th>
   <%@payment_history.each do |payment|%>
   <tr>
-    <td><%= payment.collection_date.strftime("%d-%m-%y") if payment.collection_date.present?%></td>
+    <td><%= format_date(payment.collection_date) if payment.collection_date.present?%></td>
     <td><%= payment.amount%></td>
     <td><%= payment.transaction_type%></td>
     <%if payment.transaction_type=="Cheque" %>

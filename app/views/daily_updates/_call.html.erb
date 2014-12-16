@@ -1,0 +1,68 @@
+<button type="button" class="btn announce" data-toggle="modal" data-target="#myModal" id="<%=id%>">
+Call
+</button>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Lead Status</h4>
+      </div>
+      <div class="modal-body">
+     <%= form_tag(call_path, :method=>'post', :multipart => true) do %>
+     <table>
+       <tr>
+         <td class="f-label">
+           State
+         </td>
+         <td class="f-label">
+            <%= select_tag 'state', options_for_select([
+                    ['Select',''],
+                    ['Interested','Interested'],
+                    ['Not Interested','Not Interested'],
+                    ['Client','Client'],
+                    ['Already website','Already website'],['Not Picked','Not Picked']
+                    ]),:style=>"width: 122px;"%>
+         </td>
+       </tr>
+       <tr>
+       </br>
+         <td class="f-label">
+           Comment
+         </td>
+         <td class="f-label"><%=text_area_tag :comment%></td>
+       </tr>
+       </br>
+       <tr>
+         <td class="f-label">
+           Schedule next call
+         </td>
+         <td class="f-label"><%=date_field_tag :schedule_next_call%></td>
+       </tr>
+        <tr>
+         <td class="f-label">
+           Schedule next call time
+         </td>
+         <td class="f-label"><%=time_field_tag :schedule_next_call_time%></td>
+       </tr>
+       <%=hidden_field_tag :daily_update_id%>
+     </table>
+       
+     <%=submit_tag 'save',:class=>"btn btn-default"%>
+     <%end%>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+ $(document).ready(function(){
+   $(".announce").click(function(){
+     
+     $('#daily_update_id').val($(this).attr('id'));
+   });
+});
+</script>

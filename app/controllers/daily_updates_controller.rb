@@ -4,6 +4,7 @@ class DailyUpdatesController < ApplicationController
   respond_to :html
   def index
     #@d=DailyUpdate.includes(:lead_status).where('lead_statuses.state !=?', 'Client').references(:lead_status)
+    
      @search = DailyUpdate.search(params[:q])
      @daily_updates = @search.result.order("created_at DESC").page(params[:page]).per(25)
      respond_with(@daily_updates)
@@ -55,7 +56,10 @@ class DailyUpdatesController < ApplicationController
   def scheduled_call
     @records=DailyUpdate.all
   end
-
+  def call
+    @call=LeadStatus.create(:state=>params[:state],:daily_update_id=>params[:daily_update_id],:comment=>params[:comment],:schedule_next_call=>params[:schedule_next_call],:schedule_next_call_time=>params[:schedule_next_call_time])
+    redirect_to :back
+  end
   private
     def set_daily_update
       @daily_update = DailyUpdate.find(params[:id])
@@ -63,6 +67,6 @@ class DailyUpdatesController < ApplicationController
 
     def daily_update_params
       params.require(:daily_update).permit(:business,:status, :category_id,:contact_person,:user_id, :number, :designation, :status, :summary, :address, :email,lead_status_attributes: [:state,
-                                                   :comment,:user_id,:schedule_next_call])
+                                                   :comment,:user_id,:schedule_next_call,:schedule_next_call_time])
     end
 end

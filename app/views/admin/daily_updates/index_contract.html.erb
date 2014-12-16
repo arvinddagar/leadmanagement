@@ -24,7 +24,7 @@
                 <tr>
                   <td><%= DailyUpdate.find(contract.client_id).contact_person %></td>
                   <td><%= contract.domain_name %></td>
-                  <td><%= contract.renewal_date.to_date.strftime("%d-%m-%y") %></td>
+                  <td><%= format_date(contract.renewal_date.to_date)%></td>
                   <td><%= contract.plan %></td>
                   <td><%= contract.status %></td>
                  <td><%= link_to 'Update contract', edit_contract_path(:id=>contract) %>

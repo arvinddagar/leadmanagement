@@ -32,10 +32,10 @@
                 <th>Contact person</th>
                 <th>Number</th>
                 <th>Designation</th>
-                <th>Status</th>
-                <th>Comment</th>
+                <th  colspan="2">Status</th>
+                <th colspan="2">Comment</th>
                 
-                <th >Actions</th>
+                <th colspan="2" >Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -49,9 +49,9 @@
                         <td><%= daily_update.number %></td>
                         <td><%= daily_update.designation %></td>
                      
-                        <td><%= DailyUpdate.find(daily_update.id).lead_status.last.state %></td>
-                        <td><%= DailyUpdate.find(daily_update.id).lead_status.last.comment %></td>
-                        <td><%= link_to 'Show', daily_update %> | <%= link_to 'Update record', edit_daily_update_path(daily_update) %></td>
+                        <td colspan="2"><%= DailyUpdate.find(daily_update.id).lead_status.last.state %></td>
+                        <td colspan="2"><%= DailyUpdate.find(daily_update.id).lead_status.last.comment %></td>
+                        <td colspan="2" id="<%=daily_update.id%>"><%=render  :partial=> "call", locals: {:id => daily_update.id}%>|<%= link_to 'Show', daily_update %> | <%= link_to 'Update record', edit_daily_update_path(daily_update) %></td>
                       </tr>
                     <%end%>
                   <%#end%>
@@ -61,10 +61,9 @@
                   <td><%= daily_update.contact_person %></td>
                   <td><%= daily_update.number %></td>
                   <td><%= daily_update.designation %></td>
-                  <td><%#= daily_update.status %></td>
-                  <td><%#= daily_update.summary %></td>
-                  
-                  <td><%= link_to 'Show', daily_update %> | <%= link_to 'Update record', edit_daily_update_path(daily_update) %></td>
+                  <td colspan="2"><%#= daily_update.status %></td>
+                  <td colspan="2"><%#= daily_update.summary %></td>
+                  <td colspan="2"><%=render  :partial=> "call", locals: {:id => daily_update.id}%>|<%= link_to 'Show', daily_update %> | <%= link_to 'Update record', edit_daily_update_path(daily_update) %></td>
                 </tr>
                 <%end%>
               <% end %>

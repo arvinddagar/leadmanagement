@@ -13,7 +13,7 @@
                    Date:
                  </td>
                  <td>
-                   <%= @meeting.meeting_date.strftime("%d-%m-%y")%>
+                   <%=format_date( @meeting.meeting_date)%>
                  </td>            
                </tr>
                <tr>

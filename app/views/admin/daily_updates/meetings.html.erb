@@ -6,16 +6,16 @@
         </div>
       <div class="col-md-12 mt">
         <div class="content-panel">
-        <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form"} do |f| %>
-           <%= f.label 'Filter By Date' ,:class=>"f-label" %>
-           <%= f.date_field :meeting_date_eq , :class=>'form-control'%>
-            <%= f.label 'Venue' ,:class=>"f-label"%>
-           <%= f.text_field :venue_eq , :class=>'form-control'%>
-           <%if current_user.admin==true%>
-            <%= f.label 'Assigned to' ,:class=>"f-label"%>
-          <%= f.select :assigned_to_eq ,User.all.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control'%>
-          <%end%>
-            <div class="actions" align="center"><%= f.submit "Search" %></div>
+          <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form"} do |f| %>
+             <%= f.label 'Filter By Date' ,:class=>"f-label" %>
+             <%= f.date_field :meeting_date_eq , :class=>'form-control'%>
+              <%= f.label 'Venue' ,:class=>"f-label"%>
+             <%= f.text_field :venue_eq , :class=>'form-control'%>
+             <%if current_user.admin==true%>
+              <%= f.label 'Assigned to' ,:class=>"f-label"%>
+              <%= f.select :assigned_to_eq ,User.all.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control'%>
+            <%end%>
+              <div class="actions" align="center"><%= f.submit "Search" %></div>
           <% end %>
           <table class='table'>
             <thead>
@@ -30,10 +30,10 @@
               </tr>
             </thead>
           
-            <tbody><section id="main-content">
+            <tbody>
               <% @meetings.each do |meeting| %>
                 <tr>
-                  <td><%= meeting.meeting_date.strftime("%d-%m-%y") if meeting.meeting_date.present? %></td>
+                  <td><%= format_date(meeting.meeting_date) %></td>
                   <td><%= meeting.meeting_time.strftime('%I:%M%p') if meeting.meeting_time.present? %></td>
                   <td style="width:20px"><%= meeting.venue %></td>
                   <td style="width:30px"><%= meeting.notes%></td>

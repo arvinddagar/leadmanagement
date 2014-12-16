@@ -51,6 +51,7 @@
       <%else%>
       <th class="f-label" >Status</th>
        <th class="f-label">Schedule next call</th>
+        <th class="f-label">Schedule time</th>
       <th class="f-label" >Comment</th>
       <%end%>
     </tr>
@@ -71,6 +72,9 @@
         </td>
         <td class="f-label">
           <%= q.date_field :schedule_next_call,  :class=>"form-control" %>
+        </td>
+         <td class="f-label">
+          <%= q.time_field :schedule_next_call_time,  :class=>"form-control" %>
         </td>
         
         
