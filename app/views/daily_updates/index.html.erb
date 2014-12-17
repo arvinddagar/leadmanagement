@@ -44,7 +44,7 @@
                   <%#daily_update.lead_status.each do |lead|%>
                     <%if daily_update.lead_status.last.state.present? && DailyUpdate.find(daily_update.id).lead_status.last.state !="Client" %>
                       <tr>
-                        <td><%= daily_update.business %></td>
+                        <td style="width:115px;"><%= daily_update.business %></td>
                         <td><%= daily_update.contact_person %></td>
                         <td><%= daily_update.number %></td>
                         <td><%= daily_update.designation %></td>
@@ -57,7 +57,7 @@
                   <%#end%>
                   <%else%>
                    <tr>
-                  <td><%= daily_update.business %></td>
+                  <td style="width:115px;"><%= daily_update.business %></td>
                   <td><%= daily_update.contact_person %></td>
                   <td><%= daily_update.number %></td>
                   <td><%= daily_update.designation %></td>
