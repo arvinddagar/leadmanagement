@@ -1,5 +1,4 @@
 class Admin::ManageUserController < ApplicationController
-	
 	before_filter :check_user
 
   def check_user
@@ -10,21 +9,20 @@ class Admin::ManageUserController < ApplicationController
 		@user = User.all.where(:admin => nil)
 	end
 
-
   def deactivate
  	  @user = User.find(params[:id])
  	  if @user.active
- 	      @user.active = false
- 	      @user.save
- 	      respond_to do |format|
- 	      	format.json {render json: "user deactivated"}
- 	      end
+ 	    @user.active = false
+ 	    @user.save
+ 	    respond_to do |format|
+ 	     	format.json {render json: "user deactivated"}
+ 	    end
  	  else
  	  	@user.active = true
  	  	@user.save
  	  	respond_to do |format|
- 	      	format.json  {render json: "user activated"}
- 	      end
+ 	     	format.json  {render json: "user activated"}
+ 	    end
  	  end
   end
 
@@ -34,7 +32,5 @@ class Admin::ManageUserController < ApplicationController
 
 	def edit
 		@user = User.find(params[:id])
-	end
-
-	
+	end	
 end
