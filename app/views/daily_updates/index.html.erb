@@ -46,7 +46,7 @@
                       <tr>
                         <td style="width:115px;"><%= daily_update.business %></td>
                         <td><%= daily_update.contact_person %></td>
-                        <td><%= daily_update.number %></td>
+                        <td style="width:20px;"><%= daily_update.number %></td>
                         <td><%= daily_update.designation %></td>
                      
                         <td colspan="2"><%= DailyUpdate.find(daily_update.id).lead_status.last.state %></td>
@@ -59,7 +59,7 @@
                    <tr>
                   <td style="width:115px;"><%= daily_update.business %></td>
                   <td><%= daily_update.contact_person %></td>
-                  <td><%= daily_update.number %></td>
+                  <td style="width:20px;"><%= daily_update.number %></td>
                   <td><%= daily_update.designation %></td>
                   <td colspan="2"><%#= daily_update.status %></td>
                   <td colspan="2"><%#= daily_update.summary %></td>
