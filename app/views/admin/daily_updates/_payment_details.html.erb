@@ -7,25 +7,25 @@
   <th>Bank Name</th>
   <th>Cheque Date</th>
   <%@payment_history.each do |payment|%>
-  <tr>
-    <td><%= format_date(payment.collection_date) if payment.collection_date.present?%></td>
-    <td><%= payment.amount%></td>
-    <td><%= payment.transaction_type%></td>
-    <%if payment.transaction_type=="Cheque" %>
-      <td><%= payment.cheque_no%></td>
-    <%else%>
-      <td>N.A</td>
-    <%end%>
-    <%if payment.transaction_type=="Cheque"  %>
-      <td><%= payment.bank_name%></td>
-    <%else%>
-      <td>N.A</td>
-    <%end%>
-    <%if payment.transaction_type=="Cheque" %>
-      <td><%= payment.cheque_date%></td>
-    <%else%>
-      <td>N.A</td>
-    <%end%>
+    <tr>
+      <td><%= format_date(payment.collection_date) if payment.collection_date.present?%></td>
+      <td><%= payment.amount%></td>
+      <td><%= payment.transaction_type%></td>
+      <%if payment.transaction_type=="Cheque" %>
+        <td><%= payment.cheque_no%></td>
+      <%else%>
+        <td>N.A</td>
+      <%end%>
+      <%if payment.transaction_type=="Cheque"  %>
+        <td><%= payment.bank_name%></td>
+      <%else%>
+        <td>N.A</td>
+      <%end%>
+      <%if payment.transaction_type=="Cheque" %>
+        <td><%= payment.cheque_date%></td>
+      <%else%>
+        <td>N.A</td>
+      <%end%>
     </tr>
   <%end%>
   <tr></tr>
