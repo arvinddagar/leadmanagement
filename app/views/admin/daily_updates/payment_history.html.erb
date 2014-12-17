@@ -32,11 +32,8 @@
           	  	  Transaction type
           	    </td>
           	    <td>
-          	  	  <%= select_tag 'transaction_type', options_for_select([
-      	            ['Select',''],
-      	            ['Cheque','Cheque'],
-      	            ['Cash','Cash']
-      	            ]),:style=>"width: 122px;"%>
+          	  	  <%= select_tag 'transaction_type', options_for_select(PaymentHistory::TRANSACTION_TYPES)%>
+                    
           	    </td>	
               </tr>
            	  <tr class="transaction">

@@ -16,13 +16,7 @@ Call
            State
          </td>
          <td class="f-label">
-            <%= select_tag 'state', options_for_select([
-                    ['Select',''],
-                    ['Interested','Interested'],
-                    ['Not Interested','Not Interested'],
-                    ['Client','Client'],
-                    ['Already website','Already website'],['Not Picked','Not Picked']
-                    ]),:style=>"width: 122px;"%>
+            <%=  select_tag 'state', options_for_select(LeadStatus::PERSON_TYPES)%>
          </td>
        </tr>
        <tr>
