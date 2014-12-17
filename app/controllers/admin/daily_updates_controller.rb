@@ -54,6 +54,7 @@ class Admin::DailyUpdatesController < ApplicationController
 
   def new_contract
     @add_contract=AddContract.new
+    @client=DailyUpdate.includes(:lead_status).where('lead_statuses.state =?', 'Client').references(:lead_status)
   end
 
   def show_meetings
