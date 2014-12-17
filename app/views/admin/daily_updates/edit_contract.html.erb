@@ -26,13 +26,7 @@
           		    Plan
           	    </td>
           	    <td>
-          		  <%= select_tag 'plan', options_for_select([
-      	          ['Select',''],
-      	          ['1 month','1 month'],
-      	          ['2 month','2 month'],
-      	          ['quaterly','quaterly'],
-      	          ['half yearly','half yearly'],['yearly','yearly']
-      	          ],@contract.plan),:style=>"width: 122px;"%>
+          		  <%= select_tag 'plan', options_for_select(AddContract::PLANS,@contract.plan)%>
           	    </td>
           		</tr>
            	 <tr>
@@ -40,7 +34,7 @@
           		    Renewal date
           	    </td>
           	    <td>
-          		    <%=text_field_tag :renewal_date,@contract.renewal_date %>
+          		    <%=text_field_tag :renewal_date,format_date(@contract.renewal_date.to_date) %>
           	    </td>
              </tr>
           	<tr>
@@ -48,10 +42,7 @@
           		  Status
           	  </td>
           	  <td>
-          		   <%= select_tag 'status', options_for_select([
-                    ['active','active'],
-                    ['expired','expired']
-                    ],@contract.status),:style=>"width: 122px;"%>
+          		   <%=  select_tag 'status', options_for_select(AddContract::STATUS,@contract.status)%>
           	  </td>
           	  <%=hidden_field_tag :id,params[:id]%>
             </tr>

@@ -26,14 +26,8 @@
           	  	  Plan
           	    </td>
           	    <td>
-          	  	  <%= select_tag 'plan', options_for_select([
-      	            ['Select',''],
-      	            ['1 month','1 month'],
-      	            ['2 month','2 month'],
-      	            ['quaterly','quaterly'],
-      	            ['half yearly','half yearly'],['yearly','yearly']
-      	            ]),:style=>"width: 122px;"%>
-          	    </td>	
+                  <%= select_tag 'plan', options_for_select(AddContract::PLANS)%>
+          	    </td>                
               </tr>
            	  <tr>
           	    <td>
@@ -48,10 +42,7 @@
           	  	  Status
           	    </td>
           	    <td>
-          	  	  <%= select_tag 'status', options_for_select([
-                    ['active','active'],
-                    ['expired','expired']
-                    ]),:style=>"width: 122px;"%>
+          	  	  <%=  select_tag 'status', options_for_select(AddContract::STATUS)%>
           	    </td>
               </tr>
               <tr>
