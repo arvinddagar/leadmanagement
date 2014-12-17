@@ -14,3 +14,20 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+ function myFunctionModal(data_id) {
+   $('#daily_update_id').val($(data_id).attr('id'));
+}
+
+ function plan_submit(plan) {
+ 	
+  $.ajax('/fetch_plans',{
+      type: 'get',
+        dataType: 'html',
+        data: {plans: $(plan).val()},
+        success: function(data, textStatus, jqXHR)
+          {
+            
+            $('#renewal_date').val(data);
+          }
+    });
+ }

@@ -26,7 +26,7 @@
           	  	  Plan
           	    </td>
           	    <td>
-                  <%= select_tag 'plan', options_for_select(AddContract::PLANS)%>
+                  <%= select_tag 'plan', options_for_select(AddContract::PLANS), :onchange => "plan_submit(this);"%>
           	    </td>                
               </tr>
            	  <tr>
@@ -56,17 +56,3 @@
     </div>
   </section>   
 </section>
-<script>
-$( "#plan" ).change(function() {
-    $.ajax('/fetch_plans',{
-    	type: 'get',
-        dataType: 'html',
-        data: {plans: $(this).val()},
-        success: function(data, textStatus, jqXHR)
-          {
-          	
-            $('#renewal_date').val(data);
-          }
-    });
-});
-</script>
