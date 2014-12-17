@@ -41,7 +41,7 @@
                     <td><%= User.find(meeting.assigned_to).name %></td>
                   <%end%>
                   <td><%= meeting.mom%></td>
-                  <td><%=render  :partial=> "update_status", locals: {:id => meeting.id}%><%=link_to "Show" ,show_meetings_path(:id=>meeting)%></td>
+                  <td><%=render  :partial=> "update_status", locals: {:id => meeting.id}%><%=link_to "Show" ,show_meetings_path(:id=>meeting)%> | <%=link_to "Edit" ,edit_meetings_path(:id=>meeting)%></td>
                 </tr>
               <% end %>
             </tbody>

@@ -14,28 +14,24 @@
                    Date:
                  </td>
                  <td>
-                   <%= format_date(@meeting.meeting_date)%>
+                   <%=date_field_tag :meeting_date ,@meeting.meeting_date%>
                  </td>            
                </tr>
                <tr>
                  <td> Time:</td>
-                 <td><%= @meeting.meeting_time.strftime("%I:%M%p") if @meeting.meeting_time.present? %></td> 
+                 <td><%= time_field_tag :meeting_time ,@meeting.meeting_time %></td> 
               </tr>
               <tr>
                 <td>Venue:</td>
-                <td><%= @meeting.venue %></td>
+                <td><%=text_area_tag :venue, @meeting.venue %></td>
               </tr>
               <tr>
                 <td>Notes:</td>
-                <td><%= @meeting.notes %></td>
+                <td><%=text_area_tag :notes, @meeting.notes %></td>
               </tr>
               <tr>
                 <td>Assigned to :</td>
-                <td><%= User.find(@meeting.assigned_to).name %></td>
-              </tr>
-               <tr>
-                <td>Mom:</td>
-                <td><%=text_area_tag :mom, @meeting.mom %></td>
+                <td><%=  select_tag "assigned_to", options_for_select(User.all.collect{ |u| [ u.email,u.id]},@meeting.assigned_to)%></td>
               </tr>
    
               <%= hidden_field_tag :id , params[:id]%>
@@ -45,39 +41,9 @@
               </tr>
             </table>
           <% end %>
-          <%= button_tag 'Schedule meeting',:class=>"togg"%>
+        
           </br>
-          <div class="toggl">
-            <%= form_tag(schedule_meeting_path, :method=>'post', :multipart => true) do %>
-           <table class="table">
-           <tr>
-             <td>Date:</td>
-             <td><%= date_field_tag "meeting_date" %></td>
-           </tr>
-           <tr>
-            <td> Time: </td>
-             <td><%= time_field_tag "meeting_time" %></td>
-           </tr>
-           <tr>
-            <td> Venue</td>
-             <td><%= text_area_tag "venue", "", :size=>"20x5" %></td>
-           </tr>
-           <tr>
-            <td> Notes</td>
-             <td><%= text_area_tag "notes", "", :size=>"20x5" %></td>
-           </tr>
-           <tr>
-            <td> Assigned to:</td>
-             <td><%= select_tag "assigned_to", options_from_collection_for_select(User.all, "id", "email"),:class=>"form-control",:style=>"width:30%"%></td>
-           </tr>
-           <%= hidden_field_tag :daily_update_id , @meeting.daily_update_id%>
-           <tr>
-           <td></td>
-             <td><%= submit_tag 'Submit' %></td>
-           </tr>
-           </table>
-          <% end %> 
-          </div>
+         
           <%= link_to "Back",meetings_path%> 
           </div>
         </div>

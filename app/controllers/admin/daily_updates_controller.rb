@@ -31,6 +31,10 @@ class Admin::DailyUpdatesController < ApplicationController
   if params[:commit]=="Save Only Mom"
     @meeting=ScheduleMeeting.find(params[:id])
     @meeting.update(:mom=>params[:mom])
+  elsif params[:commit]=="Submit"
+	@meeting=ScheduleMeeting.find(params[:id])
+    @meeting.update(:mom=>params[:mom],:meeting_date=>params[:meeting_date],:meeting_time=>params[:meeting_time],:venue=>params[:venue],:notes=>params[:notes])
+    
   else
      @meeting=ScheduleMeeting.find(params[:id])
     @meeting.update(:mom=>params[:mom])
