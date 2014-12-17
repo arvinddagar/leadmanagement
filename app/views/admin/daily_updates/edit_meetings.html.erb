@@ -32,8 +32,7 @@
               <tr>
                 <td>Assigned to :</td>
                 <td><%=  select_tag "assigned_to", options_for_select(User.all.collect{ |u| [ u.email,u.id]},@meeting.assigned_to)%></td>
-              </tr>
-   
+              </tr>   
               <%= hidden_field_tag :id , params[:id]%>
               <tr>
               <td></td>
@@ -41,17 +40,14 @@
               </tr>
             </table>
           <% end %>
-        
-          </br>
-         
+          </br>         
           <%= link_to "Back",meetings_path%> 
           </div>
         </div>
       </div>
     </div>
   </section>   
-</section>
- 
+</section> 
 <script>
   $( document ).ready(function() {
    $( ".toggl" ).hide();

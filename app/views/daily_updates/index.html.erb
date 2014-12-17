@@ -1,4 +1,3 @@
-
 <section id="main-content">
   <section class="wrapper">
     <h3><i class="fa fa-angle-right"></i>Listing Records</h3>
@@ -41,7 +40,6 @@
             <tbody>
               <% @daily_updates.each do |daily_update| %>
                 <% if daily_update.lead_status.present?%>
-                  <%#daily_update.lead_status.each do |lead|%>
                     <%if daily_update.lead_status.last.state.present? && DailyUpdate.find(daily_update.id).lead_status.last.state !="Client" %>
                       <tr>
                         <td style="width:115px;"><%= daily_update.business %></td>
@@ -54,7 +52,6 @@
                         <td colspan="2" id="<%=daily_update.id%>"><%=render  :partial=> "call", locals: {:id => daily_update.id}%>|<%= link_to 'Show', daily_update %> | <%= link_to 'Update', edit_daily_update_path(daily_update) %></td>
                       </tr>
                     <%end%>
-                  <%#end%>
                   <%else%>
                    <tr>
                   <td style="width:115px;"><%= daily_update.business %></td>

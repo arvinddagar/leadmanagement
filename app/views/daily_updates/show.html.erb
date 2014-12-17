@@ -7,9 +7,7 @@
       <div class="col-md-12 mt">
         <div class="content-panel">
           <table class="table">
-          <p id="notice"><%= notice %></p>
-          
-          
+          <p id="notice"><%= notice %></p>          
           <tr><td>  <strong>Business:</strong></td><td>
             <%= @daily_update.business %>
           </td></tr>
@@ -42,8 +40,7 @@
           </td></tr>
           </table>
           <%= link_to 'Edit', edit_daily_update_path(@daily_update) %> |
-          <%= link_to 'Back', daily_updates_path %>
-          
+          <%= link_to 'Back', daily_updates_path %>          
           <h3>This Client Status Till Now</h3>
           <table class='table'>
             <tr><th>Status</th><th> Comment </th><th>Updated By</th><th>Updated At</th></tr>
