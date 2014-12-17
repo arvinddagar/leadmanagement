@@ -21,7 +21,7 @@
                     <td><%=lead.daily_update.contact_person%></td>
                     <td><%=lead.daily_update.number%></td>
                     <td><%=format_date(lead.schedule_next_call)%></td>
-                    <td><%=lead.schedule_next_call_time.strftime('%I:%M%p') if lead.schedule_next_call_time.present?%></td>
+                    <td><%=format_time(lead.schedule_next_call_time) if lead.schedule_next_call_time.present?%></td>
                     <td><%= link_to 'Update record', edit_daily_update_path(lead.daily_update) %></td>
                   <%end%>
                 </tr>

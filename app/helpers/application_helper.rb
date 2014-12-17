@@ -3,6 +3,6 @@ module ApplicationHelper
     time.strftime("%v")
   end
   def format_time(time)
-    time.strftime("%v")
+    time.strftime("%I:%M%p")
   end
 end

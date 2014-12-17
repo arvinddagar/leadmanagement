@@ -18,7 +18,7 @@
                </tr>
                <tr>
                  <td> Time:</td>
-                 <td><%= @meeting.meeting_time.strftime("%I:%M%p") if @meeting.meeting_time.present? %></td> 
+                 <td><%= format_time(@meeting.meeting_time) if @meeting.meeting_time.present? %></td> 
               </tr>
               <tr>
                 <td>Venue:</td>
