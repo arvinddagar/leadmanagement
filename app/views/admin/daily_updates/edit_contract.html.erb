@@ -7,7 +7,6 @@
       <div class="col-md-12 mt">
         <div class="content-panel">
           <%= form_tag("/update_contract") do %>
-          <%@client=DailyUpdate.includes(:lead_status).where('lead_statuses.state =?', 'Client').references(:lead_status)%>
             <table class="table">
               <tr>
           	    <td>Client</td>
@@ -46,6 +45,14 @@
           	  </td>
           	  <%=hidden_field_tag :id,params[:id]%>
             </tr>
+             <tr>
+                <td>
+                  Work Status
+                </td>
+                <td>
+                  <%=  select_tag 'work_status', options_for_select(AddContract::WORKSTATUS,@contract.work_status)%>
+                </td>
+              </tr>
             <tr>
               <td>
                 <%=submit_tag"save"%>

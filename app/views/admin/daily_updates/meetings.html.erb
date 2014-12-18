@@ -13,7 +13,7 @@
              <%= f.text_field :venue_eq , :class=>'form-control'%>
              <%if current_user.admin==true%>
               <%= f.label 'Assigned to' ,:class=>"f-label"%>
-              <%= f.select :assigned_to_eq ,User.all.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control'%>
+              <%= f.select :assigned_to_eq ,@user.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control'%>
             <%end%>
               <div class="actions" align="center"><%= f.submit "Search" %></div>
           <% end %>
@@ -38,7 +38,7 @@
                   <td style="width:20px"><%= meeting.venue %></td>
                   <td style="width:30px"><%= meeting.notes%></td>
                   <%if meeting.assigned_to.present?%>
-                    <td><%= User.find(meeting.assigned_to).name %></td>
+                    <td><%= User.meeting(meeting.assigned_to).name %></td>
                   <%end%>
                   <td><%= meeting.mom%></td>
                   <td><%=render  :partial=> "update_status", locals: {:id => meeting.id}%><%=link_to "Show" ,show_meetings_path(:id=>meeting)%> | <%=link_to "Edit" ,edit_meetings_path(:id=>meeting)%></td>

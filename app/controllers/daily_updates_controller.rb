@@ -4,8 +4,10 @@ class DailyUpdatesController < ApplicationController
   respond_to :html
 
   def index
+    @user=User.all
+    @category=Category.all
     @search = DailyUpdate.search(params[:q])
-    @daily_updates = @search.result.order("created_at DESC").page(params[:page]).per(25)
+    @daily_updates = @search.result.includes(:lead_status).where('lead_statuses.state !=?', 'Client').references(:lead_status).order('daily_updates.created_at DESC').page(params[:page]).per(25)
     respond_with(@daily_updates)
   end
 
@@ -21,12 +23,14 @@ class DailyUpdatesController < ApplicationController
   end
 
   def new
+    @category=Category.all
     @daily_update = DailyUpdate.new
     @daily_update.lead_status.build 
     respond_with(@daily_update)
   end
 
   def edit
+     @category=Category.all
    @lead_status = @daily_update.lead_status
   end
 

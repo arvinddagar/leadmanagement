@@ -14,7 +14,7 @@
            <%= f.label 'Contact Number', :class=>'f-label'%>
            <%= f.text_field :number_cont , :class=>'form-control'%></br>
            <%= f.label 'Added by', :class=>'f-label'%>
-           <%= f.select :user_id_eq ,User.all.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control'%>
+           <%= f.select :user_id_eq ,@user.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control'%>
            <%= f.label 'Contact Person'%>
            <%= f.text_field :contact_person_eq , :class=>'form-control'%>
             <div class="actions" align="center"><%= f.submit "Search" %></div>

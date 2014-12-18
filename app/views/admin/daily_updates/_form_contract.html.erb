@@ -45,6 +45,14 @@
           	    </td>
               </tr>
               <tr>
+                <td>
+                  Work Status
+                </td>
+                <td>
+                  <%=  select_tag 'work_status', options_for_select(AddContract::WORKSTATUS)%>
+                </td>
+              </tr>
+              <tr>
                 <td> <%=submit_tag%></td>
               </tr>
            	</table>

@@ -31,7 +31,7 @@
               </tr>
               <tr>
                 <td>Assigned to :</td>
-                <td><%=  select_tag "assigned_to", options_for_select(User.all.collect{ |u| [ u.email,u.id]},@meeting.assigned_to)%></td>
+                <td><%=  select_tag "assigned_to", options_for_select(@user.collect{ |u| [ u.email,u.id]},@meeting.assigned_to)%></td>
               </tr>   
               <%= hidden_field_tag :id , params[:id]%>
               <tr>

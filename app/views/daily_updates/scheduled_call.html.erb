@@ -17,9 +17,9 @@
               <%record.lead_status.each do |lead|%>
                 <tr>
                   <%if lead.schedule_next_call.present?%>
-                    <td><%=lead.daily_update.business%></td>
-                    <td><%=lead.daily_update.contact_person%></td>
-                    <td><%=lead.daily_update.number%></td>
+                    <td><%=lead.daily_update_business%></td>
+                    <td><%=lead.daily_update_contact_person%></td>
+                    <td><%=lead.daily_update_number%></td>
                     <td><%=format_date(lead.schedule_next_call)%></td>
                     <td><%=format_time(lead.schedule_next_call_time) if lead.schedule_next_call_time.present?%></td>
                     <td><%= link_to 'Update record', edit_daily_update_path(lead.daily_update) %></td>

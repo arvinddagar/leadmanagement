@@ -48,7 +48,7 @@
             <tr>
             <td><%= ls.state %></td>
             <td><%= ls.comment %></td>
-            <td><%= ls.user.name if ls.user.present? %></td>
+            <td><%= ls.user_name if ls.user.present? %></td>
             <td><%= format_date(ls.updated_at) if ls.updated_at.present? %></td></tr>
           <%end%>
           </table>

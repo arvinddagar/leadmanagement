@@ -1,5 +1,6 @@
 class DailyUpdate < ActiveRecord::Base
 	validates :business, presence: true
+	scope :client, lambda {|id| find(id)}
 	validates :number, presence: true, uniqueness: true
 	has_many :lead_status
 	belongs_to :user
@@ -9,4 +10,7 @@ class DailyUpdate < ActiveRecord::Base
 	ransacker :created_at do
     Arel.sql('date(created_at)')
   end
+#   def self.with_lead
+#   joins(:lead_status).group('lead_status.id').select('daily_update.*, count(lead_status.id) as lead_status_count')
+# end
 end

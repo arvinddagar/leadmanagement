@@ -22,7 +22,7 @@
       </tr>
     <tr>
       <td class="f-label">
-        <%= f.select :category_id, Category.all.collect { |c| [c.name, c.id] },{:include_blank => "select"}, :class=>"form-control " ,:style=> 'width:100%;'%>
+        <%= f.select :category_id, @category.collect { |c| [c.name, c.id] },{:include_blank => "select"}, :class=>"form-control " ,:style=> 'width:100%;'%>
       </td>
       <td class="f-label">
         <%= f.text_field :business , placeholder: 'Business', :class=>"form-control" %>
@@ -76,6 +76,7 @@
           <%= q.hidden_field :user_id, value: current_user.id%>                 
         <% end %>
         <%end%>
+        
   </tr></table>
 
   </div>

@@ -13,7 +13,7 @@
                    Date:
                  </td>
                  <td>
-                   <%=format_date( @meeting.meeting_date)%>
+                   <%=format_date( @meeting.meeting_date) if @meeting.meeting_date%>
                  </td>            
                </tr>
                <tr>
@@ -30,19 +30,19 @@
               </tr>
               <tr>
                 <td>Assigned to :</td>
-                <td><%= User.find(@meeting.assigned_to).name %></td>
+                <td><%= User.meeting(@meeting.assigned_to).name %></td>
               </tr>
                <tr>
                 <td>Business :</td>
-                <td><%= @meeting.daily_update.business %></td>
+                <td><%= @meeting.daily_update_business %></td>
               </tr>
               <tr>
                 <td>Contact Person :</td>
-                <td><%= @meeting.daily_update.contact_person %></td>
+                <td><%= @meeting.daily_update_contact_person %></td>
               </tr>
                 <tr>
                 <td>Contact number :</td>
-                <td><%= @meeting.daily_update.number %></td>
+                <td><%= @meeting.daily_update_number %></td>
               </tr>
               <%= hidden_field_tag :id , params[:id]%>
               <tr>

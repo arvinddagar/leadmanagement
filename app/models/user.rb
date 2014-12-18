@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :daily_updates
   ROLES = ["Admin", "Executive","Manager"]
+  scope :meeting, lambda {|id| find(id)}
+  
 end

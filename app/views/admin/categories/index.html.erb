@@ -11,11 +11,9 @@
             <table class='table'>
               <thead>
                 <tr>
-                  <th>Name</th>
-                
+                  <th>Name</th>                
                 </tr>
-              </thead>
-            
+              </thead>            
               <tbody>
                 <% @categories.each do |category| %>
                   <tr>
@@ -24,8 +22,7 @@
                     <%= link_to 'Edit', edit_admin_category_path(category) %> |
                     <%= link_to 'Destroy', admin_category_path(category), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                   </tr>
-                <% end %>
-            
+                <% end %>            
               </tbody>
             </table>            
             <%= link_to 'New Category', new_admin_category_path,:class=>"btn btn-primary" %>
