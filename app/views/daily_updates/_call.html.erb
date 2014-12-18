@@ -9,7 +9,7 @@ Call
         <h4 class="modal-title" id="myModalLabel">Lead Status</h4>
       </div>
       <div class="modal-body">
-     <%= form_tag(call_path, :method=>'post', :multipart => true) do %>
+     <%= form_tag(call_path, :method=>'post', :multipart => true,:id=>"tester") do %>
      <table>
        <tr>
          <td class="f-label">
@@ -50,3 +50,19 @@ Call
     </div>
   </div>
 </div>
+<script>
+
+      $("#tester").validate({
+        rules:  {
+          "schedule_next_call": {
+               required: function(element) {
+                if ($('#state').val()!="Not Picked") {
+                    return false;
+                } else {
+                    return true;
+                }
+        },
+      },
+    }
+  });
+</script>
