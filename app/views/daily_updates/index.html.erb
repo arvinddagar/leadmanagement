@@ -1,6 +1,7 @@
 <section id="main-content">
   <section class="wrapper">
     <h3><i class="fa fa-angle-right"></i>Listing Records</h3>
+
     <div class="row">
       <div class="col-md-12">
       </div>
@@ -28,6 +29,7 @@
             <%= f.select :lead_status_state_eq, LeadStatus::PERSON_TYPES, {:include_blank=>"select"},:class=>'form-control'%>
             <div class="actions" align="center"><%= f.submit "Search" %></div>
           <% end %>          
+           <%=@daily_updates.count%> results found
           <div style="float:right;"><%= link_to 'New Record', new_daily_update_path , :class=>"btn btn-primary",:style=>"margin-right:10px"%></div>          
           <table class='table'>
             <thead>
@@ -51,8 +53,8 @@
                         <td style="width:20px;"><%= daily_update.number %></td>
                         <td><%= daily_update.designation %></td>
                      
-                        <td colspan="2"><%= daily_update.lead_status.last.state %></td>
-                        <td colspan="2"><%= daily_update.lead_status.last.comment %></td>
+                        <td colspan="2"><%= daily_update.lead_status.last.state if daily_update.lead_status.present? %></td>
+                        <td colspan="2"><%= daily_update.lead_status.last.comment if daily_update.lead_status.present? %></td>
                         <td colspan="2" id="<%=daily_update.id%>"><%=render  :partial=> "call", locals: {:id => daily_update.id}%>|<%= link_to 'Show', daily_update %> | <%= link_to 'Update', edit_daily_update_path(daily_update) %></td>
                       </tr>
                
