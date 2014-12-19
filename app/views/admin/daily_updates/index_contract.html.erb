@@ -24,7 +24,7 @@
                 <tr>
                   <td><%= DailyUpdate.client(contract.client_id).contact_person %></td>
                   <td><%= contract.domain_name %></td>
-                  <td><%= format_date(contract.renewal_date.to_date)%></td>
+                  <td><%= format_date(contract.renewal_date.to_date) if contract.renewal_date.present?%></td>
                   <td><%= contract.plan %></td>
                   <td><%= contract.status %></td>
                    <td><%= contract.work_status %></td>
