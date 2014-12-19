@@ -7,11 +7,11 @@ class DailyUpdatesController < ApplicationController
     @user=User.all
     @category=Category.all
     @search = DailyUpdate.search(params[:q])
-    if params[:q].nil?
-      @daily_updates = @search.result.where(:status=>"0").includes(:lead_status).where('lead_statuses.state !=?', 'Client').references(:lead_status).order('daily_updates.created_at DESC').page(params[:page]).per(25)
-    else
+    # if params[:q].nil?
+    #   @daily_updates = @search.result.where(:status=>"0").includes(:lead_status).where('lead_statuses.state !=?', 'Client').references(:lead_status).order('daily_updates.created_at DESC').page(params[:page]).per(25)
+    # else
       @daily_updates = @search.result.includes(:lead_status).where('lead_statuses.state !=?', 'Client').references(:lead_status).order('daily_updates.created_at DESC').page(params[:page]).per(25)
-    end
+    # end
     respond_with(@daily_updates)
   end
 
@@ -21,6 +21,7 @@ class DailyUpdatesController < ApplicationController
   end
 
   def schedule_meeting
+    binding.pry
     @schedule=ScheduleMeeting.new(:meeting_date=>params[:meeting_date],:notes=>params[:notes],:assigned_to=>params[:assigned_to],:meeting_time=>params[:meeting_time],:venue=>params[:venue],:daily_update_id=>params[:daily_update_id])
     @schedule.save
     redirect_to :back
