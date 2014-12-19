@@ -46,7 +46,7 @@
                   <%end%>
                   <td><%= meeting.mom%></td>
                   
-                  <td><%=render  :partial=> "edit_meetings", locals: {:id => meeting.id}%></br><%=render  :partial=> "update_status", locals: {:id => meeting.id}%></td>
+                  <td><%=render  :partial=> "edit_meetings", locals: {:id => meeting.id}%>  <td><%=render  :partial=> "update_status", locals: {:id => meeting.id}%></td></td>
                 </tr>
               <% end %>
             </tbody>
