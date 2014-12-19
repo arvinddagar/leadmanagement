@@ -14,8 +14,29 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+var x;
  function myFunctionModal(data_id) {
+   $('#daily_update_id1').val($(data_id).attr('id'));
+}
+function myFunctionModal1(data_id) {
    $('#daily_update_id').val($(data_id).attr('id'));
+   $.ajax('/fetch_meetings',{
+      type: 'get',
+        dataType: 'html',
+        data: {meeting_id: $(data_id).attr('id')},
+        success: function(data, textStatus, jqXHR)
+          {
+            
+            x=d;
+            var d=JSON.parse(data);
+            $('#venue').val(d['venue']);
+            $('#notes').val(d['notes']);
+            $('#meeting_date').val(d['meeting_date']);
+            $('#assigned_to').val(d['assigned_to']);
+             $('#meeting_time').val(d['meeting_time']);
+         
+          }
+    });
 }
 
  function plan_submit(plan) {

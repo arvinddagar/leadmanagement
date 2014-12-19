@@ -7,11 +7,11 @@ class DailyUpdatesController < ApplicationController
     @user=User.all
     @category=Category.all
     @search = DailyUpdate.search(params[:q])
-    # if params[:q].nil?
-    #   @daily_updates = @search.result.where(:status=>"0").includes(:lead_status).where('lead_statuses.state !=?', 'Client').references(:lead_status).order('daily_updates.created_at DESC').page(params[:page]).per(25)
-    # else
+    if params[:q].nil?
+       @daily_updates = @search.result.where(:status=>"0").order('created_at DESC').page(params[:page]).per(25)
+     else
       @daily_updates = @search.result.order('created_at DESC').page(params[:page]).per(25)
-    # end
+     end
     respond_with(@daily_updates)
   end
 
@@ -21,12 +21,14 @@ class DailyUpdatesController < ApplicationController
   end
 
   def schedule_meeting
-    binding.pry
-    @schedule=ScheduleMeeting.new(:meeting_date=>params[:meeting_date],:notes=>params[:notes],:assigned_to=>params[:assigned_to],:meeting_time=>params[:meeting_time],:venue=>params[:venue],:daily_update_id=>params[:daily_update_id])
+    meeting_no= ScheduleMeeting.connection.execute("SELECT nextval('meeting_num_seq')")
+    meeting='SE'+'0'+meeting_no[0]['nextval']
+    @schedule=ScheduleMeeting.new(:meeting_no=>meeting,:meeting_date=>params[:meeting_date],:notes=>params[:notes],:assigned_to=>params[:assigned_to],:meeting_time=>params[:meeting_time],:venue=>params[:venue],:daily_update_id=>params[:daily_update_id])
     @schedule.save
     redirect_to :back
   end
-
+ def meeting_no
+ end
   def new
     @category=Category.all
     @daily_update = DailyUpdate.new
@@ -35,7 +37,7 @@ class DailyUpdatesController < ApplicationController
   end
 
   def edit
-     @category=Category.all
+   @category=Category.all
    @lead_status = @daily_update.lead_status
   end
 
@@ -68,7 +70,8 @@ class DailyUpdatesController < ApplicationController
   end
 
   def call
-    @call=LeadStatus.create(:state=>params[:state],:daily_update_id=>params[:daily_update_id],:comment=>params[:comment],:schedule_next_call=>params[:schedule_next_call],:schedule_next_call_time=>params[:schedule_next_call_time])
+    @call=LeadStatus.create(:state=>params[:state],:daily_update_id=>params[:daily_update_id1],:comment=>params[:comment],:schedule_next_call=>params[:schedule_next_call],:schedule_next_call_time=>params[:schedule_next_call_time])
+    DailyUpdate.find(params[:daily_update_id1]).update(:status=>1)
     redirect_to :back
   end
 

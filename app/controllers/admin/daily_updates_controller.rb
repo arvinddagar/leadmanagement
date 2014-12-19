@@ -17,7 +17,10 @@ class Admin::DailyUpdatesController < ApplicationController
   def user_daily_updates  	
   	@daily_updates=User.find(params[:id]).daily_updates.order("created_at").page(params[:page]).per(25)
   end  
-
+  def fetch_meetings
+    @meetings=ScheduleMeeting.find(params[:meeting_id])
+    render :json =>@meetings
+  end
   def meetings
     @user=User.all
     @search = ScheduleMeeting.search(params[:q])
@@ -39,6 +42,7 @@ class Admin::DailyUpdatesController < ApplicationController
       @meeting=ScheduleMeeting.find(params[:id])
       @meeting.update(:mom=>params[:mom])
     elsif params[:commit]=="Submit"
+      binding.pry
 	    @meeting=ScheduleMeeting.find(params[:id])
       @meeting.update(:mom=>params[:mom],:meeting_date=>params[:meeting_date],:meeting_time=>params[:meeting_time],:venue=>params[:venue],:notes=>params[:notes]) 
     else
