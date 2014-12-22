@@ -1,3 +1,5 @@
+ <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
 <button type="button" onclick="myFunctionupdate(this)" class="btn announce" data-toggle="modal" data-target="#myModal" id="<%=id%>">
 Edit
 </button>
@@ -9,7 +11,7 @@ Edit
         <h4 class="modal-title" id="myModalLabel">Lead Status</h4>
       </div>
       <div class="modal-body">
-    <%= form_tag(update_meetings_path, :method=>'post', :multipart => true) do %>
+      <%= form_tag(update_meetings_path, :method=>'post', :multipart => true) do %>
             <table class="table">
               <tr>
                  <td>
@@ -17,11 +19,11 @@ Edit
                  </td>
                  <td>
                    <%=date_field_tag :meeting_date %>
-                 </td>            
+                 </td>
                </tr>
                <tr>
                  <td> Time:</td>
-                 <td><%= time_field_tag :meeting_time  %></td> 
+                 <td><%= time_field_tag :meeting_time  %></td>
               </tr>
               <tr>
                 <td>Venue:</td>
@@ -34,7 +36,8 @@ Edit
               <tr>
                 <td>Assigned to :</td>
                 <td><%=  select_tag "assigned_to", options_for_select(@user.collect{ |u| [ u.email,u.id]})%></td>
-              </tr>   
+              </tr>
+              <%#binding.pry%>
               <%= hidden_field_tag :id , params[:id]%>
               <tr>
               <td></td>
