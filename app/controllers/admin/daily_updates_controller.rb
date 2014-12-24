@@ -39,13 +39,13 @@ class Admin::DailyUpdatesController < ApplicationController
 
   def update_meetings
     if params[:commit]=="Save Only Mom"
-      @meeting=ScheduleMeeting.find(params[:s_id])
+      @meeting=ScheduleMeeting.find(params[:ss_id])
       @meeting.update(:mom=>params[:mom])
     elsif params[:commit]=="Submit"
 	    @meeting=ScheduleMeeting.find(params[:s_id])
       @meeting.update(:mom=>params[:mom],:meeting_date=>params[:meeting_date],:meeting_time=>params[:meeting_time],:venue=>params[:venue],:notes=>params[:notes]) 
     else
-      @meeting=ScheduleMeeting.find(params[:s_id])
+      @meeting=ScheduleMeeting.find(params[:ss_id])
       @meeting.update(:mom=>params[:mom])
       meeting_no= ScheduleMeeting.connection.execute("SELECT nextval('meeting_num_seq')")
       meeting='SE'+'0'+meeting_no[0]['nextval']
