@@ -45,7 +45,6 @@ class Admin::DailyUpdatesController < ApplicationController
 	    @meeting=ScheduleMeeting.find(params[:s_id])
       @meeting.update(:mom=>params[:mom],:meeting_date=>params[:meeting_date],:meeting_time=>params[:meeting_time],:venue=>params[:venue],:notes=>params[:notes]) 
     else
-      binding.pry
       @meeting=ScheduleMeeting.find(params[:s_id])
       @meeting.update(:mom=>params[:mom])
       meeting_no= ScheduleMeeting.connection.execute("SELECT nextval('meeting_num_seq')")
