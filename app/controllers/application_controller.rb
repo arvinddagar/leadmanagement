@@ -11,7 +11,10 @@ class ApplicationController < ActionController::Base
     end
  end
   def renewal_date
-	  @contract=AddContract.where('renewal_date < ?', Date.today).update_all(:status=>"expired")
+	  @contract=Plan.where('renewal_date < ?', Date.today)
+    @contract.each do |c|
+      c.add_contract.update(:status=>"expired")
+    end
   end
 end
 
