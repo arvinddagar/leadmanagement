@@ -38,7 +38,7 @@ Edit
                 <td><%=  select_tag "assigned_to", options_for_select(@user.collect{ |u| [ u.email,u.id]})%></td>
               </tr>
               <%#binding.pry%>
-              <%= hidden_field_tag :id , params[:id]%>
+              <%= hidden_field_tag :s_id , params[:id]%>
               <tr>
               <td></td>
                <td> <%= submit_tag 'Submit' %></td>

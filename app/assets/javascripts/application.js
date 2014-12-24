@@ -19,6 +19,7 @@ var x;
    $('#daily_update_id1').val($(data_id).attr('id'));
 }
 function myFunctionupdate(data_id) {
+  $('#s_id').val($(data_id).attr('id'));
    $.ajax('/fetch_meetings',{
       type: 'get',
         dataType: 'html',

@@ -39,15 +39,18 @@ class Admin::DailyUpdatesController < ApplicationController
 
   def update_meetings
     if params[:commit]=="Save Only Mom"
-      @meeting=ScheduleMeeting.find(params[:id])
+      @meeting=ScheduleMeeting.find(params[:s_id])
       @meeting.update(:mom=>params[:mom])
     elsif params[:commit]=="Submit"
-	    @meeting=ScheduleMeeting.find(params[:id])
+	    @meeting=ScheduleMeeting.find(params[:s_id])
       @meeting.update(:mom=>params[:mom],:meeting_date=>params[:meeting_date],:meeting_time=>params[:meeting_time],:venue=>params[:venue],:notes=>params[:notes]) 
     else
-      @meeting=ScheduleMeeting.find(params[:id])
+      binding.pry
+      @meeting=ScheduleMeeting.find(params[:s_id])
       @meeting.update(:mom=>params[:mom])
-      @schedule=ScheduleMeeting.new(:meeting_date=>params[:meeting_date],:notes=>params[:notes],:assigned_to=>params[:assigned_to],:meeting_time=>params[:meeting_time],:venue=>params[:venue],:daily_update_id=>params[:daily_update_id])
+      meeting_no= ScheduleMeeting.connection.execute("SELECT nextval('meeting_num_seq')")
+      meeting='SE'+'0'+meeting_no[0]['nextval']
+      @schedule=ScheduleMeeting.new(:meeting_no=>meeting,:meeting_date=>params[:meeting_date],:notes=>params[:notes],:assigned_to=>params[:assigned_to],:meeting_time=>params[:meeting_time],:venue=>params[:venue],:daily_update_id=>params[:daily_update_id])
       @schedule.save
     end
     redirect_to :back
