@@ -27,8 +27,6 @@ class DailyUpdatesController < ApplicationController
     @schedule.save
     redirect_to :back
   end
- def meeting_no
- end
   def new
     @category=Category.all
     @daily_update = DailyUpdate.new
@@ -47,7 +45,7 @@ class DailyUpdatesController < ApplicationController
       flash[:notice] = "Update successfully created"
       redirect_to new_daily_update_path
     else
-      render :new
+      redirect_to '/daily_updates/new'
     end
   end
 
@@ -66,7 +64,9 @@ class DailyUpdatesController < ApplicationController
   end
 
   def scheduled_call
-    @records=DailyUpdate.all
+    @search = DailyUpdate.search(params[:q])
+    @records=@search.result
+    respond_with(@records)
   end
 
   def call
