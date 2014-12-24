@@ -105,6 +105,7 @@ class Admin::DailyUpdatesController < ApplicationController
 
   def edit_contract
     @contract=AddContract.find(params[:id])
+    @plans=Plan.where(:add_contract_id=>params[:id])
     @client=DailyUpdate.includes(:lead_status).where('lead_statuses.state =?', 'Client').references(:lead_status)
   end
 

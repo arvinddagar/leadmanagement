@@ -60,11 +60,21 @@
             </tr>
          
         <% end %>  
-        <tr>
-          <td>
-         
-          </td>
-        </tr>       
+        
+          <table class='table'>
+          
+            <tr>
+              <th>Plan</th>
+              <th> Renewal Date </th>
+            </tr> <h3>This Client plan history Till Now</h3>
+            <% @plans.each do |ls|%>
+              <tr>
+                <td><%= ls.plan_type %></td>
+                <td><%= ls.renewal_date %></td>
+              
+              </tr>
+            <%end%>
+          </table>    
          </table>   
         </div>
       </div>
