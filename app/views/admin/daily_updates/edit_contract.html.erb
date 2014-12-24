@@ -62,7 +62,7 @@
         <% end %>  
         
           <table class='table'>
-          
+
             <tr>
               <th>Plan</th>
               <th> Renewal Date </th>
@@ -70,7 +70,7 @@
             <% @plans.each do |ls|%>
               <tr>
                 <td><%= ls.plan_type %></td>
-                <td><%= ls.renewal_date %></td>
+                <td><%= format_date(ls.renewal_date) %></td>
               
               </tr>
             <%end%>
