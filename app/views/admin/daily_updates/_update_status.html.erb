@@ -15,7 +15,7 @@ Update
               <td>Mom:</td>
               <td><%=text_area_tag :mom %></td>
             </tr>
-            <%= hidden_field_tag :s_id%>         
+            <%= hidden_field_tag :ss_id%>         
             </br>
             <div class="toggl">
             <tr>
@@ -49,3 +49,19 @@ Update
     </div>
   </div>
 </div>
+<script>
+   $(".announce").click(function(){
+
+     $('#ss_id').val($(this).attr('id'));
+      $.ajax('/fetch_daily',{
+      type: 'get',
+        dataType: 'html',
+        data: {daily_up: $(this).attr('id')},
+        success: function(data, textStatus, jqXHR)
+          {
+           $('#daily_update_id').val(data);
+          }
+    });
+
+   });
+</script>
