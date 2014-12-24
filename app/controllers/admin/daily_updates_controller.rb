@@ -21,6 +21,13 @@ class Admin::DailyUpdatesController < ApplicationController
     @meetings=ScheduleMeeting.find(params[:meeting_id])
     render :json =>@meetings
   end
+  def notify_expiry
+    binding.pry
+    @user=DailyUpdate.find(params[:id])
+    NotificationMailer.expiry_notification(@user).deliver
+    redirect_to :back
+   
+  end
   def meetings
     @user=User.all
     @search = ScheduleMeeting.search(params[:q])
@@ -38,6 +45,7 @@ class Admin::DailyUpdatesController < ApplicationController
   end
 
   def update_meetings
+    binding.pry
     if params[:commit]=="Save Only Mom"
       @meeting=ScheduleMeeting.find(params[:ss_id])
       @meeting.update(:mom=>params[:mom])

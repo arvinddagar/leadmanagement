@@ -21,6 +21,19 @@ Rails.application.configure do
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
   config.serve_static_assets = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = {host: 'marketing-update.herokuapp.com'}
+  config.action_mailer.smtp_settings = {
+  address:              "smtp.gmail.com",
+  port:                 587,
+  domain:               "gmail.com",
+  user_name:            "99slips",
+  password:             "99slipsdummy",
+  authentication:       "plain",
+  enable_starttls_auto: true
+}
+
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
