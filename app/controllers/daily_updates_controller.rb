@@ -64,8 +64,8 @@ class DailyUpdatesController < ApplicationController
   end
 
   def scheduled_call
-    @search = DailyUpdate.search(params[:q])
-    @records=@search.result
+    @search = LeadStatus.search(params[:q])
+    @records = @search.result.order('schedule_next_call DESC')
     respond_with(@records)
   end
 

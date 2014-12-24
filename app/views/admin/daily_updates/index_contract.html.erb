@@ -24,8 +24,8 @@
                 <tr>
                   <td><%= DailyUpdate.client(contract.client_id).contact_person %></td>
                   <td><%= contract.domain_name %></td>
-                  <td><%= format_date(contract.renewal_date.to_date) if contract.renewal_date.present?%></td>
-                  <td><%= contract.plan %></td>
+                  <td><%= format_date(contract.plans.last.renewal_date.to_date) if contract.plans.last.renewal_date.present? if contract.plans.present?%></td>
+                  <td><%= contract.plans.last.plan_type if contract.plans.present?%></td>
                   <td><%= contract.status %></td>
                    <td><%= contract.work_status %></td>
                  <td><%= link_to 'Update contract', edit_contract_path(:id=>contract) %>

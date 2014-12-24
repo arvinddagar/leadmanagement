@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     post 'update_contract' => 'admin/daily_updates#update_contract'
      post 'call' => 'daily_updates#call'
     get 'show_meetings' => 'admin/daily_updates#show_meetings'
+    get 'lead_statuses' => 'daily_updates#scheduled_call'
   as :admin do
     post 'admin/new_users' => 'admin/users#create'
     post 'user_daily_updates' => 'admin/daily_updates#user_daily_updates'
