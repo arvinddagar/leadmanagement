@@ -22,7 +22,6 @@ class Admin::DailyUpdatesController < ApplicationController
     render :json =>@meetings
   end
   def notify_expiry
-    binding.pry
     @user=DailyUpdate.find(params[:id])
     NotificationMailer.expiry_notification(@user).deliver
     redirect_to :back
