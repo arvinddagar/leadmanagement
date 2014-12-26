@@ -39,7 +39,7 @@ class Admin::DailyUpdatesController < ApplicationController
   end
   
   def edit_meetings
-    @user=User.all<td><%=link_to 'Logs',meeting_logs_path(:client=>meeting.daily_update.id)%></td>
+    @user=User.all
     @meeting=ScheduleMeeting.find(params[:id])
   end
 
