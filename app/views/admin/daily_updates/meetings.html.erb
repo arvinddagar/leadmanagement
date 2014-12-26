@@ -28,6 +28,7 @@
                 <th>Notes</th>
                 <th>Assigned to</th>
                 <th>status</th>
+                <th>History</th>
                 <th >Actions</th>
               </tr>
             </thead>
@@ -46,7 +47,8 @@
                   <%end%>
                   <td><%= meeting.mom%></td>
                   
-                  <td><%=render  :partial=> "edit_meetings", locals: {:id => meeting.id}%>  <td><%=render  :partial=> "update_status", locals: {:id => meeting.id}%></td></td>
+                  <td><%=link_to 'Logs',meeting_logs_path(:client=>meeting.daily_update.id)%></td>
+                  <td><%=render  :partial=> "edit_meetings", locals: {:id => meeting.id}%></td>  <td><%=render  :partial=> "update_status", locals: {:id => meeting.id}%></td>
                 </tr>
               <% end %>
             </tbody>

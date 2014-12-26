@@ -27,6 +27,9 @@ class DailyUpdatesController < ApplicationController
     @schedule.save
     redirect_to :back
   end
+  def meeting_logs
+    @meetings= DailyUpdate.find(params[:client]).schedule_meeting.order('meeting_date Desc')
+  end
   def new
     @category=Category.all
     @daily_update = DailyUpdate.new

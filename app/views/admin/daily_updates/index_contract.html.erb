@@ -6,7 +6,25 @@
       </div>
       <div class="col-md-12 mt">
         <div class="content-panel">
+        <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form" , mothod: 'post'} do |f| %>
+          <%= f.label :domain_name %>
+          <%= f.text_field :domain_name_cont ,:class=>'form-control'%>
+          <%= f.label :plan, "Plan" %>
+          <%= f.select :plan_eq ,(AddContract::PLANS), {:include_blank=>"select"},:class=>'form-control'%>
+          <%= f.label :status, "Status" %>
+          <%= f.select :status_eq ,(AddContract::STATUS), {:include_blank=>"select"},:class=>'form-control'%>
+          <%= f.label :work_status, "Work status" %>
+          <%= f.select :work_status_eq ,(AddContract::WORKSTATUS), {:include_blank=>"select"},:class=>'form-control'%>
+          </br>
+          </br>
+          <%= f.label :renewal_date_gteq, "Filter By Date" %>
+             <%= f.date_field :plans_renewal_date_gteq ,:class=>'form-control'%>
+            <%= f.label :renewal_date_lteq, "and" %>
+            <%= f.date_field :plans_renewal_date_lteq,:class=>'form-control' %>  
+            <div class="actions" align="center"><%= f.submit "Search" %></div>
+        <% end %>
           <div style="float:right;"><%= link_to 'New Contract', new_contract_path , :class=>"btn btn-primary",:style=>"margin-right:10px"%></div>
+            
           <table class='table'>
             <thead>
               <tr>
@@ -28,19 +46,17 @@
                   <td><%= contract.plans.last.plan_type if contract.plans.present?%></td>
                   <td><%= contract.status %>
                     <%if contract.status=="expired"%>
-                      <%= button_to "Notify", notify_expiry_path(:id=>contract.client_id)%>
+                      <%= button_to "Notify", notify_expiry_path(:id=>contract.client_id,:contract_id=>contract.id)%>
                     <%end%>
-                  </td>
-                  
+                  </td>                  
                    <td><%= contract.work_status %></td>
-                 <td><%= link_to 'Update contract', edit_contract_path(:id=>contract) %>
+                 <td><%=render  :partial=> "edit_contract", locals: {:id => contract.id}%>
                  <td><%= link_to 'Payment history' ,payment_history_path(:id=>contract.id)%>
                  </td>
                 </tr>
               <% end %>
             </tbody>
           </table>              
-          </div>
         </div>
       </div>
     </div>

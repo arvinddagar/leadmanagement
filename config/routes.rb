@@ -9,10 +9,12 @@ Rails.application.routes.draw do
     get 'deactivate' => 'manage_user#deactivate', :as=>'deactivate'
     get 'daily_updates/index'
   end
+    get 'add_contracts'=>'admin/daily_updates#index_contract'
     get 'new_contract' => 'admin/daily_updates#new_contract'
     get 'scheduled_call' => 'daily_updates#scheduled_call'
     post 'create_contract' => 'admin/daily_updates#create_contract'
     get 'fetch_plans' => 'admin/daily_updates#fetch_plans'
+    get 'fetch_contract' => 'admin/daily_updates#fetch_contract'
     get 'fetch_meetings' => 'admin/daily_updates#fetch_meetings'
     get 'fetch_daily' => 'daily_updates#fetch_daily'
     get 'index_contract' => 'admin/daily_updates#index_contract'
@@ -21,6 +23,7 @@ Rails.application.routes.draw do
      post 'call' => 'daily_updates#call'
     get 'show_meetings' => 'admin/daily_updates#show_meetings'
     get 'lead_statuses' => 'daily_updates#scheduled_call'
+    get 'meeting_logs' => 'daily_updates#meeting_logs'
   as :admin do
     post 'notify_expiry'=>'admin/daily_updates#notify_expiry'
     post 'admin/new_users' => 'admin/users#create'

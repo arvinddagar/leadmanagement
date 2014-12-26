@@ -1,0 +1,97 @@
+ <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+<button type="button" onclick="myFunctionupdate(this)" class="btn announce" data-toggle="modal" data-target="#myModal" id="<%=id%>">
+Update contract
+</button>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Lead Status</h4>
+      </div>
+      <div class="modal-body">
+     <%= form_tag("/update_contract") do %>
+            <table class="table">
+              <tr>
+                <td>Client</td>
+                <td><%=select_tag "client_id", options_for_select(@client.collect{ |u| [ "#{u.business} (#{u.contact_person}:#{u.number})",u.id]})%></td>
+              </tr>
+              <tr>
+                <td>
+                  Domain
+                </td>
+                <td>
+                  <%=text_field_tag :domain_name %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Plan
+                </td>
+                <td>
+                <%= select_tag 'plan', options_for_select(AddContract::PLANS), :onchange => "plan_submit(this);"%>
+                </td>
+              </tr>
+             <tr>
+                <td>
+                  Renewal date
+                </td>
+                <td>
+                  <%=text_field_tag :renewal_date %>
+                </td>
+             </tr>
+            <tr>
+              <td>
+                Status
+              </td>
+              <td>
+                 <%=  select_tag 'status', options_for_select(AddContract::STATUS)%>
+              </td>
+              <%=hidden_field_tag :contract_id%>
+            </tr>
+             <tr>
+                <td>
+                  Work Status
+                </td>
+                <td>
+                  <%=  select_tag 'work_status', options_for_select(AddContract::WORKSTATUS)%>
+                </td>
+              </tr>
+            <tr>
+              <td>
+                <%=submit_tag"save"%>
+              </td>
+            </tr>
+         </table>
+        <% end %>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+   $(".announce").click(function(){
+
+     $('#contract_id').val($(this).attr('id'));
+     $.ajax('/fetch_contract',{
+      type: 'get',
+        dataType: 'html',
+        data: {contract: $(this).attr('id')},
+        success: function(data, textStatus, jqXHR)
+          {
+            var d=JSON.parse(data);
+           $('#client_id').val(d['contract']['client_id'])
+            $('#domain_name').val(d['contract']['domain_name'])
+               $('#work_status').val(d['contract']['work_status'])
+               $('#status').val(d['contract']['status'])
+               $('#plan').val(d['plan']['plan_type'])
+               $('#renewal_date').val(d['plan']['renewal_date'])
+
+          }
+    });
+
+   });
+</script>

@@ -10,15 +10,24 @@ Update
       </div>
       <div class="modal-body">
         <%= form_tag(update_meetings_path, :method=>'post', :multipart => true) do %>
+        
           <table class="table">
+
             <tr>
+            <h3>Current Minutes of meeting</h3>
               <td>Mom:</td>
               <td><%=text_area_tag :mom %></td>
             </tr>
             <%= hidden_field_tag :ss_id%>         
             </br>
             <div class="toggl">
+              <tr>
+                <td>
+                  <h3>Schedule next meeting</h3>
+                </td>
+              </tr>
             <tr>
+
               <td>Date:</td>
               <td><%= date_field_tag "meeting_date" %></td>
             </tr>

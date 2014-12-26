@@ -1,0 +1,46 @@
+<section id="main-content">
+  <section class="wrapper">
+    <h3><i class="fa fa-angle-right"></i>Meetings</h3>
+    <div class="row">
+        <div class="col-md-12">
+        </div>
+      <div class="col-md-12 mt">
+        <div class="content-panel">
+          <table class='table'>
+            <thead>
+              <tr>
+              <th>Meeting no</th>
+                <th>Meeting Date</th>
+                <th>Meeting Time</th>
+                <th>Venue</th>
+                <th>status</th>
+              </tr>
+            </thead>
+          
+            <tbody>
+              <% @meetings.each do |meeting| %>
+                <tr>
+                <td><%=meeting.meeting_no%></td>
+                  <td><%= format_date(meeting.meeting_date) if meeting.meeting_date.present? %></td>
+                  <td><%= format_time(meeting.meeting_time) if meeting.meeting_time.present? %></td>
+                  <td style="width:20px"><%= meeting.venue %></td>
+                  <%if meeting.mom.present?%>
+                    <td><%= meeting.mom%></td>
+                  <%else%>
+                    <%if meeting.meeting_date.present?%>
+                      <%if meeting.meeting_date<Date.today%>
+                        <td style="color:red"> Status missing</td>
+                      <%else%>
+                        <td style="color:green">Future meeting</td>
+                      <%end%>
+                    <%end%>
+                  <%end%>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>   
+</section>

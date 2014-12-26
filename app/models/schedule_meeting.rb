@@ -1,4 +1,5 @@
 class ScheduleMeeting < ActiveRecord::Base
+	 #validates :meeting_date, presence: true
 	belongs_to :daily_update
 	ransacker :created_at do
       Arel.sql('date(created_at)')

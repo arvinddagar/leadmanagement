@@ -70,8 +70,7 @@
             <% @plans.each do |ls|%>
               <tr>
                 <td><%= ls.plan_type %></td>
-                <td><%= format_date(ls.renewal_date) %></td>
-              
+                <td><%= format_date(ls.renewal_date) if ls.renewal_date.present?%></td>              
               </tr>
             <%end%>
           </table>    
