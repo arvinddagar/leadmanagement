@@ -23,7 +23,7 @@ class Admin::DailyUpdatesController < ApplicationController
   end
   def notify_expiry
     @user=DailyUpdate.find(params[:id])
-    NotificationMailer.expiry_notification(@user).deliver
+    NotificationMailer.expiry_notification(@user,params[:contract_id]).deliver
     redirect_to :back
    
   end
@@ -37,14 +37,13 @@ class Admin::DailyUpdatesController < ApplicationController
     end
     respond_with(@meetings)
   end
-
+  
   def edit_meetings
-    @user=User.all
+    @user=User.all<td><%=link_to 'Logs',meeting_logs_path(:client=>meeting.daily_update.id)%></td>
     @meeting=ScheduleMeeting.find(params[:id])
   end
 
   def update_meetings
-    binding.pry
     if params[:commit]=="Save Only Mom"
       @meeting=ScheduleMeeting.find(params[:ss_id])
       @meeting.update(:mom=>params[:mom])
