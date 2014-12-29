@@ -11,6 +11,8 @@
              <%= f.date_field :schedule_meeting_meeting_date_eq , :class=>'form-control'%>
               <%= f.label 'Venue' ,:class=>"f-label"%>
              <%= f.text_field :schedule_meeting_venue_cont , :class=>'form-control'%>
+             <%= f.label 'Meeting no' ,:class=>"f-label"%>
+             <%= f.text_field :schedule_meeting_meeting_no_cont , :class=>'form-control'%>         
              <%if current_user.admin==true%>
               <%= f.label 'Assigned to' ,:class=>"f-label"%>
               <%= f.select :schedule_meeting_assigned_to_eq ,@user.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control'%>
