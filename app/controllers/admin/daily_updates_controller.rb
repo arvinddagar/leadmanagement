@@ -25,17 +25,22 @@ class Admin::DailyUpdatesController < ApplicationController
     @user=DailyUpdate.find(params[:id])
     NotificationMailer.expiry_notification(@user,params[:contract_id]).deliver
     redirect_to :back
-   
   end
+  
   def meetings
     @user=User.all
-    @search = ScheduleMeeting.search(params[:q])
-    if current_user.admin== true or current_user.role=="Manager" or current_user=="Admin"
-      @meetings=@search.result.order(meeting_date: :desc)
-    else
-      @meetings=@search.result.where(:assigned_to=>current_user.id).order(meeting_date: :desc)
+    @meetings=[]
+    @search = DailyUpdate.search(params[:q])
+    @search.result.each do |daily|
+     # @meetings<<daily.schedule_meeting.last.id
+     if daily.schedule_meeting.present?
+      if @meetings.include?(daily.schedule_meeting.last.id )
+      else
+        @meetings<<daily.schedule_meeting.last.id
+      end
     end
-    respond_with(@meetings)
+  end
+    respond_with(@meetings)  
   end
   
   def edit_meetings
@@ -99,7 +104,7 @@ class Admin::DailyUpdatesController < ApplicationController
   end
 
   def index_contract
-     @client=DailyUpdate.includes(:lead_status).where('lead_statuses.state =?', 'Client').references(:lead_status)
+    @client=DailyUpdate.includes(:lead_status).where('lead_statuses.state =?', 'Client').references(:lead_status)
     @search = AddContract.search(params[:q])
     @contracts=@search.result
     respond_with(@search)
@@ -113,8 +118,7 @@ class Admin::DailyUpdatesController < ApplicationController
   def fetch_contract
     @contract=AddContract.find(params[:contract])
     @plan=Plan.where(:add_contract_id=>@contract).last
-   render :json => {:contract => @contract, 
-                                  :plan => @plan }
+    render :json => {:contract => @contract, :plan => @plan }
   end
   def update_contract
     @contract=AddContract.find(params[:contract_id])
@@ -124,7 +128,7 @@ class Admin::DailyUpdatesController < ApplicationController
   end
 
   def payment_history
-   @payment_history=PaymentHistory.where(:add_contract_id=>params[:id]).order("created_at DESC")
+    @payment_history=PaymentHistory.where(:add_contract_id=>params[:id]).order("created_at DESC")
   end
 
   def create_payment
