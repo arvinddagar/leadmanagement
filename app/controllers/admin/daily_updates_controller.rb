@@ -101,7 +101,7 @@ class Admin::DailyUpdatesController < ApplicationController
   def index_contract
      @client=DailyUpdate.includes(:lead_status).where('lead_statuses.state =?', 'Client').references(:lead_status)
     @search = AddContract.search(params[:q])
-    @contracts=@search.result.includes(:plans).order('plans.renewal_date DESC')
+    @contracts=@search.result
     respond_with(@search)
   end
 
@@ -119,7 +119,7 @@ class Admin::DailyUpdatesController < ApplicationController
   def update_contract
     @contract=AddContract.find(params[:contract_id])
     @contract.update(:daily_update_id=>params[:client_id],:work_status=>params[:work_status],:status=>params[:status],:domain_name=>params[:domain_name])
-    @plan=Plan.create(:plan_type=>params[:plan],:renewal_date=>params[:renewal_date],:add_contract_id=>params[:id])
+    @plan=Plan.create(:plan_type=>params[:plan],:renewal_date=>params[:renewal_date],:add_contract_id=>params[:contract_id])
     redirect_to :index_contract
   end
 
