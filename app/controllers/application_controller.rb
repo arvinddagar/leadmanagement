@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
     end
  end
   def renewal_date
-    binding.pry
     @c=AddContract.all
     @c.each do |c|
      if  c.plans.last.renewal_date<Date.today
