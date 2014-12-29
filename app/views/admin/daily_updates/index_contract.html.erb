@@ -49,7 +49,7 @@
                   <td><%= contract.plans.last.plan_type if contract.plans.present?%></td>
                   <td><%= contract.status %>
                     <%if contract.status=="expired"%>
-                      <%= button_to "Notify", notify_expiry_path(:id=>contract.client_id,:contract_id=>contract.id)%>
+                      <%= button_to "Notify", notify_expiry_path(:id=>contract.daily_update_id,:contract_id=>contract.id)%>
                     <%end%>
                   </td>                  
                    <td><%= contract.work_status %></td>
