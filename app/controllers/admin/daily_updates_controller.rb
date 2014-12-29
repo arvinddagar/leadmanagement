@@ -78,7 +78,7 @@ class Admin::DailyUpdatesController < ApplicationController
   end
 
   def create_contract
-    @add_contract=AddContract.create(:daily_update_id=>params[:client_id],:client_name=>params[:client_name],:status=>params[:status],:domain_name=>params[:domain_name],:work_status=>params[:work_status])
+    @add_contract=AddContract.create(:daily_update_id=>params[:client_id],:status=>params[:status],:domain_name=>params[:domain_name],:work_status=>params[:work_status])
     @plan=Plan.create(:plan_type=>params[:plan],:renewal_date=>params[:renewal_date],:add_contract_id=>@add_contract.id)
     redirect_to :back
   end
