@@ -83,7 +83,7 @@ Update contract
         success: function(data, textStatus, jqXHR)
           {
             var d=JSON.parse(data);
-            $('#client_id').val(d['contract']['client_id'])
+            $('#client_id').val(d['contract']['daily_update_id'])
             $('#domain_name').val(d['contract']['domain_name'])
             $('#work_status').val(d['contract']['work_status'])
             $('#status').val(d['contract']['status'])

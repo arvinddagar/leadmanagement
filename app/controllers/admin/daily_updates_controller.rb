@@ -118,7 +118,7 @@ class Admin::DailyUpdatesController < ApplicationController
   end
   def update_contract
     @contract=AddContract.find(params[:contract_id])
-    @contract.update(:client_id=>params[:client_id],:work_status=>params[:work_status],:client_name=>params[:client_name],:status=>params[:status],:domain_name=>params[:domain_name])
+    @contract.update(:daily_update_id=>params[:client_id],:work_status=>params[:work_status],:status=>params[:status],:domain_name=>params[:domain_name])
     @plan=Plan.create(:plan_type=>params[:plan],:renewal_date=>params[:renewal_date],:add_contract_id=>params[:id])
     redirect_to :index_contract
   end
