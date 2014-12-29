@@ -45,7 +45,7 @@
                 <tr>
                   <td><%= DailyUpdate.client(contract.daily_update_id).contact_person %></td>
                   <td><%= contract.domain_name %></td>
-                  <td><%= format_date(contract.plans.last.renewal_date.to_date) if contract.plans.last.renewal_date.present? if contract.plans.present?%></td>
+                  <td style="width:100px"><%= format_date(contract.plans.last.renewal_date.to_date) if contract.plans.last.renewal_date.present? if contract.plans.present?%></td>
                   <td><%= contract.plans.last.plan_type if contract.plans.present?%></td>
                   <td><%= contract.status %>
                     <%if contract.status=="expired"%>
