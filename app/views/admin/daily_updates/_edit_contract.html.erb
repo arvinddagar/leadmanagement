@@ -83,12 +83,12 @@ Update contract
         success: function(data, textStatus, jqXHR)
           {
             var d=JSON.parse(data);
-           $('#client_id').val(d['contract']['client_id'])
+            $('#client_id').val(d['contract']['client_id'])
             $('#domain_name').val(d['contract']['domain_name'])
-               $('#work_status').val(d['contract']['work_status'])
-               $('#status').val(d['contract']['status'])
-               $('#plan').val(d['plan']['plan_type'])
-               $('#renewal_date').val(d['plan']['renewal_date'])
+            $('#work_status').val(d['contract']['work_status'])
+            $('#status').val(d['contract']['status'])
+            $('#plan').val(d['plan']['plan_type'])
+            $('#renewal_date').val(d['plan']['renewal_date'])
 
           }
     });
