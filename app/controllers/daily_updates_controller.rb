@@ -29,6 +29,7 @@ class DailyUpdatesController < ApplicationController
   end
   def meeting_logs
     @meetings= DailyUpdate.find(params[:client]).schedule_meeting.order('meeting_date Desc')
+    render layout: false
   end
   def new
     @category=Category.all

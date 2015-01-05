@@ -32,7 +32,6 @@ class Admin::DailyUpdatesController < ApplicationController
     @meetings=[]
     @search = DailyUpdate.search(params[:q])
     @search.result.each do |daily|
-     # @meetings<<daily.schedule_meeting.last.id
      if daily.schedule_meeting.present?
       if @meetings.include?(daily.schedule_meeting.last.id )
       else
@@ -125,6 +124,10 @@ class Admin::DailyUpdatesController < ApplicationController
     @contract.update(:daily_update_id=>params[:client_id],:work_status=>params[:work_status],:status=>params[:status],:domain_name=>params[:domain_name])
     @plan=Plan.create(:plan_type=>params[:plan],:renewal_date=>params[:renewal_date],:add_contract_id=>params[:contract_id])
     redirect_to :index_contract
+  end
+   def logs
+    @meetings= DailyUpdate.find(params[:client]).schedule_meeting.order('meeting_date Desc')
+     render :json => @meetings
   end
 
   def payment_history

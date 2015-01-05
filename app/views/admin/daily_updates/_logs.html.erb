@@ -1,0 +1,30 @@
+<button type="button"  class="btn meeting_log" data-toggle="modal" data-target="#myModal1" id="<%=id%>">
+logs
+</button>
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Meeting status</h4>
+      </div>
+      <div class="modal-body">
+         <div id="meet_log"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+   $(".meeting_log").click(function(){
+      $.ajax('/meeting_logs',{
+      type: 'get',
+        dataType: 'html',
+        data: {client: $(this).attr('id')},
+        success: function(data, textStatus, jqXHR)
+          {
+            $("#meet_log").html(data);
+          }
+    });
+
+   });
+</script>
