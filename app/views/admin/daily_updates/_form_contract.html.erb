@@ -25,7 +25,7 @@
           	  	  Plan
           	    </td>
           	    <td>
-                  <%= select_tag 'plan', options_for_select(AddContract::PLANS), :onchange => "plan_submit(this);"%>
+                  <%= select_tag 'plan', options_for_select(AddContract::PLANS), :onchange => "plan_submit(this);",:include_blank=>"select"%>
           	    </td>                
               </tr>
            	  <tr>

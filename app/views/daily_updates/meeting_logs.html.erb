@@ -11,7 +11,7 @@
             <tbody>
               <% @meetings.each do |meeting| %>
                 <tr>
-                <td><%=meeting.meeting_no%></td>
+                  <td><%=meeting.meeting_no%></td>
                   <td><%= format_date(meeting.meeting_date) if meeting.meeting_date.present? %></td>
                   <td><%= format_time(meeting.meeting_time) if meeting.meeting_time.present? %></td>
                   <td style="width:20px"><%= meeting.venue %></td>

@@ -1,7 +1,7 @@
-<button type="button"  class="btn announce" data-toggle="modal" data-target="#myModal111" id="<%=id%>">
+<button type="button"  class="btn announce" data-toggle="modal" data-target="#status_modal" id="<%=id%>">
 Update
 </button>
-<div class="modal fade" id="myModal111" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="status_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -9,10 +9,8 @@ Update
         <h4 class="modal-title" id="myModalLabel">Meeting status</h4>
       </div>
       <div class="modal-body">
-        <%= form_tag(update_meetings_path, :method=>'post', :multipart => true) do %>
-        
+        <%= form_tag(update_meetings_path, :method=>'post', :multipart => true) do %>        
           <table class="table">
-
             <tr>
             <h3>Current Minutes of meeting</h3>
               <td>Mom:</td>
@@ -27,7 +25,6 @@ Update
                 </td>
               </tr>
             <tr>
-
               <td>Date:</td>
               <td><%= date_field_tag "meeting_date" %></td>
             </tr>

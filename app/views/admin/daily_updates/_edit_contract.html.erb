@@ -11,63 +11,60 @@ Update contract
         <h4 class="modal-title" id="myModalLabel">Lead Status</h4>
       </div>
       <div class="modal-body">
-     <%= form_tag("/update_contract") do %>
-            <table class="table">
-              <tr>
-                <td>Client</td>
-                <td><%=select_tag "client_id", options_for_select(@client.collect{ |u| [ "#{u.business} (#{u.contact_person}:#{u.number})",u.id]})%></td>
-              </tr>
-              <tr>
-                <td>
-                  Domain
-                </td>
-                <td>
-                  <%=text_field_tag :domain_name %>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Plan
-                </td>
-                <td>
-                <%= select_tag 'plan', options_for_select(AddContract::PLANS), :onchange => "plan_submit(this);"%>
-                </td>
-              </tr>
-             <tr>
-                <td>
-                  Renewal date
-                </td>
-                <td>
-                  <%=text_field_tag :renewal_date %>
-                </td>
-             </tr>
+        <%= form_tag("/update_contract") do %>
+          <table class="table">
+            <tr>
+              <td>Client</td>
+              <td><%=select_tag "client_id", options_for_select(@client.collect{ |u| [ "#{u.business} (#{u.contact_person}:#{u.number})",u.id]})%></td>
+            </tr>
+            <tr>
+              <td>
+                Domain
+              </td>
+              <td>
+                <%=text_field_tag :domain_name %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Plan
+              </td>
+              <td>
+              <%= select_tag 'plan', options_for_select(AddContract::PLANS), :onchange => "plan_submit(this);"%>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Renewal date
+              </td>
+              <td>
+                <%=text_field_tag :renewal_date %>
+              </td>
+            </tr>
             <tr>
               <td>
                 Status
               </td>
               <td>
-                 <%=  select_tag 'status', options_for_select(AddContract::STATUS)%>
+                <%=  select_tag 'status', options_for_select(AddContract::STATUS)%>
               </td>
               <%=hidden_field_tag :contract_id%>
             </tr>
-             <tr>
-                <td>
-                  Work Status
-                </td>
-                <td>
-                  <%=  select_tag 'work_status', options_for_select(AddContract::WORKSTATUS)%>
-                </td>
-              </tr>
+            <tr>
+              <td>
+                Work Status
+              </td>
+              <td>
+                <%=  select_tag 'work_status', options_for_select(AddContract::WORKSTATUS)%>
+              </td>
+            </tr>
             <tr>
               <td>
                 <%=submit_tag"save"%>
               </td>
             </tr>
-         </table>
+          </table>
         <% end %>  
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

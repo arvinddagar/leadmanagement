@@ -7,24 +7,23 @@
       <div class="col-md-12 mt">
         <div class="content-panel">
         <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form" , mothod: 'post'} do |f| %>
-          <%= f.label :client_name %>
+          <%= f.label :client_name ,:class=>"f-label" %>
           <%= f.text_field :daily_update_contact_person_cont ,:class=>'form-control'%>
-          <%= f.label :domain_name %>
+          <%= f.label :domain_name ,:class=>"f-label"%>
           <%= f.text_field :domain_name_cont ,:class=>'form-control'%>
-          <%= f.label :plan, "Plan" %>
+          <%= f.label :plan, "Plan" ,:class=>"f-label"%>
           <%= f.select :plans_plan_type_eq ,(AddContract::PLANS), {:include_blank=>"select"},:class=>'form-control'%>
-          <%= f.label :status, "Status" %>
+          <%= f.label :status, "Status" ,:class=>"f-label"%>
           <%= f.select :status_eq ,(AddContract::STATUS), {:include_blank=>"select"},:class=>'form-control'%>
           </br>
           </br>
-          <%= f.label :work_status, "Work status" %>
+          <%= f.label :work_status, "Work status",:class=>"f-label" %>
           <%= f.select :work_status_eq ,(AddContract::WORKSTATUS), {:include_blank=>"select"},:class=>'form-control'%>
-          <%= f.label :renewal_date_gteq, "Filter By Date" %>
-            <%= f.date_field :plans_renewal_date_gteq ,:class=>'form-control'%>
-            <%= f.label :renewal_date_lteq, "and" %>
-            <%= f.date_field :plans_renewal_date_lteq,:class=>'form-control' %> 
-
-            <div class="actions" align="center"><%= f.submit "Search" %></div>
+          <%= f.label :renewal_date_gteq, "Filter By Date" ,:class=>"f-label"%>
+          <%= f.date_field :plans_renewal_date_gteq ,:class=>'form-control'%>
+          <%= f.label :renewal_date_lteq, "and" %>
+          <%= f.date_field :plans_renewal_date_lteq,:class=>'form-control' %>
+          <div class="actions" align="center"><%= f.submit "Search" %></div>
         <% end %>
           <div style="float:right;"><%= link_to 'New Contract', new_contract_path , :class=>"btn btn-primary",:style=>"margin-right:10px"%></div>
             
@@ -37,7 +36,7 @@
                 <th>Plan</th>
                 <th>Status</th>
                 <th> Work Status</th>
-                <th colspan="3">actions</th>
+                <th colspan="3">Actions</th>
               </tr>
             </thead>          
             <tbody>

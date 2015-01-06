@@ -6,17 +6,17 @@
       </div>
       <div class="col-md-12 mt">
         <div class="content-panel">
-         <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form"} do |f| %>
-           <%= f.label 'Filter By Date' , :class=>'f-label'%>
-           <%= f.date_field :created_at_eq , :class=>'form-control'%>
-           <%= f.label 'Business', :class=>'f-label'%>
-           <%= f.text_field :business_cont , :class=>'form-control'%>
-           <%= f.label 'Contact Number', :class=>'f-label'%>
-           <%= f.text_field :number_cont , :class=>'form-control'%></br>
-           <%= f.label 'Added by', :class=>'f-label'%>
-           <%= f.select :user_id_eq ,@user.all.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control'%>
-           <%= f.label 'Contact Person'%>
-           <%= f.text_field :contact_person_eq , :class=>'form-control'%>
+          <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form"} do |f| %>
+            <%= f.label 'Filter By Date' , :class=>'f-label'%>
+            <%= f.date_field :created_at_eq , :class=>'form-control'%>
+            <%= f.label 'Business', :class=>'f-label'%>
+            <%= f.text_field :business_cont , :class=>'form-control'%>
+            <%= f.label 'Contact Number', :class=>'f-label'%>
+            <%= f.text_field :number_cont , :class=>'form-control'%></br>
+            <%= f.label 'Added by', :class=>'f-label'%>
+            <%= f.select :user_id_eq ,@user.all.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control'%>
+            <%= f.label 'Contact Person'%>
+            <%= f.text_field :contact_person_eq , :class=>'form-control'%>
             <div class="actions" align="center"><%= f.submit "Search" %></div>
           <% end %>
           <div style="float:right;"><%= link_to 'New Record', new_daily_update_path , :class=>"btn btn-primary",:style=>"margin-right:10px"%></div>
@@ -35,34 +35,34 @@
               </tr>
             </thead>
             <tbody>
-               <% @daily_updates.each do |daily_update| %>
+              <% @daily_updates.each do |daily_update| %>
                 <% if daily_update.lead_status.present?%>
-                    <%if daily_update.lead_status.last.state.present? && DailyUpdate.client(daily_update.id).lead_status.last.state !="Client" %>
-                      <tr>
-                        <td><%= daily_update.business %></td>
-                        <td><%= daily_update.contact_person %></td>
-                        <td><%= daily_update.number %></td>
-                        <td><%= daily_update.designation %></td>
-                        <td><%= DailyUpdate.client(daily_update.id).lead_status.last.state %></td>
-                        <td><%= DailyUpdate.client(daily_update.id).lead_status.last.comment %></td>
-                        <td><%= link_to 'Show', daily_update %> | <%= link_to 'Update record', edit_daily_update_path(daily_update) %></td>
-                      </tr>
-                    <%end%>
-                  <%else%>
-                   <tr>
-                  <td><%= daily_update.business %></td>
-                  <td><%= daily_update.contact_person %></td>
-                  <td><%= daily_update.number %></td>
-                  <td><%= daily_update.designation %></td>
-                  <td></td>
-                  <td></td>                  
-                  <td><%= link_to 'Show', daily_update %> | <%= link_to 'Update record', edit_daily_update_path(daily_update) %></td>
-                </tr>
+                  <%if daily_update.lead_status.last.state.present? && DailyUpdate.client(daily_update.id).lead_status.last.state !="Client" %>
+                    <tr>
+                      <td><%= daily_update.business %></td>
+                      <td><%= daily_update.contact_person %></td>
+                      <td><%= daily_update.number %></td>
+                      <td><%= daily_update.designation %></td>
+                      <td><%= DailyUpdate.client(daily_update.id).lead_status.last.state %></td>
+                      <td><%= DailyUpdate.client(daily_update.id).lead_status.last.comment %></td>
+                      <td><%= link_to 'Show', daily_update %> | <%= link_to 'Update record', edit_daily_update_path(daily_update) %></td>
+                    </tr>
+                  <%end%>
+                <%else%>
+                  <tr>
+                    <td><%= daily_update.business %></td>
+                    <td><%= daily_update.contact_person %></td>
+                    <td><%= daily_update.number %></td>
+                    <td><%= daily_update.designation %></td>
+                    <td></td>
+                    <td></td>                  
+                    <td><%= link_to 'Show', daily_update %> | <%= link_to 'Update record', edit_daily_update_path(daily_update) %></td>
+                  </tr>
                 <%end%>
               <% end %>          
             </tbody>
           </table>
-              <%= paginate @daily_updates %>
+          <%= paginate @daily_updates %>
           </div>
         </div>
       </div>

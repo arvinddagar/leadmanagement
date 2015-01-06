@@ -11,4 +11,8 @@ module ApplicationHelper
     yield presenter if block_given?
     presenter
   end
+  def sc_meeting(m)
+    ScheduleMeeting.find(m)
+
+  end
 end

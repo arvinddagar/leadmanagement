@@ -1,7 +1,7 @@
-<button type="button" onclick="myFunctionupdate(this)" class="btn announce" data-toggle="modal" data-target="#myModal" id="<%=id%>">
+<button type="button" onclick="myFunctionupdate(this)" class="btn announce" data-toggle="modal" data-target="#edit_meeting_Modal" id="<%=id%>">
 Edit
 </button>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="edit_meeting_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -9,42 +9,39 @@ Edit
         <h4 class="modal-title" id="myModalLabel">Lead Status</h4>
       </div>
       <div class="modal-body">
-      <%= form_tag(update_meetings_path, :method=>'post', :multipart => true) do %>
-            <table class="table">
-              <tr>
-                 <td>
-                   Date:
-                 </td>
-                 <td>
-                   <%=date_field_tag :meeting_date %>
-                 </td>
-               </tr>
-               <tr>
-                 <td> Time:</td>
-                 <td><%= time_field_tag :meeting_time  %></td>
-              </tr>
-              <tr>
-                <td>Venue:</td>
-                <td><%=text_area_tag :venue %></td>
-              </tr>
-              <tr>
-                <td>Notes:</td>
-                <td><%=text_area_tag :notes%></td>
-              </tr>
-              <tr>
-                <td>Assigned to :</td>
-                <td><%=  select_tag "assigned_to", options_for_select(@user.collect{ |u| [ u.email,u.id]})%></td>
-              </tr>
-              <%= hidden_field_tag :s_id , params[:id]%>
-              <tr>
-              <td></td>
-               <td> <%= submit_tag 'Submit' %></td>
-              </tr>
-            </table>
-          <% end %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= form_tag(update_meetings_path, :method=>'post', :multipart => true) do %>
+          <table class="table">
+            <tr>
+               <td>
+                 Date:
+               </td>
+               <td>
+                 <%=date_field_tag :meeting_date %>
+               </td>
+             </tr>
+             <tr>
+               <td> Time:</td>
+               <td><%= time_field_tag :meeting_time  %></td>
+            </tr>
+            <tr>
+              <td>Venue:</td>
+              <td><%=text_area_tag :venue %></td>
+            </tr>
+            <tr>
+              <td>Notes:</td>
+              <td><%=text_area_tag :notes%></td>
+            </tr>
+            <tr>
+              <td>Assigned to :</td>
+              <td><%=  select_tag "assigned_to", options_for_select(@user.collect{ |u| [ u.email,u.id]})%></td>
+            </tr>
+            <%= hidden_field_tag :s_id , params[:id]%>
+            <tr>
+            <td></td>
+             <td> <%= submit_tag 'Submit' %></td>
+            </tr>
+          </table>
+        <% end %>
       </div>
     </div>
   </div>

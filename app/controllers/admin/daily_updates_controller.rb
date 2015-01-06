@@ -17,10 +17,12 @@ class Admin::DailyUpdatesController < ApplicationController
   def user_daily_updates  	
   	@daily_updates=User.find(params[:id]).daily_updates.order("created_at").page(params[:page]).per(25)
   end  
+
   def fetch_meetings
     @meetings=ScheduleMeeting.find(params[:meeting_id])
     render :json =>@meetings
   end
+
   def notify_expiry
     @user=DailyUpdate.find(params[:id])
     NotificationMailer.expiry_notification(@user,params[:contract_id]).deliver
@@ -53,7 +55,7 @@ class Admin::DailyUpdatesController < ApplicationController
       @meeting.update(:mom=>params[:mom])
     elsif params[:commit]=="Submit"
 	    @meeting=ScheduleMeeting.find(params[:s_id])
-      @meeting.update(:mom=>params[:mom],:meeting_date=>params[:meeting_date],:meeting_time=>params[:meeting_time],:venue=>params[:venue],:notes=>params[:notes]) 
+      @meeting.update(:meeting_date=>params[:meeting_date],:meeting_time=>params[:meeting_time],:venue=>params[:venue],:notes=>params[:notes]) 
     else
       @meeting=ScheduleMeeting.find(params[:ss_id])
       @meeting.update(:mom=>params[:mom])
@@ -114,22 +116,20 @@ class Admin::DailyUpdatesController < ApplicationController
     @plans=Plan.where(:add_contract_id=>params[:id])
     @client=DailyUpdate.includes(:lead_status).where('lead_statuses.state =?', 'Client').references(:lead_status)
   end
+
   def fetch_contract
     @contract=AddContract.find(params[:contract])
     @plan=Plan.where(:add_contract_id=>@contract).last
     render :json => {:contract => @contract, :plan => @plan }
   end
+  
   def update_contract
     @contract=AddContract.find(params[:contract_id])
     @contract.update(:daily_update_id=>params[:client_id],:work_status=>params[:work_status],:status=>params[:status],:domain_name=>params[:domain_name])
     @plan=Plan.create(:plan_type=>params[:plan],:renewal_date=>params[:renewal_date],:add_contract_id=>params[:contract_id])
     redirect_to :index_contract
   end
-   def logs
-    @meetings= DailyUpdate.find(params[:client]).schedule_meeting.order('meeting_date Desc')
-     render :json => @meetings
-  end
-
+  
   def payment_history
     @payment_history=PaymentHistory.where(:add_contract_id=>params[:id]).order("created_at DESC")
   end
@@ -137,5 +137,23 @@ class Admin::DailyUpdatesController < ApplicationController
   def create_payment
     @payment=PaymentHistory.create(:collection_date=>params[:collection_date],:amount=>params[:amount],:cheque_no=>params[:cheque_no],:bank_name=>params[:bank_name],:cheque_date=>params[:cheque_date],:transaction_type=>params[:transaction_type],:add_contract_id=>params[:add_contract_id])
     redirect_to :back
+  end
+  
+  def reports
+    @search = PaymentHistory.search(params[:q])
+    @payment=0
+      @search.result.each do |pay|
+        @payment=@payment+ pay.amount
+      end   
+  end
+  def contract_expiry
+    @contract=AddContract.where(:status=>"expired")
+    @c=[]
+    AddContract.all.each do |c|
+      @con= (Date.today..Date.today+7).cover?(c.plans.last.renewal_date)
+      if @con==true
+        @c<<c
+      end
+    end
   end
 end

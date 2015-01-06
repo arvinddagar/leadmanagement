@@ -1,7 +1,7 @@
-<button type="button" onclick="myFunctionModal(this)" class="btn announce" data-toggle="modal" data-target="#myModal" id="<%=id%>">
-Call
+<button type="button" onclick="myFunctionModal(this)" class="btn announce" data-toggle="modal" data-target="#call" id="<%=id%>">
+  Call
 </button>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="call" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -9,40 +9,77 @@ Call
         <h4 class="modal-title" id="myModalLabel">Lead Status</h4>
       </div>
       <div class="modal-body">
-     <%= form_tag(call_path, :method=>'post', :multipart => true,:id=>"tester") do %>
-     <table>
-       <tr>
-         <td class="f-label">
-           State
-         </td>
-         <td class="f-label">
-            <%=  select_tag 'state', options_for_select(LeadStatus::PERSON_TYPES)%>
-         </td>
-       </tr>
-       <tr>
-       </br>
-         <td class="f-label">
-           Comment
-         </td>
-         <td class="f-label"><%=text_area_tag :comment%></td>
-       </tr>
-       </br>
-       <tr>
-         <td class="f-label">
-           Schedule next call
-         </td>
-         <td class="f-label"><%=date_field_tag :schedule_next_call%></td>
-       </tr>
-        <tr>
-         <td class="f-label">
-           Schedule next call time
-         </td>
-         <td class="f-label"><%=time_field_tag :schedule_next_call_time%></td>
-       </tr>
-       <%=hidden_field_tag :daily_update_id1%>
-     </table>       
-     <%=submit_tag 'save',:class=>"btn btn-default"%>
-     <%end%>
+        <%= form_tag(call_path, :method=>'post', :multipart => true,:id=>"tester") do %>
+          <table>
+             <tr>
+               <td class="f-label">
+                 State
+               </td>
+               <td class="f-label">
+                 <%=  select_tag 'state', options_for_select(LeadStatus::PERSON_TYPES)%>
+               </td>
+             </tr>
+             <tr>
+             </br>
+               <td class="f-label">
+                 Comment
+               </td>
+               <td class="f-label"><%=text_area_tag :comment%></td>
+             </tr>
+             </br>
+             <tr>
+               <td class="f-label">
+                 Schedule next call
+               </td>
+               <td class="f-label"><%=date_field_tag :schedule_next_call%></td>
+             </tr>
+             <tr>
+               <td class="f-label">
+                Schedule next call time
+               </td>
+               <td class="f-label"><%=time_field_tag :schedule_next_call_time%></td>
+             </tr>
+             <%=hidden_field_tag :daily_update_id1%>
+
+          </table>       
+          <%=submit_tag 'save',:class=>"btn btn-default"%>
+        <%end%>
+         <%= button_tag 'Schedule meeting',:class=>"togg"%>
+          <br/>
+          <div class="toggl">
+            <%= form_tag(schedule_meeting_path, :method=>'post', :multipart => true) do %>
+           <table class="table">
+           <tr>
+             <td>Date:</td>
+             <td><%= date_field_tag "meeting_date" %></td>
+           </tr>
+           <tr>
+            <td> Time: </td>
+             <td><%= time_field_tag "meeting_time" %></td>
+           </tr>
+           <tr>
+            <td> Venue</td>
+             <td><%= text_area_tag "venue", "", :size=>"20x5" %></td>
+           </tr>
+           <tr>
+            <td> Notes</td>
+             <td><%= text_area_tag "notes", "", :size=>"20x5" %></td>
+           </tr>
+            <%= hidden_field_tag :daily_update_id%>
+
+         
+           <tr>
+            <td> Assigned to:</td>
+             <td><%= select_tag "assigned_to", options_from_collection_for_select(User.all, "id", "email",:selected=>1),:class=>"form-control",:style=>"width:30%"%></td>
+           </tr>
+           
+           <tr>
+           <td></td>
+             <td><%= submit_tag 'Submit' %></td>
+           </tr>
+           </table>
+          <% end %> 
+         
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -67,3 +104,11 @@ Call
   });
 
 </script>
+<script>
+  $( document ).ready(function() {
+   $( ".toggl" ).hide();
+  });
+$( ".togg" ).click(function() {
+  $( ".toggl" ).show();
+});
+ </script>

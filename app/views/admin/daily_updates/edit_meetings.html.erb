@@ -6,20 +6,20 @@
         </div>
       <div class="col-md-12 mt">
         <div class="content-panel">
-         <div>
+        <div>
             <%= form_tag(update_meetings_path, :method=>'post', :multipart => true) do %>
             <table class="table">
               <tr>
-                 <td>
-                   Date:
-                 </td>
-                 <td>
-                   <%=date_field_tag :meeting_date ,@meeting.meeting_date%>
-                 </td>            
-               </tr>
-               <tr>
-                 <td> Time:</td>
-                 <td><%= time_field_tag :meeting_time ,@meeting.meeting_time %></td> 
+                <td>
+                  Date:
+                </td>
+                <td>
+                  <%=date_field_tag :meeting_date ,@meeting.meeting_date%>
+                </td>            
+              </tr>
+              <tr>
+                <td> Time:</td>
+                <td><%= time_field_tag :meeting_time ,@meeting.meeting_time %></td> 
               </tr>
               <tr>
                 <td>Venue:</td>
@@ -35,8 +35,8 @@
               </tr>   
               <%= hidden_field_tag :id , params[:id]%>
               <tr>
-              <td></td>
-               <td> <%= submit_tag 'Submit' %></td>
+                <td></td>
+                <td> <%= submit_tag 'Submit' %></td>
               </tr>
             </table>
           <% end %>
@@ -52,8 +52,8 @@
   $( document ).ready(function() {
    $( ".toggl" ).hide();
   });
-$( ".togg" ).click(function() {
-  $( ".toggl" ).show();
-});
- </script>
+  $( ".togg" ).click(function() {
+    $( ".toggl" ).show();
+  });
+</script>
 

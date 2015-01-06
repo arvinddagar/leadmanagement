@@ -2,7 +2,7 @@
 <aside>
   <div id="sidebar"  class="nav-collapse ">
     <ul class="sidebar-menu" id="nav-accordion">
-      <p class="centered"><%=image_tag "logo-shad.png",:class=>"img-circle",:style=>"width:160px; height:150px;" %></p>
+      <p class="centered"><%=image_tag "logo-shad.png",:class=>"img-circle",:style=>"width:160px; height:100px;" %></p>
      <h5 class="centered"></h5>
       <li class="mt">
         <i class="fa fa-dashboard"></i>
@@ -33,6 +33,12 @@
       </li>
        <li class="sub-menu">
         <span><%= link_to "Scheduled calls" ,scheduled_call_path%></span>
+      </li> 
+      <li class="sub-menu">
+        <span><%= link_to "Payment Reports" ,payment_histories_path%></span>
+      </li>
+      <li class="sub-menu">
+        <span><%= link_to "Contract expiry Reports" ,contract_expiry_path%></span>
       </li>       
     </ul>
   </div>

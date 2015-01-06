@@ -25,7 +25,7 @@
           	  	  Transaction type
           	    </td>
           	    <td>
-          	  	  <%= select_tag 'transaction_type', options_for_select(PaymentHistory::TRANSACTION_TYPES)%>                    
+          	  	  <%= select_tag 'transaction_type', options_for_select(PaymentHistory::TRANSACTION_TYPES), :include_blank=>"select"%>                    
           	    </td>	
               </tr>
            	  <tr class="transaction">

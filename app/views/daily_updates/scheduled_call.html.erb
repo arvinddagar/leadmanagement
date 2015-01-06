@@ -6,19 +6,19 @@
       </div>
       <div class="col-md-12 mt">
         <div class="content-panel">
-        <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form"} do |f| %>
-           <%= f.label :schedule_next_call, "Filter By Date" %>
-             <%= f.date_field :schedule_next_call_eq, :class=>'form-control' %>
-             <%= f.label :contact_person, "Contact person" %>
-             <%= f.text_field :daily_update_contact_person_cont, :class=>'form-control' %>
-             <%= f.label :business, "Business" %>
-             <%= f.text_field :daily_update_business_cont , :class=>'form-control'%>
-             </br>
-             <%= f.label :number, "Contact Number" %>
-             <%= f.text_field :daily_update_number_cont , :class=>'form-control'%>
-             </br>
+          <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form"} do |f| %>
+            <%= f.label :schedule_next_call, "Filter By Date" %>
+            <%= f.date_field :schedule_next_call_eq, :class=>'form-control' %>
+            <%= f.label :contact_person, "Contact person" %>
+            <%= f.text_field :daily_update_contact_person_cont, :class=>'form-control' %>
+            <%= f.label :business, "Business" %>
+            <%= f.text_field :daily_update_business_cont , :class=>'form-control'%>
+            </br>
+            <%= f.label :number, "Contact Number" %>
+            <%= f.text_field :daily_update_number_cont , :class=>'form-control'%>
+            </br>
             <div class="actions" align="center"><%= f.submit "Search" %></div>
-        <%end%>
+          <%end%>
           <table class="table">
             <th>Buisness</th>
             <th>Contact Person</th>
@@ -27,17 +27,16 @@
             <th>Scheduled Time</th>
             <th>Actions</th>
             <%@records.each do |record|%>
-                <tr>
-                  <%if record.schedule_next_call.present?%>
-                    <td><%=record.daily_update_business%></td>
-                    <td><%=record.daily_update_contact_person%></td>
-                    <td><%=record.daily_update_number%></td>
-                    <td><%=format_date(record.schedule_next_call)%></td>
-                    <td><%=format_time(record.schedule_next_call_time) if record.schedule_next_call_time.present?%></td>
-                    <td><%=render  :partial=> "call", locals: {:id => record.daily_update.id}%></td>
-                    
-                </tr>
-              <%end%>
+              <tr>
+                <%if record.schedule_next_call.present?%>
+                  <td><%=record.daily_update_business%></td>
+                  <td><%=record.daily_update_contact_person%></td>
+                  <td><%=record.daily_update_number%></td>
+                  <td><%=format_date(record.schedule_next_call)%></td>
+                  <td><%=format_time(record.schedule_next_call_time) if record.schedule_next_call_time.present?%></td>
+                  <td><%=render  :partial=> "call", locals: {:id => record.daily_update.id}%></td>
+                <%end%>
+              </tr>
             <%end%>
           </table>
         </div>

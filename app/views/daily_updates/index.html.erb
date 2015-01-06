@@ -8,8 +8,8 @@
       <div class="col-md-12 mt">
         <div class="content-panel" style="width:995px; margin-left:-20px;">
           <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form" , mothod: 'post'} do |f| %>
-             <%= f.label :created_at_gteq, "Filter By Date" %>
-             <%= f.date_field :created_at_gteq %>
+            <%= f.label :created_at_gteq, "Filter By Date" %>
+            <%= f.date_field :created_at_gteq %>
             <%= f.label :created_at_lteq, "and" %>
             <%= f.date_field :created_at_lteq %>  
             <%= f.label 'Business', :class=>'f-label'%>
@@ -38,13 +38,12 @@
                 <th>Contact person</th>
                 <th>Number</th>
                 <th>Designation</th>
-                <th  colspan="2">Status</th>
+                <th colspan="2">Status</th>
                 <th colspan="2">Comment</th>                
                 <th colspan="2" >Actions</th>
               </tr>
             </thead>
             <tbody>
-
               <% @daily_updates.each do |daily_update| %>
                 <%if daily_update.lead_status.present?%>
                   <%if daily_update.lead_status.last.state!='Client'%>
@@ -59,17 +58,16 @@
                   </tr>
                   <%end%>
                   <%else%>
-                   <tr>
-                    <td style="width:115px;"><%= daily_update.business %></td>
-                    <td><%= daily_update.contact_person %></td>
-                    <td style="width:20px;"><%= daily_update.number %></td>
-                    <td><%= daily_update.designation %></td>
-                    <td colspan="2"><%= daily_update.lead_status.last.state if daily_update.lead_status.present? %></td>
-                    <td colspan="2"><%= daily_update.lead_status.last.comment if daily_update.lead_status.present? %></td>
-                    <td colspan="2" id="<%=daily_update.id%>"><%=render  :partial=> "call", locals: {:id => daily_update.id}%>|<%= link_to 'Show', daily_update %> | <%= link_to 'Update', edit_daily_update_path(daily_update) %></td>
-                  </tr>
-
-               <%end%>
+                    <tr>
+                      <td style="width:115px;"><%= daily_update.business %></td>
+                      <td><%= daily_update.contact_person %></td>
+                      <td style="width:20px;"><%= daily_update.number %></td>
+                      <td><%= daily_update.designation %></td>
+                      <td colspan="2"><%= daily_update.lead_status.last.state if daily_update.lead_status.present? %></td>
+                      <td colspan="2"><%= daily_update.lead_status.last.comment if daily_update.lead_status.present? %></td>
+                      <td colspan="2" id="<%=daily_update.id%>"><%=render  :partial=> "call", locals: {:id => daily_update.id}%>|<%= link_to 'Show', daily_update %> | <%= link_to 'Update', edit_daily_update_path(daily_update) %></td>
+                    </tr>
+                  <%end%>
               <%end%>
             </tbody>
           </table>

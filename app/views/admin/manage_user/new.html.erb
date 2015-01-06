@@ -9,14 +9,22 @@
           <%= form_for(@user, url: admin_users_path , method: 'post') do |f| %>
             <div><%= f.label :name,:class=>"f-label" %><br />
             <%= f.text_field :name , :class=>"form-control" ,:style=> 'width:30%; margin-left:10px;'%></div>
-            <div><%= f.label :email ,:class=>"f-label"%><br/>
-            <%= f.email_field :email, autofocus: true ,:class=>"form-control" ,:style=> 'width:30%; margin-left:10px;'%></div>          
-            <div><%= f.label :password ,:class=>"f-label"%> <% if @validatable %><i>(<%= @minimum_password_length %> characters minimum)</i><% end %><br />
+            <div>
+              <%= f.label :email ,:class=>"f-label"%><br/>
+              <%= f.email_field :email, autofocus: true ,:class=>"form-control" ,:style=> 'width:30%; margin-left:10px;'%>
+            </div>          
+            <div>
+              <%= f.label :password ,:class=>"f-label"%>
+                <% if @validatable %>
+                  <i>(<%= @minimum_password_length %> characters minimum)</i>
+                <% end %>
+                <br />
               <%= f.password_field :password, autocomplete: "off",:class=>"form-control" ,:style=> 'width:30%; margin-left:10px;' %></div>          
-            <div><%= f.label :password_confirmation ,:class=>"f-label"%><br />
+            <div>
+              <%= f.label :password_confirmation ,:class=>"f-label"%><br />
               <%= f.password_field :password_confirmation, autocomplete: "off",:class=>"form-control" ,:style=> 'width:30%; margin-left:10px;' %></div>
               <%= f.label :role ,:class=>"f-label"%><br />
-               <%= f.select :role, User::ROLES, {:include_blank=>"select"}, :class=>"form-control" ,:style=> 'width:30%; margin-left:10px;'%> <br>
+              <%= f.select :role, User::ROLES, {:include_blank=>"select"}, :class=>"form-control" ,:style=> 'width:30%; margin-left:10px;'%> <br>
             <div><%= f.submit "Create", :class=>"btn btn-primary",:style=>"margin-left:10px;" %></div>
           <% end %>
           </div>

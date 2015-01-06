@@ -17,6 +17,7 @@
 var x;
  function myFunctionModal(data_id) {
    $('#daily_update_id1').val($(data_id).attr('id'));
+    $('#daily_update_id').val($(data_id).attr('id'));
 }
 function myFunctionupdate(data_id) {
   $('#s_id').val($(data_id).attr('id'));
@@ -26,7 +27,6 @@ function myFunctionupdate(data_id) {
         data: {meeting_id: $(data_id).attr('id')},
         success: function(data, textStatus, jqXHR)
           {
-           
             var d=JSON.parse(data);
             $('#venue').val(d['venue']);
             $('#notes').val(d['notes']);
