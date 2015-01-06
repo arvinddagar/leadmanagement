@@ -10,6 +10,7 @@
             </thead>
             <tbody>
               <% @meetings.each do |meeting| %>
+              
                 <tr>
                   <td><%=meeting.meeting_no%></td>
                   <td><%= format_date(meeting.meeting_date) if meeting.meeting_date.present? %></td>
@@ -26,6 +27,7 @@
                       <%end%>
                     <%end%>
                   <%end%>
+                  <td><%=link_to 'update status',edit_meetings_path(:id=>meeting.id)%></td>
                 </tr>
               <% end %>
             </tbody>

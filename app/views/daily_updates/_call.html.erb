@@ -9,8 +9,15 @@
         <h4 class="modal-title" id="myModalLabel">Lead Status</h4>
       </div>
       <div class="modal-body">
-        <%= form_tag(call_path, :method=>'post', :multipart => true,:id=>"tester") do %>
+        <%= form_tag(call_meeting_path, :method=>'post', :multipart => true,:id=>"tester") do %>
           <table>
+          <h4>Save status</h4>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><%= submit_tag 'Save only status' %></td>
+          </tr>
+          
              <tr>
                <td class="f-label">
                  State
@@ -40,42 +47,32 @@
                <td class="f-label"><%=time_field_tag :schedule_next_call_time%></td>
              </tr>
              <%=hidden_field_tag :daily_update_id1%>
-
-          </table>       
-          <%=submit_tag 'save',:class=>"btn btn-default"%>
-        <%end%>
-         <%= button_tag 'Schedule meeting',:class=>"togg"%>
-          <br/>
-          <div class="toggl">
-            <%= form_tag(schedule_meeting_path, :method=>'post', :multipart => true) do %>
-           <table class="table">
-           <tr>
-             <td>Date:</td>
+             <tr><td><h4>Schedule next meeting</h4></td></tr>
+             <tr>
+             <td class="f-label">Date:</td>
              <td><%= date_field_tag "meeting_date" %></td>
            </tr>
+           </br>
            <tr>
-            <td> Time: </td>
-             <td><%= time_field_tag "meeting_time" %></td>
+            <td class="f-label"> Time: </td>
+             <td class="f-label"><%= time_field_tag "meeting_time" %></td>
            </tr>
            <tr>
-            <td> Venue</td>
-             <td><%= text_area_tag "venue", "", :size=>"20x5" %></td>
+            <td class="f-label"> Venue</td>
+             <td class="f-label"><%= text_area_tag "venue", "", :size=>"20x5" %></td>
            </tr>
            <tr>
-            <td> Notes</td>
+            <td class="f-label"> Notes</td>
              <td><%= text_area_tag "notes", "", :size=>"20x5" %></td>
            </tr>
-            <%= hidden_field_tag :daily_update_id%>
-
-         
            <tr>
-            <td> Assigned to:</td>
-             <td><%= select_tag "assigned_to", options_from_collection_for_select(User.all, "id", "email",:selected=>1),:class=>"form-control",:style=>"width:30%"%></td>
+            <td class="f-label"> Assigned to:</td>
+             <td><%= select_tag "assigned_to", options_from_collection_for_select(User.all, "id", "email",:selected=>1),:class=>"form-control"%></td>
            </tr>
            
            <tr>
            <td></td>
-             <td><%= submit_tag 'Submit' %></td>
+             <td><%= submit_tag 'Save both' %></td>
            </tr>
            </table>
           <% end %> 

@@ -56,6 +56,10 @@ class Admin::DailyUpdatesController < ApplicationController
     elsif params[:commit]=="Submit"
 	    @meeting=ScheduleMeeting.find(params[:s_id])
       @meeting.update(:meeting_date=>params[:meeting_date],:meeting_time=>params[:meeting_time],:venue=>params[:venue],:notes=>params[:notes]) 
+    elsif params[:commit]=="Update"
+      @meeting=ScheduleMeeting.find(params[:id])
+      @meeting.update(:mom=>params[:mom],:meeting_date=>params[:meeting_date],:meeting_time=>params[:meeting_time],:venue=>params[:venue],:notes=>params[:notes]) 
+   
     else
       @meeting=ScheduleMeeting.find(params[:ss_id])
       @meeting.update(:mom=>params[:mom])
@@ -64,7 +68,7 @@ class Admin::DailyUpdatesController < ApplicationController
       @schedule=ScheduleMeeting.new(:meeting_no=>meeting,:meeting_date=>params[:meeting_date],:notes=>params[:notes],:assigned_to=>params[:assigned_to],:meeting_time=>params[:meeting_time],:venue=>params[:venue],:daily_update_id=>params[:daily_update_id])
       @schedule.save
     end
-    redirect_to :back
+    redirect_to meetings_path
   end
 
   def client_management

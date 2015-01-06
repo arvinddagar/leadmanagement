@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     get 'edit_contract' => 'admin/daily_updates#edit_contract'
     post 'update_contract' => 'admin/daily_updates#update_contract'
     post 'call' => 'daily_updates#call'
+    post 'call_meeting' => 'daily_updates#call_meeting'
     get 'show_meetings' => 'admin/daily_updates#show_meetings'
     get 'lead_statuses' => 'daily_updates#scheduled_call'
     get 'meeting_logs' => 'daily_updates#meeting_logs'

@@ -7,39 +7,49 @@
       <div class="col-md-12 mt">
         <div class="content-panel">
         <div>
-            <%= form_tag(update_meetings_path, :method=>'post', :multipart => true) do %>
-            <table class="table">
+           <%= form_tag(update_meetings_path, :method=>'post', :multipart => true) do %>        
+          <table class="table">
+            <tr>
+            <h3>Current Minutes of meeting</h3>
+              <td>Mom:</td>
+              <td><%=text_area_tag :mom %></td>
+            </tr>
+            <%= hidden_field_tag :ss_id,params[:id]%>         
+            </br>
+            <div class="toggl">
               <tr>
                 <td>
-                  Date:
+                  <h3>Schedule next meeting</h3>
                 </td>
-                <td>
-                  <%=date_field_tag :meeting_date ,@meeting.meeting_date%>
-                </td>            
               </tr>
-              <tr>
-                <td> Time:</td>
-                <td><%= time_field_tag :meeting_time ,@meeting.meeting_time %></td> 
-              </tr>
-              <tr>
-                <td>Venue:</td>
-                <td><%=text_area_tag :venue, @meeting.venue %></td>
-              </tr>
-              <tr>
-                <td>Notes:</td>
-                <td><%=text_area_tag :notes, @meeting.notes %></td>
-              </tr>
-              <tr>
-                <td>Assigned to :</td>
-                <td><%=  select_tag "assigned_to", options_for_select(@user.collect{ |u| [ u.email,u.id]},@meeting.assigned_to)%></td>
-              </tr>   
-              <%= hidden_field_tag :id , params[:id]%>
-              <tr>
-                <td></td>
-                <td> <%= submit_tag 'Submit' %></td>
-              </tr>
-            </table>
-          <% end %>
+            <tr>
+              <td>Date:</td>
+              <td><%= date_field_tag "meeting_date" %></td>
+            </tr>
+            <tr>
+              <td> Time: </td>
+              <td><%= time_field_tag "meeting_time" %></td>
+            </tr>
+            <tr>
+              <td> Venue</td>
+              <td><%= text_area_tag "venue", "", :size=>"20x5" %></td>
+            </tr>
+            <tr>
+              <td> Notes</td>
+              <td><%= text_area_tag "notes", "", :size=>"20x5" %></td>
+            </tr>
+            <tr>
+              <td> Assigned to:</td>
+              <td><%= select_tag "assigned_to", options_from_collection_for_select(User.all, "id", "email"),:class=>"form-control",:style=>"width:30%"%></td>
+            </tr>
+            <%@a=ScheduleMeeting.find(params[:id]).daily_update_id%>
+            <%= hidden_field_tag :daily_update_id ,@a%>
+            <tr>
+              <td></td>
+              <td class="a"><%= submit_tag 'Save Only Mom',:class=>"btn btn-primary",:id=>"mom" %> <%= submit_tag 'Save both' ,:class=>"btn btn-primary ",:id=>"both"%></td>
+            </tr>
+          </table>
+        <% end %> 
           </br>         
           <%= link_to "Back",meetings_path%> 
           </div>
