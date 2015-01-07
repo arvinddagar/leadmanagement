@@ -18,7 +18,49 @@
             <div class="actions" align="center"><%= f.submit "Search" %></div>
           <% end %>
            <h4>Total payments of Rs.<%=@payment%> have been made till now </h4>
-           
+            <table class='table'>
+            <thead>
+              <tr>
+                <th >Client Name</th> 
+                 <th >Domain Name</th> 
+                <th>Transaction Type</th>
+                <th >Amount</th>
+                <th >Collection Date</th>
+                <th >Cheque Number</th>
+                <th >Cheque Date</th>
+                <th >Bank Name</th> 
+                                          
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td>
+            <%@payments.each do |contract|%>
+            <tr>
+               <td><%=contract.add_contract.daily_update.contact_person if contract.add_contract.daily_update.present? if contract.add_contract.present?  %></td>
+               <td><%=contract.add_contract.domain_name if contract.add_contract.present?%>
+             </td>
+              <td><%=contract.transaction_type%></td>
+              <td><%=contract.amount%></td>
+              <td><%=format_date(contract.collection_date)%></td>
+              <%if contract.transaction_type=="Cash"%>
+              <td>N.A</td>
+              <td>N.A</td>
+              <td>N.A</td>
+              <%else%>
+              <td><%=contract.cheque_no%></td>
+              <td><%=contract.cheque_date%></td>
+              <td><%=contract.bank_name%></td>
+
+              <%end%>
+              
+              </td>
+              </tr>
+              <%end%>
+              </td>
+              </tr>
+              </tbody>
+              </table>
         </div>
         </div>
       </div>

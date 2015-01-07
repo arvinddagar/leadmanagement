@@ -6,15 +6,15 @@ class Admin::DailyUpdatesController < ApplicationController
   	redirect_to daily_updates_path if current_user.role !="Admin" or !current_user.admin?
   end
 
-  def index    
+  def index
     @user=User.all
     @category=Category.all
     @search = DailyUpdate.search(params[:q])
     @daily_updates = @search.result.includes(:lead_status).where('lead_statuses.state !=?', 'Client').references(:lead_status).order('daily_updates.created_at DESC').page(params[:page]).per(25)
     respond_with(@daily_updates)  
   end
-
-  def user_daily_updates  	
+  
+  def user_daily_updates
   	@daily_updates=User.find(params[:id]).daily_updates.order("created_at").page(params[:page]).per(25)
   end  
 
@@ -32,7 +32,7 @@ class Admin::DailyUpdatesController < ApplicationController
   def meetings
     @user=User.all
     @meetings=[]
-    @search = DailyUpdate.search(params[:q])
+  @search = DailyUpdate.search(params[:q])
     @search.result.each do |daily|
      if daily.schedule_meeting.present?
       if @meetings.include?(daily.schedule_meeting.first.id )
@@ -41,7 +41,8 @@ class Admin::DailyUpdatesController < ApplicationController
       end
     end
   end
-    respond_with(@meetings)  
+
+
   end
   
   def edit_meetings
@@ -71,7 +72,7 @@ class Admin::DailyUpdatesController < ApplicationController
     @user=User.all
     @search = DailyUpdate.search(params[:q])
     @daily_updates = DailyUpdate.includes(:lead_status).where('lead_statuses.state =?', 'Client').references(:lead_status).page(params[:page]).per(25)
-    respond_with(@daily_updates)    
+    respond_with(@daily_updates)
   end
 
   def new_contract
@@ -99,7 +100,7 @@ class Admin::DailyUpdatesController < ApplicationController
     elsif params[:plans]=="half yearly"
       @renewal_date=  Time.now + 6.month
     else params[:plans]=="yearly"
-      @renewal_date=  Time.now + 12.month   
+      @renewal_date=  Time.now + 12.month
     end
    render :json =>@renewal_date
   end
@@ -141,10 +142,11 @@ class Admin::DailyUpdatesController < ApplicationController
   
   def reports
     @search = PaymentHistory.search(params[:q])
+    @payments=@search.result
     @payment=0
       @search.result.each do |pay|
         @payment=@payment+ pay.amount
-      end   
+      end
   end
 
   def contract_expiry
@@ -154,6 +156,37 @@ class Admin::DailyUpdatesController < ApplicationController
       @con= (Date.today..Date.today+7).cover?(c.plans.last.renewal_date)
       if @con==true
         @c<<c
+      end
+    end
+  end
+  def daily_report
+    @user=User.all
+    @leads=[]
+    @no_of_leads=0
+    @sm=[]
+    @search = LeadStatus.search(params[:q])  
+    if params[:q].blank?
+       @search.result.each do |lead|
+      if lead.created_at.to_date==Date.today
+        @leads<<lead
+        if lead.state=="Interested"
+          @no_of_leads=@no_of_leads+1
+        end
+      end
+    end
+  else
+    @search.result.each do |lead|
+      @leads<<lead
+      if lead.state=="Interested"
+          @no_of_leads=@no_of_leads+1
+        end
+    end
+    end  
+   
+     respond_with(@leads) 
+      ScheduleMeeting.all.each do |sm|
+      if sm.created_at.to_date==Date.today
+        @sm<<sm
       end
     end
   end

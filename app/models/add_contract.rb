@@ -7,4 +7,5 @@ class AddContract < ActiveRecord::Base
   ransacker :renewal_date do
     Arel.sql('date(renewal_date)')
   end
+  has_many :payment_histories
 end

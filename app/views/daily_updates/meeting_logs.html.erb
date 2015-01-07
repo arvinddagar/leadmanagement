@@ -9,8 +9,7 @@
               </tr>
             </thead>
             <tbody>
-              <% @meetings.each do |meeting| %>
-              
+              <% @meetings.each do |meeting| %>              
                 <tr>
                   <td><%=meeting.meeting_no%></td>
                   <td><%= format_date(meeting.meeting_date) if meeting.meeting_date.present? %></td>

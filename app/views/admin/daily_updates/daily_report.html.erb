@@ -1,0 +1,59 @@
+<section id="main-content">
+  <section class="wrapper">
+    <h3><i class="fa fa-angle-right"></i>Listing Records</h3>
+    <div class="row">
+      <div class="col-md-12">
+      </div>
+      <div class="col-md-12 mt">
+        <div class="content-panel">
+        <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form" , method: 'post'} do |f| %>
+       <%= f.label :created_at_gteq, "Filter By Date" %>
+            <%= f.date_field :created_at_gteq %>
+            <%= f.label :created_at_lteq, "and" %>
+            <%= f.date_field :created_at_lteq %> 
+        <%= f.label 'Status', :class=>'f-label'%>
+            <%= f.select :state_eq, LeadStatus::PERSON_TYPES, {:include_blank=>"select"},:class=>'form-control'%>
+        <%= f.label 'Called by', :class=>'f-label'%>
+            <%= f.select :user_id_eq ,@user.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control'%>
+            
+        <div class="actions" align="center"><%= f.submit "Search" %></div>
+        <%end%>
+         <table class='table'>
+        
+            <thead>
+             <tr>
+         	<td>
+         		Total number of leads:<%= @no_of_leads%>
+         	</td>
+         </tr>
+         
+              <tr>
+                <th>Business</th>
+                <th>Designation</th>
+                <th>Status</th>
+                <th>Called by</th>
+                <th>Address</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+             <%@leads.each do |lead|%>
+             <tr>
+                  <td><%=lead.daily_update.business if lead.daily_update.present?%>
+                  </br><%=lead.daily_update.contact_person if lead.daily_update.present?%></br><%=lead.daily_update.number if lead.daily_update.present?%></td>
+                  <td><%=lead.daily_update.designation if lead.daily_update.present?%></td>
+                  <td><%=lead.state%></td>
+                   <td><%=lead.user.name if lead.user.present?%></td>
+                  <td><%=lead.daily_update.address if lead.daily_update.present?%></td>
+                  <td><%=lead.daily_update.email if lead.daily_update.present?%></td>
+                 
+             </tr>
+             <%end%>
+             </tbody>
+          </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

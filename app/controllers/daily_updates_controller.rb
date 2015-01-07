@@ -77,10 +77,10 @@ class DailyUpdatesController < ApplicationController
   
   def call_meeting
     if params[:commit]=='Save only status'
-      @call=LeadStatus.create(:state=>params[:state],:daily_update_id=>params[:daily_update_id1],:comment=>params[:comment],:schedule_next_call=>params[:schedule_next_call],:schedule_next_call_time=>params[:schedule_next_call_time])
+      @call=LeadStatus.create(:state=>params[:state],:user_id=>params[:user_id],:daily_update_id=>params[:daily_update_id1],:comment=>params[:comment],:schedule_next_call=>params[:schedule_next_call],:schedule_next_call_time=>params[:schedule_next_call_time])
       DailyUpdate.find(params[:daily_update_id1]).update(:status=>1)
     else
-      @call=LeadStatus.create(:state=>params[:state],:daily_update_id=>params[:daily_update_id1],:comment=>params[:comment],:schedule_next_call=>params[:schedule_next_call],:schedule_next_call_time=>params[:schedule_next_call_time])
+      @call=LeadStatus.create(:state=>params[:state],:user_id=>params[:user_id],:daily_update_id=>params[:daily_update_id1],:comment=>params[:comment],:schedule_next_call=>params[:schedule_next_call],:schedule_next_call_time=>params[:schedule_next_call_time])
       DailyUpdate.find(params[:daily_update_id1]).update(:status=>1)
       meeting_no= ScheduleMeeting.connection.execute("SELECT nextval('meeting_num_seq')")
       meeting='SE'+'0'+meeting_no[0]['nextval']

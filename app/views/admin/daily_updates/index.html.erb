@@ -55,11 +55,11 @@
                     <td><%= daily_update.number %></td>
                     <td><%= daily_update.designation %></td>
                     <td></td>
-                    <td></td>                  
+                    <td></td>
                     <td><%= link_to 'Show', daily_update %> | <%= link_to 'Update record', edit_daily_update_path(daily_update) %></td>
                   </tr>
                 <%end%>
-              <% end %>          
+              <% end %>
             </tbody>
           </table>
           <%= paginate @daily_updates %>
@@ -67,5 +67,5 @@
         </div>
       </div>
     </div>
-  </section>   
+  </section>
 </section>

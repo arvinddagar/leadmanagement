@@ -15,7 +15,8 @@
                 <th>Client name</th>
                 <th colspan="2">Status</th>
                 <th colspan="2">Domain Name</th>
-                <th colspan="2">Renewal Date</th>               
+                <th colspan="2">Renewal Date</th> 
+                <th colspan="2">Plan Type</th>               
               </tr>
             </thead>
             <tbody>
@@ -30,7 +31,9 @@
               </td>
               <td colspan="2"><%=contract.status%></td>
               <td colspan="2"><%=contract.domain_name%></td>
+
               <td colspan="2"><%=format_date(contract.plans.last.renewal_date)%></td>
+              <td colspan="2"><%=contract.plans.last.plan_type%></td>
               </tr>
             <%end%>
             </td>
@@ -47,6 +50,7 @@
               <td colspan="2"><%=contract.status%></td>
               <td colspan="2"><%=contract.domain_name%></td>
               <td colspan="2"><%=format_date(contract.plans.last.renewal_date)%></td>
+              <td colspan="2"><%=contract.plans.last.plan_type%></td>
               </tr>
             <%end%>
             </td>
