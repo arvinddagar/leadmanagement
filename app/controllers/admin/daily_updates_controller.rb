@@ -142,7 +142,7 @@ class Admin::DailyUpdatesController < ApplicationController
   
   def reports
     @search = PaymentHistory.search(params[:q])
-    @payments=@search.result
+    @payments=@search.result.order("collection_date DESC")
     @payment=0
       @search.result.each do |pay|
         @payment=@payment+ pay.amount
@@ -163,12 +163,14 @@ class Admin::DailyUpdatesController < ApplicationController
     @user=User.all
     @leads=[]
     @no_of_leads=0
+    @no_of_calls=0
     @sm=[]
     @search = LeadStatus.search(params[:q])  
     if params[:q].blank?
        @search.result.each do |lead|
       if lead.created_at.to_date==Date.today
         @leads<<lead
+        @no_of_calls=@no_of_calls+1
         if lead.state=="Interested"
           @no_of_leads=@no_of_leads+1
         end
@@ -177,6 +179,7 @@ class Admin::DailyUpdatesController < ApplicationController
   else
     @search.result.each do |lead|
       @leads<<lead
+      @no_of_calls=@no_of_calls+1
       if lead.state=="Interested"
           @no_of_leads=@no_of_leads+1
         end
