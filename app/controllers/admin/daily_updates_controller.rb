@@ -35,9 +35,9 @@ class Admin::DailyUpdatesController < ApplicationController
     @search = DailyUpdate.search(params[:q])
     @search.result.each do |daily|
      if daily.schedule_meeting.present?
-      if @meetings.include?(daily.schedule_meeting.last.id )
+      if @meetings.include?(daily.schedule_meeting.first.id )
       else
-        @meetings<<daily.schedule_meeting.last.id
+        @meetings<<daily.schedule_meeting.first.id
       end
     end
   end
