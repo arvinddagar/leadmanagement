@@ -37,7 +37,7 @@
               </tr>
             </thead>
             <tbody>
-            <%  sc_meeting(@meetings).each do |meeting|%>
+            <% sc_meeting(@meetings).sort_by(&:meeting_date).reverse.each do |meeting|%>
               <%if meeting.present?%>
                 <tr>
                 <td><%=meeting.meeting_no if meeting.meeting_no.present?%></td>

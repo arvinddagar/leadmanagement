@@ -32,7 +32,7 @@ class Admin::DailyUpdatesController < ApplicationController
   def meetings
     @user=User.all
     @meetings=[]
-  @search = DailyUpdate.search(params[:q])
+    @search = DailyUpdate.search(params[:q])
     @search.result.each do |daily|
      if daily.schedule_meeting.present?
       if @meetings.include?(daily.schedule_meeting.first.id )
