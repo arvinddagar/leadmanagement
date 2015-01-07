@@ -9,9 +9,9 @@ class DailyUpdatesController < ApplicationController
     @search = DailyUpdate.search(params[:q])
     if params[:q].nil?
        @daily_updates = @search.result.where(:status=>"0").order('created_at DESC').page(params[:page]).per(25)
-     else
+    else
       @daily_updates = @search.result.order('created_at DESC').page(params[:page]).per(25)
-     end
+    end
     respond_with(@daily_updates)
   end
 
@@ -27,10 +27,12 @@ class DailyUpdatesController < ApplicationController
     @schedule.save
     redirect_to :back
   end
+
   def meeting_logs
     @meetings= DailyUpdate.find(params[:client]).schedule_meeting.order('meeting_date Desc')
     render layout: false
   end
+
   def new
     @category=Category.all
     @daily_update = DailyUpdate.new
@@ -39,8 +41,8 @@ class DailyUpdatesController < ApplicationController
   end
 
   def edit
-   @category=Category.all
-   @lead_status = @daily_update.lead_status
+    @category=Category.all
+    @lead_status = @daily_update.lead_status
   end
 
   def create

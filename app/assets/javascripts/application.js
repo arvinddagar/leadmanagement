@@ -32,8 +32,7 @@ function myFunctionupdate(data_id) {
             $('#notes').val(d['notes']);
             $('#meeting_date').val(d['meeting_date']);
             $('#assigned_to').val(d['assigned_to']);
-             $('#meeting_time').val(d['meeting_time']);
-         
+            $('#meeting_time').val(d['meeting_time']);
           }
     });
 }

@@ -11,101 +11,90 @@
       <div class="modal-body">
         <%= form_tag(call_meeting_path, :method=>'post', :multipart => true,:id=>"tester") do %>
           <table>
-          <h4>Save status</h4>
-          <tr>
-            <td></td>
-            <td></td>
-            <td><%= submit_tag 'Save only status',:class=>"btn btn-primary " %></td>
-          </tr>
-          
-             <tr>
-               <td class="f-label">
-                 State
-               </td>
-               <td class="f-label">
-                 <%=  select_tag 'state', options_for_select(LeadStatus::PERSON_TYPES)%>
-               </td>
-             </tr>
-             <tr>
-             </br>
-               <td class="f-label">
-                 Comment
-               </td>
-               <td class="f-label"><%=text_area_tag :comment%></td>
-             </tr>
-             </br>
-             <tr>
-               <td class="f-label">
+            <h4>Save status</h4>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><%= submit_tag 'Save only status',:class=>"btn btn-primary " %></td>
+            </tr>          
+            <tr>
+              <td class="f-label">
+                State
+              </td>
+              <td class="f-label">
+                <%= select_tag 'state', options_for_select(LeadStatus::PERSON_TYPES)%>
+              </td>
+            </tr>
+            <tr>
+            </br>
+              <td class="f-label">
+                Comment
+              </td>
+              <td class="f-label"><%=text_area_tag :comment%></td>
+            </tr>
+            </br>
+            <tr>
+              <td class="f-label">
                  Schedule next call
-               </td>
-               <td class="f-label"><%=date_field_tag :schedule_next_call%></td>
-             </tr>
-             <tr>
-               <td class="f-label">
+              </td>
+              <td class="f-label"><%=date_field_tag :schedule_next_call%></td>
+            </tr>
+            <tr>
+              <td class="f-label">
                 Schedule next call time
-               </td>
-               <td class="f-label"><%=time_field_tag :schedule_next_call_time%></td>
-             </tr>
-             <%=hidden_field_tag :daily_update_id1%>
-             <tr><td><h4>Schedule next meeting</h4></td></tr>
-             <tr>
-             <td class="f-label">Date:</td>
-             <td><%= date_field_tag "meeting_date" %></td>
-           </tr>
-           </br>
-           <tr>
-            <td class="f-label"> Time: </td>
-             <td class="f-label"><%= time_field_tag "meeting_time" %></td>
-           </tr>
-           <tr>
-            <td class="f-label"> Venue</td>
-             <td class="f-label"><%= text_area_tag "venue", "", :size=>"20x5" %></td>
-           </tr>
-           <tr>
-            <td class="f-label"> Notes</td>
-             <td><%= text_area_tag "notes", "", :size=>"20x5" %></td>
-           </tr>
-           <tr>
-            <td class="f-label"> Assigned to:</td>
-             <td><%= select_tag "assigned_to", options_from_collection_for_select(User.all, "id", "email",:selected=>1),:class=>"form-control"%></td>
-           </tr>
-           
-           <tr>
-           <td></td>
-             <td><%= submit_tag 'Save both' ,:class=>"btn btn-primary "%></td>
-           </tr>
-           </table>
-          <% end %> 
-         
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </td>
+              <td class="f-label"><%=time_field_tag :schedule_next_call_time%></td>
+            </tr>
+              <%=hidden_field_tag :daily_update_id1%>
+            <tr>
+              <td>
+                <h4>Schedule next meeting</h4>
+              </td>
+            </tr>
+            <tr>
+              <td class="f-label">Date:</td>
+              <td><%= date_field_tag "meeting_date" %></td>
+            </tr>
+            </br>
+            <tr>
+              <td class="f-label"> Time: </td>
+              <td class="f-label"><%= time_field_tag "meeting_time" %></td>
+            </tr>
+            <tr>
+              <td class="f-label"> Venue</td>
+              <td class="f-label"><%= text_area_tag "venue", "", :size=>"20x5" %></td>
+            </tr>
+            <tr>
+              <td class="f-label"> Notes</td>
+              <td><%= text_area_tag "notes", "", :size=>"20x5" %></td>
+            </tr>
+            <tr>
+              <td class="f-label"> Assigned to:</td>
+              <td><%= select_tag "assigned_to", options_from_collection_for_select(User.all, "id", "email",:selected=>1),:class=>"form-control"%></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><%= submit_tag 'Save both' ,:class=>"btn btn-primary "%></td>
+            </tr>
+          </table>
+        <% end %> 
       </div>
     </div>
   </div>
 </div>
 <script>
-
-      $("#tester").validate({
-        rules:  {
-          "schedule_next_call": {
-               required: function(element) {
-                if ($('#state').val()!="Not Picked") {
-                    return false;
-                } else {
-                    return true;
-                }
-        },
-      },
+  $("#tester").validate({
+    rules:  {
+    "schedule_next_call": {
+    required: function(element) {
+    if ($('#state').val()!="Not Picked") {
+      return false;
+    } else {
+    return true;
+    }
+    },
+    },
     }
   });
 
 </script>
-<script>
-  $( document ).ready(function() {
-   $( ".toggl" ).hide();
-  });
-$( ".togg" ).click(function() {
-  $( ".toggl" ).show();
-});
- </script>
