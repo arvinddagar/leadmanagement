@@ -35,7 +35,7 @@
               </td>
               <td>  
                 <%= form_tag("/contract_expiry") do %>
-                  <%=text_field_tag :expiry_date%>
+                  <%=text_field_tag :expiry_date,@expiry_date%>
                   <%=submit_tag 'Submit'%>
                 <%end%>
               </td>
