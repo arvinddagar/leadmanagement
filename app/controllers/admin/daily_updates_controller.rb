@@ -39,15 +39,13 @@ class Admin::DailyUpdatesController < ApplicationController
     @meetings=[]
     @search = DailyUpdate.search(params[:q])
     @search.result.each do |daily|
-     if daily.schedule_meeting.present?
-      if @meetings.include?(daily.schedule_meeting.first.id )
-      else
-        @meetings<<daily.schedule_meeting.first.id
+      if daily.schedule_meeting.present?
+        if @meetings.include?(daily.schedule_meeting.first.id )
+        else
+          @meetings<<daily.schedule_meeting.first.id
+        end
       end
     end
-  end
-
-
   end
   
   def edit_meetings
@@ -135,7 +133,7 @@ class Admin::DailyUpdatesController < ApplicationController
     @plan=Plan.create(:plan_type=>params[:plan],:renewal_date=>params[:renewal_date],:add_contract_id=>params[:contract_id])
     redirect_to :index_contract
   end
-  
+
   def payment_history
     @payment_history=PaymentHistory.where(:add_contract_id=>params[:id]).order("created_at DESC")
   end
