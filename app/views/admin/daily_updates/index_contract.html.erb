@@ -30,6 +30,7 @@
           <table class='table'>
             <thead>
               <tr>
+                <th>S. no</th>
                 <th>Client</th>
                 <th>Domain name</th>
                 <th>Renewal date</th>
@@ -40,8 +41,10 @@
               </tr>
             </thead>          
             <tbody>
+            <%s_no=0%>
               <% @contracts.each do |contract| %>
                 <tr>
+                  <td><%=s_no=s_no+1%></td>
                   <td><%= DailyUpdate.client(contract.daily_update_id).contact_person %></td>
                   <td><%= contract.domain_name %></td>
                   <td style="width:100px"><%= format_date(contract.plans.last.renewal_date.to_date) if contract.plans.last.renewal_date.present? if contract.plans.present?%></td>

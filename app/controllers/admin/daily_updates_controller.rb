@@ -76,7 +76,7 @@ class Admin::DailyUpdatesController < ApplicationController
   def client_management
     @user=User.all
     @search = DailyUpdate.search(params[:q])
-    @daily_updates = DailyUpdate.includes(:lead_status).where('lead_statuses.state =?', 'Client').references(:lead_status).page(params[:page]).per(25)
+    @daily_updates = @search.result
     respond_with(@daily_updates)
   end
 
@@ -157,8 +157,13 @@ class Admin::DailyUpdatesController < ApplicationController
   def contract_expiry
     @contract=AddContract.where(:status=>"expired")
     @c=[]
+    @expiry_date=params[:expiry_date]
     AddContract.all.each do |c|
-      @con= (Date.today..Date.today+7).cover?(c.plans.last.renewal_date)
+      if request.method=='POST'
+        @con= (Date.today..Date.today+params[:expiry_date].to_i).cover?(c.plans.last.renewal_date)
+      else
+        @con= (Date.today..Date.today+7).cover?(c.plans.last.renewal_date)
+      end
       if @con==true
         @c<<c
       end
@@ -198,4 +203,8 @@ class Admin::DailyUpdatesController < ApplicationController
       end
     end
   end
+  def past_clients
+    @past_clients=DailyUpdate.all
+  end
+
 end

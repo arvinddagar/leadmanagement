@@ -1,6 +1,7 @@
 <section id="main-content">
   <section class="wrapper">
     <h3><i class="fa fa-angle-right"></i>Listing clients</h3>
+   <div style="float:right;"><%= link_to 'Past Clients', past_clients_path , :class=>"btn btn-primary",:style=>"margin-right:10px"%></div>
     <div class="row">
       <div class="col-md-12">
       </div>
@@ -23,6 +24,7 @@
           <table class='table'>
             <thead>
               <tr>
+                <th>S. no</th>
                 <th>Contact person</th>
                 <th>Designation</th>
                 <th>Business</th>
@@ -32,8 +34,13 @@
               </tr>
             </thead>          
             <tbody>
+            <%s_no=0%>
               <% @daily_updates.each do |daily_update| %>
+              <%if daily_update.lead_status.present?%>
+              <%if daily_update.lead_status.last.state=="Deal Closed" %>
+              <%elsif daily_update.lead_status.last.state=="Client"%>
                 <tr>
+                  <td><%=s_no=s_no+1%></td>
                   <td><%= link_to daily_update.contact_person ,daily_update%></td>
                   <td><%= daily_update.designation %></td>
                   <td><%= daily_update.business %></td>
@@ -41,10 +48,12 @@
                   <td><%= daily_update.email %></td>
                   <td><%= link_to 'Update record', edit_daily_update_path(daily_update) %></td>
                 </tr>
+                <%else%>
+                <%end%>
+                <%end%>
               <% end %>
             </tbody>
           </table>
-          <%= paginate @daily_updates %>
           </div>
         </div>
       </div>

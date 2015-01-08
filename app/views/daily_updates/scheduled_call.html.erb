@@ -20,15 +20,19 @@
             <div class="actions" align="center"><%= f.submit "Search" %></div>
           <%end%>
           <table class="table">
+          <th>S. no</th>
             <th>Buisness</th>
             <th>Contact Person</th>
             <th>Contact number</th>
             <th>Scheduled call</th>
             <th>Scheduled Time</th>
             <th>Actions</th>
+            <%s_no=0%>
             <%@records.each do |record|%>
+
               <tr>
                 <%if record.schedule_next_call.present?%>
+                  <td><%=s_no=s_no+1%></td>
                   <td><%=record.daily_update_business%></td>
                   <td><%=record.daily_update_contact_person%></td>
                   <td><%=record.daily_update_number%></td>

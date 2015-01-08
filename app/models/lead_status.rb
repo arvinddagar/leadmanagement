@@ -1,7 +1,7 @@
 class LeadStatus < ActiveRecord::Base
   belongs_to :user
   belongs_to :daily_update
-  PERSON_TYPES = ["Interested", "Not Interested","Client","Already website","Not Picked"]
+  PERSON_TYPES = ["Interested", "Not Interested","Client","Already website","Not Picked","Deal Closed"]
   STATUS=[["Not Called",0],["Called",1]]
   delegate :contact_person, :to => :daily_update, :prefix => true
   delegate :number, :to => :daily_update, :prefix => true

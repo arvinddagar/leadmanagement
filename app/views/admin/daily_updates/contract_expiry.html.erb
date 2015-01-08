@@ -7,33 +7,51 @@
       <div class="col-md-12 mt">
         <div class="content-panel">
         <div>
-<h3>Reports of accounts expired</h3>
-            
+        
+            <h3>Reports of accounts expired</h3>
             <table class='table'>
             <thead>
               <tr>
+                <th>S No.</th>
                 <th>Client name</th>
-                <th colspan="2">Status</th>
-                <th colspan="2">Domain Name</th>
-                <th colspan="2">Renewal Date</th> 
-                <th colspan="2">Plan Type</th>               
+                <th >Status</th>
+                <th >Domain Name</th>
+                <th >Renewal Date</th> 
+                <th>Plan Type</th>               
               </tr>
             </thead>
             <tbody>
             <tr>
             <td>
-            <h4>To be expired in upcoming 7 days </h4>
+            <%s_no_up=0%>
+            <%s_no_ex=0%>
+            <tr>
+              <td>
+                <%if request.method=='GET'%>
+                  <h4>To be expired in upcoming 7 days </h4>     
+                <%else%>
+                  <h4>To be expired in upcoming <%=@expiry_date%> days</h4>       
+                <%end%>
+              </td>
+              <td>  
+                <%= form_tag("/contract_expiry") do %>
+                  <%=text_field_tag :expiry_date%>
+                  <%=submit_tag 'Submit'%>
+                <%end%>
+              </td>
+            </tr>
             <%@c.each do |contract|%>
             <tr>
+            <td><%=s_no_up=s_no_up+1%>.</td>
               <td >
                 <%=contract.daily_update.contact_person%></br>
                 <%=contract.daily_update.number %>
               </td>
-              <td colspan="2"><%=contract.status%></td>
-              <td colspan="2"><%=contract.domain_name%></td>
+              <td ><%=contract.status%></td>
+              <td><%=contract.domain_name%></td>
 
-              <td colspan="2"><%=format_date(contract.plans.last.renewal_date)%></td>
-              <td colspan="2"><%=contract.plans.last.plan_type%></td>
+              <td ><%=format_date(contract.plans.last.renewal_date)%></td>
+              <td><%=contract.plans.last.plan_type%></td>
               </tr>
             <%end%>
             </td>
@@ -43,14 +61,15 @@
             <h4>Plans  expired</h4>
             <%@contract.each do |contract|%>
             <tr>
+               <td><%=s_no_ex=s_no_ex+1%>.</td>
                <td >
                 <%=contract.daily_update.contact_person%></br>
                 <%=contract.daily_update.number %>
               </td>
-              <td colspan="2"><%=contract.status%></td>
-              <td colspan="2"><%=contract.domain_name%></td>
-              <td colspan="2"><%=format_date(contract.plans.last.renewal_date)%></td>
-              <td colspan="2"><%=contract.plans.last.plan_type%></td>
+              <td ><%=contract.status%></td>
+              <td><%=contract.domain_name%></td>
+              <td><%=format_date(contract.plans.last.renewal_date)%></td>
+              <td><%=contract.plans.last.plan_type%></td>
               </tr>
             <%end%>
             </td>

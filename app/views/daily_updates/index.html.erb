@@ -29,10 +29,11 @@
             <div class="actions" align="center"><%= f.submit "Search" %></div>
           <% end %>          
            <%=@daily_updates.count%> results found
-          <div style="float:right;"><%#= link_to 'New Record', new_daily_update_path , :class=>"btn btn-primary",:style=>"margin-right:10px"%></div>          
+          <div style="float:right;"><%= link_to 'New Record', new_daily_update_path , :class=>"btn btn-primary",:style=>"margin-right:10px"%></div>          
           <table class='table'>
             <thead>
               <tr>
+                <th>S. no</th>
                 <th>Business</th>
                 <th>Contact person</th>
                 <th>Number</th>
@@ -42,11 +43,13 @@
                 <th colspan="2" >Actions</th>
               </tr>
             </thead>
+            <%no_lead=0%>
             <tbody>
               <% @daily_updates.each do |daily_update| %>
                 <%if daily_update.lead_status.present?%>
-                  <%if daily_update.lead_status.last.state!='Client'%>
+                  <%if daily_update.lead_status.last.state!='Client'&&daily_update.lead_status.last.state!='Deal Closed'%>
                   <tr>
+                    <td><%=no_lead=no_lead+1%>.</td>
                     <td style="width:115px;"><%= daily_update.business %></td>
                     <td><%= daily_update.contact_person %></td>
                     <td style="width:20px;"><%= daily_update.number %></td>
@@ -58,6 +61,7 @@
                   <%end%>
                   <%else%>
                     <tr>
+                       <td><%=no_lead=no_lead+1%>.</td>
                       <td style="width:115px;"><%= daily_update.business %></td>
                       <td><%= daily_update.contact_person %></td>
                       <td style="width:20px;"><%= daily_update.number %></td>
@@ -76,5 +80,3 @@
     </div>
   </section>   
 </section>
-
-

@@ -37,6 +37,7 @@
               </td>
             </tr>         
             <tr>
+            <th>S. no</th>
               <th>Business</th>
               <th>Designation</th>
               <th>Status</th>
@@ -46,8 +47,10 @@
             </tr>
           </thead>
           <tbody>
+          <%s_no=0%>
             <%@leads.each do |lead|%>
               <tr>
+              <td><%=s_no=s_no+1%></td>
                 <td><%=lead.daily_update.business if lead.daily_update.present?%>
                 </br><%=lead.daily_update.contact_person if lead.daily_update.present?%></br><%=lead.daily_update.number if lead.daily_update.present?%></td>
                 <td><%=lead.daily_update.designation if lead.daily_update.present?%></td>

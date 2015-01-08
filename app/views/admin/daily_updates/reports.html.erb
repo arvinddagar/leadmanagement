@@ -21,6 +21,7 @@
             <table class='table'>
             <thead>
               <tr>
+                <th>S.no</th>
                 <th >Client Name</th> 
                  <th >Domain Name</th> 
                 <th>Transaction Type</th>
@@ -35,8 +36,10 @@
             <tbody>
             <tr>
             <td>
+            <%s_no=0%>
             <%@payments.each do |contract|%>
             <tr>
+              <td><%=s_no=s_no+1%></td>
                <td><%=contract.add_contract.daily_update.contact_person if contract.add_contract.daily_update.present? if contract.add_contract.present?  %></td>
                <td><%=contract.add_contract.domain_name if contract.add_contract.present?%>
              </td>

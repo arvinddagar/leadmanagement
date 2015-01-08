@@ -11,12 +11,15 @@
             <table class='table'>
               <thead>
                 <tr>
+                  <th>S.no</th>
                   <th>Name</th>                
                 </tr>
               </thead>            
               <tbody>
+              <%s_no=0%>
                 <% @categories.each do |category| %>
                   <tr>
+                  <td><%=s_no=s_no+1%></td>
                     <td><%= category.name %></td>
                     <td><%= link_to 'Show', admin_category_path(category) %> |
                     <%= link_to 'Edit', edit_admin_category_path(category) %> |
