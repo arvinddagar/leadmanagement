@@ -6,7 +6,7 @@
       </div>
       <div class="col-md-12 mt">
         <div class="content-panel">
-          <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form"} do |f| %>
+          <%= search_form_for @search, url: daily_updates_path, :html=>{:class=>"form-inline", :role=>"form"} do |f| %>
             <%= f.label 'Filter By Date' , :class=>'f-label'%>
             <%= f.date_field :created_at_eq , :class=>'form-control'%>
             <%= f.label 'Business', :class=>'f-label'%>
@@ -19,7 +19,7 @@
             <%= f.text_field :contact_person_eq , :class=>'form-control'%>
             <div class="actions" align="center"><%= f.submit "Search" %></div>
           <% end %>
-          <div style="float:right;"><%= link_to 'New Record', new_daily_update_path , :class=>"btn btn-primary",:style=>"margin-right:10px"%></div>
+          <div style="float:right;"><%#= link_to 'New Record', new_daily_update_path , :class=>"btn btn-primary",:style=>"margin-right:10px"%></div>
           <table class='table'>
             <thead>
               <tr>

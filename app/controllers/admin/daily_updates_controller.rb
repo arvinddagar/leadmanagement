@@ -7,11 +7,16 @@ class Admin::DailyUpdatesController < ApplicationController
   end
 
   def index
-    @user=User.all
+    
+     @user=User.all
     @category=Category.all
     @search = DailyUpdate.search(params[:q])
-    @daily_updates = @search.result.includes(:lead_status).where('lead_statuses.state !=?', 'Client').references(:lead_status).order('daily_updates.created_at DESC').page(params[:page]).per(25)
-    respond_with(@daily_updates)  
+    if params[:q].nil?
+       @daily_updates = @search.result.where(:status=>"0").order('created_at DESC').page(params[:page]).per(25)
+    else
+      @daily_updates = @search.result.order('created_at DESC').page(params[:page]).per(25)
+    end
+    respond_with(@daily_updates)
   end
   
   def user_daily_updates
