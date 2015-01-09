@@ -6,8 +6,7 @@
         </div>
       <div class="col-md-12 mt">
         <div class="content-panel">
-        <div>
-        
+        <div>        
             <h3>Reports of accounts expired</h3>
             <table class='table'>
             <thead>
@@ -20,63 +19,63 @@
                 <th>Plan Type</th>               
               </tr>
             </thead>
-            <tbody>
-            <tr>
-            <td>
-            <%s_no_up=0%>
-            <%s_no_ex=0%>
-            <tr>
-              <td>
-                <%if request.method=='GET'%>
-                  <h4>To be expired in upcoming 7 days </h4>     
-                <%else%>
-                  <h4>To be expired in upcoming <%=@expiry_date%> days</h4>       
-                <%end%>
-              </td>
-              <td>  
-                <%= form_tag("/contract_expiry") do %>
-                  <%=text_field_tag :expiry_date,@expiry_date%>
-                  <%=submit_tag 'Submit'%>
-                <%end%>
-              </td>
-            </tr>
-            <%@c.each do |contract|%>
-            <tr>
-            <td><%=s_no_up=s_no_up+1%>.</td>
-              <td >
-                <%=contract.daily_update.contact_person%></br>
-                <%=contract.daily_update.number %>
-              </td>
-              <td ><%=contract.status%></td>
-              <td><%=contract.domain_name%></td>
-
-              <td ><%=format_date(contract.plans.last.renewal_date)%></td>
-              <td><%=contract.plans.last.plan_type%></td>
-              </tr>
-            <%end%>
-            </td>
-            </tr>
-            <tr>
-            <td>
-            <h4>Plans  expired</h4>
-            <%@contract.each do |contract|%>
-            <tr>
-               <td><%=s_no_ex=s_no_ex+1%>.</td>
-               <td >
-                <%=contract.daily_update.contact_person%></br>
-                <%=contract.daily_update.number %>
-              </td>
-              <td ><%=contract.status%></td>
-              <td><%=contract.domain_name%></td>
-              <td><%=format_date(contract.plans.last.renewal_date)%></td>
-              <td><%=contract.plans.last.plan_type%></td>
-              </tr>
-            <%end%>
-            </td>
-            </tr>
-            </tbody>
+              <tbody>
+                <tr>
+                  <td>
+                    <%s_no_up=0%>
+                    <%s_no_ex=0%>
+                    <tr>
+                      <td>
+                        <%if request.method=='GET'%>
+                          <h4>To be expired in upcoming 7 days </h4>     
+                        <%else%>
+                          <h4>To be expired in upcoming <%=@expiry_date%> days</h4>       
+                        <%end%>
+                      </td>
+                      <td>  
+                        <%= form_tag("/contract_expiry") do %>
+                          <%=text_field_tag :expiry_date,@expiry_date%>
+                          <%=submit_tag 'Submit'%>
+                        <%end%>
+                      </td>
+                    </tr>
+                    <%@c.each do |contract|%>
+                      <tr>
+                        <td><%=s_no_up=s_no_up+1%>.</td>
+                        <td >
+                          <%=contract.daily_update.contact_person%></br>
+                          <%=contract.daily_update.number %>
+                        </td>
+                        <td ><%=contract.status%></td>
+                        <td><%=contract.domain_name%></td>
+          
+                        <td ><%=format_date(contract.plans.last.renewal_date)%></td>
+                        <td><%=contract.plans.last.plan_type%></td>
+                      </tr>
+                    <%end%>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <h4>Plans  expired</h4>
+                    <%@contract.each do |contract|%>
+                    <tr>
+                      <td><%=s_no_ex=s_no_ex+1%>.</td>
+                      <td >
+                        <%=contract.daily_update.contact_person%></br>
+                        <%=contract.daily_update.number %>
+                      </td>
+                      <td ><%=contract.status%></td>
+                      <td><%=contract.domain_name%></td>
+                      <td><%=format_date(contract.plans.last.renewal_date)%></td>
+                      <td><%=contract.plans.last.plan_type%></td>
+                      </tr>
+                    <%end%>
+                  </td>
+                </tr>
+              </tbody>
             </table>
-             </div>
+          </div>
         </div>
       </div>
     </div>

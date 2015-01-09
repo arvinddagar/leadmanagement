@@ -7,7 +7,29 @@
       <div class="col-md-12 mt">
         <div class="content-panel" style="width:995px; margin-left:-20px;">
           <%= search_form_for @search, :url=> daily_updates_path, :html=>{:class=>"form-inline", :role=>"form" } do |f| %>
+            <%if params[:q].present?%>
+            <%binding.pry%>
             <%= f.label :created_at_gteq, "Filter By Date" %>
+            <%= f.date_field :created_at_gteq,:value=>params[:q][:created_at_gteq] %>
+            <%= f.label :created_at_lteq, "and" %>
+            <%= f.date_field :created_at_lteq,:value=>params[:q][:created_at_lteq]  %>  
+            <%= f.label 'Business', :class=>'f-label'%>
+            <%= f.text_field :business_cont , :class=>'form-control',:value=>params[:q][:business_cont] %>
+            <%= f.label 'Contact Number', :class=>'f-label'%>
+            <%= f.text_field :number_cont , :class=>'form-control',:value=>params[:q][:number_cont] %></br>
+            <%= f.label 'Category', :class=>'f-label'%>
+            <%= f.select :category_id_eq ,@category.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:category_id_eq] %>
+            <%= f.label 'Added by', :class=>'f-label'%>
+            <%= f.select :user_id_eq ,@user.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:user_id_eq] %>
+            <%= f.label 'Contact Person', :class=>'f-label'%>
+            <%= f.text_field :contact_person_cont , :class=>'form-control',:value=>params[:q][:contact_person_cont] %>
+            <%= f.label 'Data status', :class=>'f-label'%>
+            <%= f.select :status_eq ,(LeadStatus::STATUS), {:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:status_eq] %>
+            </br>
+             <%= f.label 'Status', :class=>'f-label'%>
+            <%= f.select :lead_status_state_eq, LeadStatus::PERSON_TYPES, {:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:lead_status_state_eq] %>
+              <%else%>
+              <%= f.label :created_at_gteq, "Filter By Date" %>
             <%= f.date_field :created_at_gteq %>
             <%= f.label :created_at_lteq, "and" %>
             <%= f.date_field :created_at_lteq %>  
@@ -26,6 +48,8 @@
             </br>
              <%= f.label 'Status', :class=>'f-label'%>
             <%= f.select :lead_status_state_eq, LeadStatus::PERSON_TYPES, {:include_blank=>"select"},:class=>'form-control'%>
+            <%end%>
+            
             <div class="actions" align="center"><%= f.submit "Search" %></div>
           <% end %>          
            <%=@daily_updates.count%> results found

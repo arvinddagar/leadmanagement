@@ -7,6 +7,18 @@
       <div class="col-md-12 mt">
         <div class="content-panel">
           <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form"} do |f| %>
+          <%if params[:q].present?%>
+            <%= f.label :schedule_next_call, "Filter By Date" %>
+            <%= f.date_field :schedule_next_call_eq, :class=>'form-control',:value=>params[:q][:schedule_next_call_eq] %>
+            <%= f.label :contact_person, "Contact person" %>
+            <%= f.text_field :daily_update_contact_person_cont, :class=>'form-control',:value=>params[:q][:daily_update_contact_person_cont] %>
+            <%= f.label :business, "Business" %>
+            <%= f.text_field :daily_update_business_cont , :class=>'form-control',:value=>params[:q][:daily_update_business_cont]%>
+            </br>
+            <%= f.label :number, "Contact Number" %>
+            <%= f.text_field :daily_update_number_cont , :class=>'form-control',:value=>params[:q][:daily_update_number_cont]%>
+            </br>
+          <%else%>
             <%= f.label :schedule_next_call, "Filter By Date" %>
             <%= f.date_field :schedule_next_call_eq, :class=>'form-control' %>
             <%= f.label :contact_person, "Contact person" %>
@@ -17,6 +29,7 @@
             <%= f.label :number, "Contact Number" %>
             <%= f.text_field :daily_update_number_cont , :class=>'form-control'%>
             </br>
+          <%end%>
             <div class="actions" align="center"><%= f.submit "Search" %></div>
           <%end%>
           <table class="table">

@@ -9,14 +9,15 @@
         <div>
         <h3>Report of payment history</h3>
         <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form"} do |f| %>
-            <%= f.label :collection_date_gteq, "Filter By Date" ,:class=>"f-label"%>
+          <%= f.label :collection_date_gteq, "Filter By Date" ,:class=>"f-label"%>
           <%= f.date_field :collection_date_gteq ,:class=>'form-control'%>
           <%= f.label :collection_date_lteq, "and" %>
-          <%= f.date_field :collection_date_lteq,:class=>'form-control' %>
-             <%= f.label 'Transaction type', :class=>'f-label'%>
-            <%= f.select :transaction_type_eq ,(PaymentHistory::TRANSACTION_TYPES), {:include_blank=>"select"},:class=>'form-control'%>
-            <div class="actions" align="center"><%= f.submit "Search" %></div>
-          <% end %>
+          <%= f.date_field :collection_date_lteq,:class=>'form-control'%>
+          <%= f.label 'Transaction type', :class=>'f-label'%>
+          <%= f.select :transaction_type_eq ,(PaymentHistory::TRANSACTION_TYPES), {:include_blank=>"select"},:class=>'form-control'%>
+      
+          <div class="actions" align="center"><%= f.submit "Search" %></div>
+        <% end %>
            <h4>Total payments of Rs.<%=@payment%> have been made till now </h4>
             <table class='table'>
             <thead>

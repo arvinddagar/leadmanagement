@@ -6,9 +6,8 @@ class Admin::DailyUpdatesController < ApplicationController
   	redirect_to daily_updates_path if current_user.role !="Admin" or !current_user.admin?
   end
 
-  def index
-    
-     @user=User.all
+  def index    
+    @user=User.all
     @category=Category.all
     @search = DailyUpdate.search(params[:q])
     if params[:q].nil?
@@ -84,7 +83,7 @@ class Admin::DailyUpdatesController < ApplicationController
   end
 
   def show_meetings
-   @meeting=ScheduleMeeting.find(params[:id])
+    @meeting=ScheduleMeeting.find(params[:id])
   end
 
   def create_contract
@@ -167,6 +166,7 @@ class Admin::DailyUpdatesController < ApplicationController
       end
     end
   end
+  
   def daily_report
     @user=User.all
     @leads=[]
@@ -175,32 +175,32 @@ class Admin::DailyUpdatesController < ApplicationController
     @sm=[]
     @search = LeadStatus.search(params[:q])  
     if params[:q].blank?
-       @search.result.each do |lead|
-      if lead.created_at.to_date==Date.today
+      @search.result.each do |lead|
+        if lead.created_at.to_date==Date.today
+          @leads<<lead
+          @no_of_calls=@no_of_calls+1
+          if lead.state=="Interested"
+            @no_of_leads=@no_of_leads+1
+          end
+        end
+      end
+    else
+      @search.result.each do |lead|
         @leads<<lead
         @no_of_calls=@no_of_calls+1
         if lead.state=="Interested"
           @no_of_leads=@no_of_leads+1
         end
       end
-    end
-  else
-    @search.result.each do |lead|
-      @leads<<lead
-      @no_of_calls=@no_of_calls+1
-      if lead.state=="Interested"
-          @no_of_leads=@no_of_leads+1
-        end
-    end
     end  
-   
-     respond_with(@leads) 
-      ScheduleMeeting.all.each do |sm|
+    respond_with(@leads) 
+    ScheduleMeeting.all.each do |sm|
       if sm.created_at.to_date==Date.today
         @sm<<sm
       end
     end
   end
+
   def past_clients
     @past_clients=DailyUpdate.all
   end
