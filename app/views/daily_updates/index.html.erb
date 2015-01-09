@@ -8,7 +8,6 @@
         <div class="content-panel" style="width:995px; margin-left:-20px;">
           <%= search_form_for @search, :url=> daily_updates_path, :html=>{:class=>"form-inline", :role=>"form" } do |f| %>
             <%if params[:q].present?%>
-            <%binding.pry%>
             <%= f.label :created_at_gteq, "Filter By Date" %>
             <%= f.date_field :created_at_gteq,:value=>params[:q][:created_at_gteq] %>
             <%= f.label :created_at_lteq, "and" %>
