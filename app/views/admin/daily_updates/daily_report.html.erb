@@ -13,7 +13,7 @@
             <%= f.label :created_at_lteq, "and" %>
             <%= f.date_field :created_at_lteq , :value =>params[:q][:created_at_lteq]%>
             <%= f.label 'Status', :class=>'f-label'%>
-          <%= f.select :state_eq, LeadStatus::PERSON_TYPES ,{},:class=>'form-control',:value=>params[:q][:state]%>
+          <%= f.select :state_eq, LeadStatus::PERSON_TYPES ,{:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:state]%>
           <%= f.label 'Called by', :class=>'f-label'%>
             <%= f.select :user_id_eq ,@user.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:user_id]%>
           <%else%>
@@ -22,7 +22,7 @@
             <%= f.label :created_at_lteq, "and" %>
             <%= f.date_field :created_at_lteq , :value => Time.now.strftime('%Y-%m-%d')%> 
             <%= f.label 'Status', :class=>'f-label'%>
-          <%= f.select :state_eq, LeadStatus::PERSON_TYPES ,{},:class=>'form-control'%>
+          <%= f.select :state_eq, LeadStatus::PERSON_TYPES ,{:include_blank=>"select"},:class=>'form-control'%>
           <%= f.label 'Called by', :class=>'f-label'%>
             <%= f.select :user_id_eq ,@user.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control'%>
           <%end%>
