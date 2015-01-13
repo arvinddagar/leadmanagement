@@ -9,63 +9,67 @@
         <div>
         <h3>Report of payment history</h3>
         <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form"} do |f| %>
-          <%= f.label :collection_date_gteq, "Filter By Date" ,:class=>"f-label"%>
-          <%= f.date_field :collection_date_gteq ,:class=>'form-control'%>
-          <%= f.label :collection_date_lteq, "and" %>
-          <%= f.date_field :collection_date_lteq,:class=>'form-control'%>
-          <%= f.label 'Transaction type', :class=>'f-label'%>
-          <%= f.select :transaction_type_eq ,(PaymentHistory::TRANSACTION_TYPES), {:include_blank=>"select"},:class=>'form-control'%>
-      
+          <%if params[:q].present?%>
+            <%= f.label 'Transaction type', :class=>'f-label'%>
+            <%= f.select :transaction_type_eq ,(PaymentHistory::TRANSACTION_TYPES), {:value=>params[:q][:transaction_type_eq],:include_blank=>"select"},:class=>'form-control'%>
+            <%= f.label :collection_date_gteq, "Filter By Date" ,:class=>"f-label",:value=>params[:q][:collection_date_gteq]%>
+            <%= f.date_field :collection_date_gteq ,:class=>'form-control'%>
+            <%= f.label :collection_date_lteq, "and" %>
+            <%= f.date_field :collection_date_lteq,:class=>'form-control',:value=>params[:q][:collection_date_lteq]%>
+          <%else%>
+            <%= f.label 'Transaction type', :class=>'f-label'%>
+            <%= f.select :transaction_type_eq ,(PaymentHistory::TRANSACTION_TYPES), {:include_blank=>"select"},:class=>'form-control'%>
+            <%= f.label :collection_date_gteq, "Filter By Date" ,:class=>"f-label"%>
+            <%= f.date_field :collection_date_gteq ,:class=>'form-control'%>
+            <%= f.label :collection_date_lteq, "and" %>
+            <%= f.date_field :collection_date_lteq,:class=>'form-control'%>
+          <%end%>
           <div class="actions" align="center"><%= f.submit "Search" %></div>
         <% end %>
            <h4>Total payments of Rs.<%=@payment%> have been made till now </h4>
             <table class='table'>
-            <thead>
-              <tr>
-                <th>S.no</th>
-                <th >Client Name</th> 
-                 <th >Domain Name</th> 
-                <th>Transaction Type</th>
-                <th >Amount</th>
-                <th >Collection Date</th>
-                <th >Cheque Number</th>
-                <th >Cheque Date</th>
-                <th >Bank Name</th> 
-                                          
-              </tr>
-            </thead>
+              <thead>
+               <tr>
+                 <th>S.no</th>
+                 <th >Client Name</th> 
+                  <th >Domain Name</th> 
+                 <th>Transaction Type</th>
+                 <th >Amount</th>
+                 <th >Collection Date</th>
+                 <th >Cheque Number</th>
+                 <th >Cheque Date</th>
+                 <th >Bank Name</th>                                           
+               </tr>
+              </thead>
             <tbody>
             <tr>
-            <td>
-            <%s_no=0%>
-            <%@payments.each do |contract|%>
-            <tr>
-              <td><%=s_no=s_no+1%></td>
-               <td><%=contract.add_contract.daily_update.contact_person if contract.add_contract.daily_update.present? if contract.add_contract.present?  %></td>
-               <td><%=contract.add_contract.domain_name if contract.add_contract.present?%>
-             </td>
-              <td><%=contract.transaction_type%></td>
-              <td><%=contract.amount%></td>
-              <td><%=format_date(contract.collection_date)%></td>
-              <%if contract.transaction_type=="Cash"%>
-              <td>N.A</td>
-              <td>N.A</td>
-              <td>N.A</td>
-              <%else%>
-              <td><%=contract.cheque_no%></td>
-              <td><%=contract.cheque_date%></td>
-              <td><%=contract.bank_name%></td>
-
-              <%end%>
-              
-              </td>
+              <td>
+                <%s_no=0%>
+                <%@payments.each do |contract|%>
+                <tr>
+                  <td><%=s_no=s_no+1%></td>
+                  <td><%=contract.add_contract.daily_update.contact_person if contract.add_contract.daily_update.present? if contract.add_contract.present?%></td>
+                  <td><%=contract.add_contract.domain_name if contract.add_contract.present?%>
+                  </td>
+                  <td><%=contract.transaction_type%></td>
+                  <td><%=contract.amount%></td>
+                  <td><%=format_date(contract.collection_date)%></td>
+                    <%if contract.transaction_type=="Cash"%>
+                      <td>N.A</td>
+                      <td>N.A</td>
+                      <td>N.A</td>
+                    <%else%>
+                      <td><%=contract.cheque_no%></td>
+                      <td><%=contract.cheque_date%></td>
+                      <td><%=contract.bank_name%></td>
+                    <%end%>
+                  </td>
+                </tr>
+                <%end%>
+               </td>
               </tr>
-              <%end%>
-              </td>
-              </tr>
-              </tbody>
-              </table>
-        </div>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
