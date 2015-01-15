@@ -5,7 +5,7 @@
       <div class="col-md-12">
       </div>
       <div class="col-md-12 mt">
-        <div class="content-panel">
+        <div class="content-panel" style="width:1000px">
         <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form" , mothod: 'post'} do |f| %>
           <%if params[:q].present?%>
             <%= f.label :client_name ,:class=>"f-label" %>
