@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :daily_updates
+  has_many :service_calls
   ROLES = ["Admin", "Executive","Manager"]
   scope :meeting, lambda {|id| find(id)}
   

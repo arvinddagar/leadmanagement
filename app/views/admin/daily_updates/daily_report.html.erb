@@ -7,50 +7,48 @@
       <div class="col-md-12 mt">
         <div class="content-panel">
           <%= search_form_for @search, :html=>{:class=>"form-inline", :role=>"form" , method: 'post'} do |f| %>            
-          <%if params[:q].present?%>
-            <%= f.label :created_at_gteq, "Filter By Date" %>
-            <%= f.date_field :created_at_gteq , :value =>params[:q][:created_at_gteq]%>
-            <%= f.label :created_at_lteq, "and" %>
-            <%= f.date_field :created_at_lteq , :value =>params[:q][:created_at_lteq]%>
-            <%= f.label 'Status', :class=>'f-label'%>
-          <%= f.select :state_eq, LeadStatus::PERSON_TYPES ,{:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:state]%>
-          <%= f.label 'Called by', :class=>'f-label'%>
-            <%= f.select :user_id_eq ,@user.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:user_id]%>
-          <%else%>
-           <%= f.label :created_at_gteq, "Filter By Date" %>
-            <%= f.date_field :created_at_gteq , :value => Time.now.strftime('%Y-%m-%d')%>
-            <%= f.label :created_at_lteq, "and" %>
-            <%= f.date_field :created_at_lteq , :value => Time.now.strftime('%Y-%m-%d')%> 
-            <%= f.label 'Status', :class=>'f-label'%>
-          <%= f.select :state_eq, LeadStatus::PERSON_TYPES ,{:include_blank=>"select"},:class=>'form-control'%>
-          <%= f.label 'Called by', :class=>'f-label'%>
-            <%= f.select :user_id_eq ,@user.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control'%>
+            <%if params[:q].present?%>
+              <%= f.label :created_at_gteq, "Filter By Date" %>
+              <%= f.date_field :created_at_gteq , :value =>params[:q][:created_at_gteq]%>
+              <%= f.label :created_at_lteq, "and" %>
+              <%= f.date_field :created_at_lteq , :value =>params[:q][:created_at_lteq]%>
+              <%= f.label 'Status', :class=>'f-label'%>
+              <%= f.select :state_eq, LeadStatus::PERSON_TYPES ,{:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:state]%>
+              <%= f.label 'Called by', :class=>'f-label'%>
+              <%= f.select :user_id_eq ,@user.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:user_id]%>
+            <%else%>
+              <%= f.label :created_at_gteq, "Filter By Date" %>
+              <%= f.date_field :created_at_gteq , :value => Time.now.strftime('%Y-%m-%d')%>
+              <%= f.label :created_at_lteq, "and" %>
+              <%= f.date_field :created_at_lteq , :value => Time.now.strftime('%Y-%m-%d')%> 
+              <%= f.label 'Status', :class=>'f-label'%>
+              <%= f.select :state_eq, LeadStatus::PERSON_TYPES ,{:include_blank=>"select"},:class=>'form-control'%>
+              <%= f.label 'Called by', :class=>'f-label'%>
+              <%= f.select :user_id_eq ,@user.map.each {|c| [c.name,c.id]} ,{:include_blank=>"select"},:class=>'form-control'%>
+            <%end%>            
+            <div class="actions" align="center"><%= f.submit "Search" %></div>
           <%end%>
-          
-            
-        <div class="actions" align="center"><%= f.submit "Search" %></div>
-        <%end%>
-        <table class='table'>        
-          <thead>
-            <tr>
-              <td>
-                Total number of leads:<%= @no_of_leads%>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Total number of calls:<%= @no_of_calls%>
-              </td>
-            </tr>         
-            <tr>
-            <th>S. no</th>
-              <th>Business</th>
-              <th>Designation</th>
-              <th>Status</th>
-              <th>Called by</th>
-              <th>Address</th>
-              <th>Email</th>
-            </tr>
+          <table class='table'>        
+            <thead>
+              <tr>
+                <td>
+                  Total number of leads:<%= @no_of_leads%>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Total number of calls:<%= @no_of_calls%>
+                </td>
+              </tr>         
+              <tr>
+                <th>S. no</th>
+                <th>Business</th>
+                <th>Designation</th>
+                <th>Status</th>
+                <th>Called by</th>
+                <th>Address</th>
+                <th>Email</th>
+              </tr>
           </thead>
           <tbody>
           <%s_no=0%>
@@ -86,54 +84,50 @@
           <%ServiceCall.all.each do |service|%>
             <tr>
               <%if params[:q].present? %>
-              <%if params[:q][:created_at_gteq].blank? and params[:q][:user_id_eq].present?%>
-              <%if params[:q][:user_id_eq]==service.user_id.to_s%>
-              <td><%=s_no_s=s_no_s+1%></td>
-              <td><%=service.add_contract.daily_update.contact_person if service.add_contract.present?%></td>
-              <td><%=service.add_contract.daily_update.business if service.add_contract.present?%></td>
-              <td><%=service.add_contract.domain_name if service.add_contract.present?%></td>
-              <td><%=service.description%></td>
-              <td><%=User.find(service.user_id).name if service.user_id.present?%></td>
-             
-              <%end%>
-               <%elsif  params[:q][:created_at_gteq].present? and params[:q][:user_id_eq].present?%>
-               <%if params[:q][:created_at_gteq].to_date <service.created_at and params[:q][:created_at_lteq].to_date>service.created_at and params[:q][:user_id_eq]==service.user_id.to_s%>
-              <td><%=s_no_s=s_no_s+1%></td>
-              <td><%=service.add_contract.daily_update.contact_person if service.add_contract.present?%></td>
-              <td><%=service.add_contract.daily_update.business if service.add_contract.present?%></td>
-              <td><%=service.add_contract.domain_name if service.add_contract.present?%></td>
-              <td><%=service.description%></td>
-              <td><%=User.find(service.user_id).name if service.user_id.present?%></td>
-             
-              <%end%>
+                <%if params[:q][:created_at_gteq].blank? and params[:q][:user_id_eq].present?%>
+                  <%if params[:q][:user_id_eq]==service.user_id.to_s%>
+                    <td><%=s_no_s=s_no_s+1%></td>
+                    <td><%=service.add_contract.daily_update.contact_person if service.add_contract.present?%></td>
+                    <td><%=service.add_contract.daily_update.business if service.add_contract.present?%></td>
+                    <td><%=service.add_contract.domain_name if service.add_contract.present?%></td>
+                    <td><%=service.description%></td>
+                    <td><%=User.find(service.user_id).name if service.user_id.present?%></td>             
+                  <%end%>
+                <%elsif  params[:q][:created_at_gteq].present? and params[:q][:user_id_eq].present?%>
+                  <%if params[:q][:created_at_gteq].to_date <service.created_at and params[:q][:created_at_lteq].to_date>service.created_at and params[:q][:user_id_eq]==service.user_id.to_s%>
+                    <td><%=s_no_s=s_no_s+1%></td>
+                    <td><%=service.add_contract.daily_update.contact_person if service.add_contract.present?%></td>
+                    <td><%=service.add_contract.daily_update.business if service.add_contract.present?%></td>
+                    <td><%=service.add_contract.domain_name if service.add_contract.present?%></td>
+                    <td><%=service.description%></td>
+                    <td><%=User.find(service.user_id).name if service.user_id.present?%></td>
+                  <%end%>
+                <%else%>
+                  <%if  params[:q][:created_at_gteq].to_date <service.created_at and params[:q][:created_at_lteq].to_date>service.created_at %>
+                    <td><%=s_no_s=s_no_s+1%></td>
+                    <td><%=service.add_contract.daily_update.contact_person if service.add_contract.present?%></td>
+                    <td><%=service.add_contract.daily_update.business if service.add_contract.present?%></td>
+                    <td><%=service.add_contract.domain_name if service.add_contract.present?%></td>
+                    <td><%=service.description%></td>
+                    <td><%=User.find(service.user_id).name if service.user_id.present?%></td>             
+                  <%end%>
+                <%end%>
               <%else%>
-               <%if  params[:q][:created_at_gteq].to_date <service.created_at and params[:q][:created_at_lteq].to_date>service.created_at %>
-              <td><%=s_no_s=s_no_s+1%></td>
-              <td><%=service.add_contract.daily_update.contact_person if service.add_contract.present?%></td>
-              <td><%=service.add_contract.daily_update.business if service.add_contract.present?%></td>
-              <td><%=service.add_contract.domain_name if service.add_contract.present?%></td>
-              <td><%=service.description%></td>
-              <td><%=User.find(service.user_id).name if service.user_id.present?%></td>
-             
+                <%if service.created_at.to_date==Date.today%>
+                  <tr>
+                    <td><%=s_no_s=s_no_s+1%></td>
+                    <td><%=service.add_contract.daily_update.contact_person if service.add_contract.present?%></td>
+                    <td><%=service.add_contract.daily_update.business if service.add_contract.present?%></td>
+                    <td><%=service.add_contract.domain_name if service.add_contract.present?%></td>
+                    <td><%=service.description%></td>
+                    <td><%=User.find(service.user_id).name if service.user_id.present?%></td>
+                  </tr>
+                <%end%>
               <%end%>
-              <%end%>
-              <%else%>
-               <%if service.created_at.to_date==Date.today%>
-              <tr>
-              <td><%=s_no_s=s_no_s+1%></td>
-              <td><%=service.add_contract.daily_update.contact_person if service.add_contract.present?%></td>
-              <td><%=service.add_contract.daily_update.business if service.add_contract.present?%></td>
-              <td><%=service.add_contract.domain_name if service.add_contract.present?%></td>
-                <td><%=service.description%></td>
-                <td><%=User.find(service.user_id).name if service.user_id.present?%></td>
               </tr>
-              <%end%>
-              <%end%>
-               </tr>
             <%end%>
           </tbody>
-        </table>
-      </div>
+      </table>
     </div>
   </div>
 </div>
