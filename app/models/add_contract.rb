@@ -3,7 +3,9 @@ class AddContract < ActiveRecord::Base
 	STATUS=["active","expired"]
 	WORKSTATUS=["Work not started","Work started","Ready for deployment","Handed over to client","Working on revision","Freezed"]
   has_many :plans
+  has_many :service_calls
   belongs_to :daily_update
+  
   ransacker :renewal_date do
     Arel.sql('date(renewal_date)')
   end

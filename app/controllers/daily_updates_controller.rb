@@ -100,7 +100,11 @@ class DailyUpdatesController < ApplicationController
     @d=ScheduleMeeting.find(params[:daily_up]).daily_update_id
     render :json =>@d
   end
-
+ def contract_updates
+  if params[:description].present?
+  @service=ServiceCall.create(:user_id=>params[:user_id],:description=>params[:description],:add_contract_id=>params[:add_contract_id])
+  end
+ end
   private
     def set_daily_update
       @daily_update = DailyUpdate.find(params[:id])

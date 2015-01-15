@@ -4,6 +4,7 @@ class DailyUpdate < ActiveRecord::Base
 	validates :number, presence: true, uniqueness: true
 	has_many :lead_status
 	belongs_to :user
+	has_many :add_contracts
 	belongs_to :category
 	accepts_nested_attributes_for :lead_status
 	has_many :schedule_meeting

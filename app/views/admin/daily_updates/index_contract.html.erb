@@ -74,6 +74,7 @@
                     <%end%>
                   </td>                  
                    <td><%= contract.work_status %></td>
+                   <td><%= link_to 'Updates' ,contract_updates_path(:id=>contract.id)%></td>
                  <td><%=render  :partial=> "edit_contract", locals: {:id => contract.id}%>
                  <td><%= link_to 'Payment history' ,payment_history_path(:id=>contract.id)%>
                  </td>

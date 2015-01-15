@@ -69,6 +69,47 @@
             <%end%>
           </tbody>
         </table>
+         <h3><i class="fa fa-angle-right"></i>Listing Service Calls</h3>
+          <table class='table'>        
+          <thead>         
+            <tr>
+             <th >S. no</th>
+              <th>Client</th>
+              <th>Business</th>
+              <th>Domain name</th>
+              <th >Description</th>
+              <th >Called by</th>
+            </tr>
+          </thead>
+          <tbody>
+          <%s_no_s=0%>
+          <%ServiceCall.all.each do |service|%>
+            <tr>
+              <%if params[:q].present?%>
+              <%if params[:q][:created_at_gteq].to_date <service.created_at and params[:q][:created_at_lteq].to_date>service.created_at%>
+              <td><%=s_no_s=s_no_s+1%></td>
+              <td><%=service.add_contract.daily_update.contact_person if service.add_contract.present?%></td>
+              <td><%=service.add_contract.daily_update.business if service.add_contract.present?%></td>
+              <td><%=service.add_contract.domain_name if service.add_contract.present?%></td>
+              <td><%=service.description%></td>
+              <td><%=User.find(service.user_id).name if service.user_id.present?%></td>
+              <%end%>
+              <%else%>
+               <%if service.created_at.to_date==Date.today%>
+              <tr>
+              <td><%=s_no_s=s_no_s+1%></td>
+              <td><%=service.add_contract.daily_update.contact_person if service.add_contract.present?%></td>
+              <td><%=service.add_contract.daily_update.business if service.add_contract.present?%></td>
+              <td><%=service.add_contract.domain_name if service.add_contract.present?%></td>
+                <td><%=service.description%></td>
+                <td><%=User.find(service.user_id).name if service.user_id.present?%></td>
+              </tr>
+              <%end%>
+              <%end%>
+               </tr>
+            <%end%>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

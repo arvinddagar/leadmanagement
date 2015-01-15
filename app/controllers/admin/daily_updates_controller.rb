@@ -199,6 +199,13 @@ class Admin::DailyUpdatesController < ApplicationController
         @sm<<sm
       end
     end
+    #@service_calls=ServiceCall.all
+    # ServiceCall.all.each do |service|
+    #   if  service.created_at.to_date==Date.today
+    #     @service_calls<<service
+    #   end
+    # end
+    # binding.pry
   end
 
   def past_clients
