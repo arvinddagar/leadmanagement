@@ -208,7 +208,7 @@ class Admin::DailyUpdatesController < ApplicationController
     @category=Category.all
     @user=User.all
     @search = DailyUpdate.search(params[:q])
-    @not_called= @search.result.where(:status=>'0')
+    @not_called= @search.result.where(:status=>'0').order('created_at DESC').page(params[:page]).per(25 )
     respond_with(@not_called)
   end
 end
