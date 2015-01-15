@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     get 'show_meetings' => 'admin/daily_updates#show_meetings'
     get 'lead_statuses' => 'daily_updates#scheduled_call'
     get 'meeting_logs' => 'daily_updates#meeting_logs'
+    get 'not_called'=>'admin/daily_updates#not_called'
   as :admin do
     post 'notify_expiry'=>'admin/daily_updates#notify_expiry'
     post 'lead_statuses'=>'admin/daily_updates#daily_report'

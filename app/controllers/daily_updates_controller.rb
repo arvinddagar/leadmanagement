@@ -57,7 +57,7 @@ class DailyUpdatesController < ApplicationController
 
   def update  
     @daily_update.update(daily_update_params)
-    if  params[:daily_update][:lead_status_attributes]["0"][:state].nil? or  params[:daily_update][:lead_status_attributes]["0"][:comment].nil?
+    if  params[:daily_update][:lead_status_attributes]["0"][:state].blank? or  params[:daily_update][:lead_status_attributes]["0"][:comment].blank?
     else
        @daily_update.update(:status=>1)
     end

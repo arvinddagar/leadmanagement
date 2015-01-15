@@ -1,6 +1,7 @@
           <table class='table'>
             <thead>
               <tr>
+              <th>S.no</th>
               <th>Meeting no</th>
                 <th>Meeting Date</th>
                 <th>Meeting Time</th>
@@ -9,8 +10,10 @@
               </tr>
             </thead>
             <tbody>
+            <%s_no1=0%>
               <% @meetings.each do |meeting| %>              
                 <tr>
+                <td><%=s_no1=s_no1+1%></td>
                   <td><%=meeting.meeting_no%></td>
                   <td><%= format_date(meeting.meeting_date) if meeting.meeting_date.present? %></td>
                   <td><%= format_time(meeting.meeting_time) if meeting.meeting_time.present? %></td>

@@ -204,5 +204,11 @@ class Admin::DailyUpdatesController < ApplicationController
   def past_clients
     @past_clients=DailyUpdate.all
   end
-
+  def not_called
+    @category=Category.all
+    @user=User.all
+    @search = DailyUpdate.search(params[:q])
+    @not_called= @search.result.where(:status=>'0')
+    respond_with(@not_called)
+  end
 end

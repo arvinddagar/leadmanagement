@@ -42,6 +42,7 @@
           <table class='table'>
             <thead>
               <tr>
+                <th>S. no</th>
                 <th>Meeting no</th>
                 <th>Meeting Date</th>
                 <th>Meeting Time</th>
@@ -55,11 +56,12 @@
               </tr>
             </thead>
             <tbody>
-             <h5>Total <%=@meetings.count%> meetings are held</h5>
-            <% sc_meeting(@meetings).sort_by(&:meeting_date).reverse.each do |meeting|%>
-              <%if meeting.present?%>
-             
+            <%s_no=0%>
+              <h5>Total <%=@meetings.count%> meetings are held</h5>
+              <% sc_meeting(@meetings).sort_by(&:meeting_date).reverse.each do |meeting|%>
+                <%if meeting.present?%>             
                 <tr>
+                <td><%=s_no=s_no+1%></td>
                 <td><%=meeting.meeting_no if meeting.meeting_no.present?%></td>
                   <td><%= format_date(meeting.meeting_date) if meeting.meeting_date.present? %></td>
                   <td><%= format_time(meeting.meeting_time) if meeting.meeting_time.present? %></td>

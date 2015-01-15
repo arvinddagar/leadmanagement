@@ -58,7 +58,8 @@
               <tr>
               <td><%=s_no=s_no+1%></td>
                 <td><%=lead.daily_update.business if lead.daily_update.present?%>
-                </br><%=lead.daily_update.contact_person if lead.daily_update.present?%></br><%=lead.daily_update.number if lead.daily_update.present?%></td>
+                </br><%=lead.daily_update.contact_person if lead.daily_update.present?%>
+                </br><%=lead.daily_update.number if lead.daily_update.present?%></td>
                 <td><%=lead.daily_update.designation if lead.daily_update.present?%></td>
                 <td><%=lead.state%></td>
                 <td><%=lead.user.name if lead.user.present?%></td>
