@@ -87,7 +87,7 @@ class Admin::DailyUpdatesController < ApplicationController
   end
 
   def create_contract
-    @add_contract=AddContract.create(:daily_update_id=>params[:client_id],:status=>params[:status],:domain_name=>params[:domain_name],:work_status=>params[:work_status])
+    @add_contract=AddContract.create(:priority=>params[:priority],:daily_update_id=>params[:client_id],:status=>params[:status],:domain_name=>params[:domain_name],:work_status=>params[:work_status])
     @plan=Plan.create(:plan_type=>params[:plan],:renewal_date=>params[:renewal_date],:add_contract_id=>@add_contract.id)
     redirect_to :back
   end
@@ -128,7 +128,7 @@ class Admin::DailyUpdatesController < ApplicationController
   
   def update_contract
     @contract=AddContract.find(params[:contract_id])
-    @contract.update(:daily_update_id=>params[:client_id],:work_status=>params[:work_status],:status=>params[:status],:domain_name=>params[:domain_name])
+    @contract.update(:priority=>params[:priority],:daily_update_id=>params[:client_id],:work_status=>params[:work_status],:status=>params[:status],:domain_name=>params[:domain_name])
     @plan=Plan.create(:plan_type=>params[:plan],:renewal_date=>params[:renewal_date],:add_contract_id=>params[:contract_id])
     redirect_to :index_contract
   end

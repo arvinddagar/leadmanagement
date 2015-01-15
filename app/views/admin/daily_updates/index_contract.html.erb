@@ -56,6 +56,7 @@
                 <th>Plan</th>
                 <th>Status</th>
                 <th> Work Status</th>
+                <th> Priority</th>
                 <th colspan="3">Actions</th>
               </tr>
             </thead>          
@@ -74,6 +75,7 @@
                     <%end%>
                   </td>                  
                    <td><%= contract.work_status %></td>
+                   <td><%= contract.priority %></td>
                    <td><%= link_to 'Updates' ,contract_updates_path(:id=>contract.id)%></td>
                  <td><%=render  :partial=> "edit_contract", locals: {:id => contract.id}%>
                  <td><%= link_to 'Payment history' ,payment_history_path(:id=>contract.id)%>

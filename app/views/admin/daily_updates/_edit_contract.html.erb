@@ -58,6 +58,14 @@ Update contract
                 <%=  select_tag 'work_status', options_for_select(AddContract::WORKSTATUS)%>
               </td>
             </tr>
+                <tr>
+              <td>
+               Priority
+              </td>
+              <td>
+                <%=  select_tag 'priority', options_for_select(AddContract::PRIORITY)%>
+              </td>
+            </tr>
             <tr>
               <td>
                 <%=submit_tag"save"%>
