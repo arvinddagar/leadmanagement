@@ -15,9 +15,10 @@
             <%= f.label :plan, "Plan" ,:class=>"f-label"%>
             <%= f.select :plans_plan_type_eq ,(AddContract::PLANS), {:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:plans_plan_type_eq]%>
             <%= f.label :status, "Status" ,:class=>"f-label"%>
-            <%= f.select :status_eq ,(AddContract::STATUS), {:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:status_eq]%>
+            <%= f.select :status_eq ,(AddContract::STATUS), {:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:status_eq]%></br>
             </br>
-            </br>
+             <%= f.label :priority, "Priority" ,:class=>"f-label"%>
+            <%= f.select :priority_eq ,(AddContract::PRIORITY), {:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:status_eq]%>            
             <%= f.label :work_status, "Work status",:class=>"f-label" %>
             <%= f.select :work_status_eq ,(AddContract::WORKSTATUS), {:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:work_status_eq]%>
             <%= f.label :renewal_date_gteq, "Filter By Date" ,:class=>"f-label"%>
@@ -32,9 +33,10 @@
             <%= f.label :plan, "Plan" ,:class=>"f-label"%>
             <%= f.select :plans_plan_type_eq ,(AddContract::PLANS), {:include_blank=>"select"},:class=>'form-control'%>
             <%= f.label :status, "Status" ,:class=>"f-label"%>
-            <%= f.select :status_eq ,(AddContract::STATUS), {:include_blank=>"select"},:class=>'form-control'%>
+            <%= f.select :status_eq ,(AddContract::STATUS), {:include_blank=>"select"},:class=>'form-control'%></br>
             </br>
-            </br>
+            <%= f.label :priority, "Priority" ,:class=>"f-label"%>
+            <%= f.select :priority_eq ,(AddContract::PRIORITY), {:include_blank=>"select"},:class=>'form-control'%>
             <%= f.label :work_status, "Work status",:class=>"f-label" %>
             <%= f.select :work_status_eq ,(AddContract::WORKSTATUS), {:include_blank=>"select"},:class=>'form-control'%>
             <%= f.label :renewal_date_gteq, "Filter By Date" ,:class=>"f-label"%>

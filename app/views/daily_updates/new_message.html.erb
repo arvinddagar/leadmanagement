@@ -1,0 +1,29 @@
+<section id="main-content">
+  <section class="wrapper">
+    <h3><i class="fa fa-angle-right"></i>Compose Message</h3>
+    <div class="row">      
+      <div class="col-md-12 mt">
+        <div class="content-panel" style="width:995px; margin-left:-20px;">
+          <%= form_tag("/new_message") do %>
+            <table>
+        	    <tr>
+        	  	  <td class='f-label'>To</td>
+        	  	  <td><%=  select_tag "send_to", options_for_select(User.all.collect{ |u| [ u.email,u.id]})%></td>
+        	    </tr>
+        	    <tr>
+            	  <td class='f-label'>Message</td>
+        	  	  <td><%=text_area_tag :message%></td>
+        	    </tr>
+              <%=hidden_field_tag :user_id,current_user.id%>
+        	    <tr>
+        	      <td>
+        	        <%=submit_tag 'Save'%>
+                </td>
+              </tr>
+            </table>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

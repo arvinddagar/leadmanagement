@@ -2,9 +2,13 @@
 <aside>
   <div id="sidebar"  class="nav-collapse ">
     <ul class="sidebar-menu" id="nav-accordion">
-      <p class="centered"><%=image_tag "logo-shad.png",:class=>"img-circle",:style=>"width:160px; height:50px;" %></p>
+      
      <h5 class="centered"></h5>
-      <li class="mt">
+     <li class="mt">
+        <i class="fa fa-dashboard"></i>
+        <span><%= link_to "Messages" , messages_path %></span>
+      </li>
+      <li class="sub-menu">
         <i class="fa fa-dashboard"></i>
         <span><%= link_to "Meetings" , meetings_path %></span>
       </li>
@@ -50,9 +54,13 @@
 <aside>
   <div id="sidebar"  class="nav-collapse ">
     <ul class="sidebar-menu" id="nav-accordion">
-      <p class="centered"><%=image_tag "logo-shad.png",:class=>"img-circle",:style=>"width:160px; height:150px;"%></p>
+      
      <h5 class="centered"></h5>
-      <li class="mt">
+     <li class="sub-menu">
+        <i class="fa fa-dashboard"></i>
+        <span><%= link_to "Messages" , messages_path %></span>
+      </li>
+      <li class="sub-menu">
         <i class="fa fa-dashboard"></i>
         <span><%= link_to "New records" , new_daily_update_path %></span>
       </li>
@@ -77,9 +85,12 @@
 <aside>
   <div id="sidebar"  class="nav-collapse ">
     <ul class="sidebar-menu" id="nav-accordion">
-      <p class="centered"><%=image_tag "logo-shad.png",:class=>"img-circle",:style=>"width:160px; height:150px;"%></p>
-     <h5 class="centered"></h5>
-      <li class="mt">
+    <h5 class="centered"></h5>
+     <li class="sub-menu">
+        <i class="fa fa-dashboard"></i>
+        <span><%= link_to "Messages" , messages_path %></span>
+      </li>
+      <li class="sub-menu">
         <i class="fa fa-dashboard"></i>
         <span><%= link_to "New records" , new_daily_update_path %></span>
       </li>

@@ -1,0 +1,22 @@
+<section id="main-content">
+  <section class="wrapper">
+    <h3><i class="fa fa-angle-right"></i>Messages</h3>
+    <div class="row">      
+      <div class="col-md-12 mt">
+        <div class="content-panel" style="width:995px; margin-left:-20px;">
+          <div style="float:right; margin-top:-80px;" ><%= link_to 'Compose', new_message_path , :class=>"btn btn-primary",:style=>"margin-right:10px"%></div> 
+         </br>
+          		<%Messages.find(@message).each do |messages|%>
+          		<div style="padding:10px;border-style: solid; border-width: 1px; margin-left:40px;margin-right:40px;">
+          				<%=User.find(messages.user_id).name if messages.user_id.present?%>
+          				on <%=format_date(messages.created_at)%>
+          			</br></br>
+          				<%=truncate(messages.message, :length => 100) %>......
+          				<%= link_to 'View more', view_more_path(:parent_message_id=>messages.parent_message_id,:sent_to=>messages.user_id) %>
+          		</div></br>
+          			<%end%>
+          			 </div>
+      </div>
+    </div>
+  </section>   
+</section>
