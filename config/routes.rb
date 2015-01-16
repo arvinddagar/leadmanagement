@@ -29,6 +29,10 @@ Rails.application.routes.draw do
     get 'meeting_logs' => 'daily_updates#meeting_logs'
     get 'not_called'=>'admin/daily_updates#not_called'
     get 'contract_updates'=>'daily_updates#contract_updates'
+     get 'messages'=>'daily_updates#messages'
+     get 'view_more'=>'daily_updates#view_more'
+      get 'new_message'=>'daily_updates#new_message'
+      post 'new_message'=>'daily_updates#new_message'
      post 'contract_updates'=>'daily_updates#contract_updates'
   as :admin do
     post 'notify_expiry'=>'admin/daily_updates#notify_expiry'
