@@ -108,8 +108,8 @@ class DailyUpdatesController < ApplicationController
  def messages
  
   @message=[]
-  Messages.all.each do |message|
-    if message.sent_to==current_user.id and !@message.include?(message.id) and !@message.include?(message.parent_message_id)
+  Messages.all.order('created_at DESC').each do |message|
+    if message.sent_to==current_user.id and  !@message.include?(message.id) and !@message.include?(message.parent_message_id)
       @message<<message.parent_message_id
     end
   end

@@ -5,17 +5,26 @@
       <div class="col-md-12 mt">
         <div class="content-panel" style="width:995px; margin-left:-20px;">
           <div style="float:right; margin-top:-80px;" ><%= link_to 'Compose', new_message_path , :class=>"btn btn-primary",:style=>"margin-right:10px"%></div> 
-         </br>
-          		<%Messages.find(@message).each do |messages|%>
+          </br>
+            <%Messages.find(@message).each do |messages|%>
           		<div style="padding:10px;border-style: solid; border-width: 1px; margin-left:40px;margin-right:40px;">
-          				<%=User.find(messages.user_id).name if messages.user_id.present?%>
-          				on <%=format_date(messages.created_at)%>
+          			<%@m=Messages.where(:parent_message_id=>messages.parent_message_id)%>
+          			
+          			<%=User.find(@m.last.user_id).name if messages.user_id.present?%>
+          			on <%=format_date(messages.created_at)%>
           			</br></br>
-          				<%=truncate(messages.message, :length => 100) %>......
-          				<%= link_to 'View more', view_more_path(:parent_message_id=>messages.parent_message_id,:sent_to=>messages.user_id) %>
-          		</div></br>
-          			<%end%>
-          			 </div>
+          			<%if @m.last.status=='0'%>
+          			 <b> <%=truncate(@m.last.message, :length => 100) %>......</b>
+          			 <%else%>
+          			 <%=truncate(@m.last.message, :length => 100) %>......
+          			 <%end%>
+          			
+          			<%= link_to 'View more', view_more_path(:parent_message_id=>@m.last.parent_message_id,:sent_to=>@m.last.user_id) %>
+          		</div>
+          		</br>
+          	<%end%>
+          </div>
+        </div>
       </div>
     </div>
   </section>   

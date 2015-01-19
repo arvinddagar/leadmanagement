@@ -6,7 +6,8 @@
      <h5 class="centered"></h5>
      <li class="mt">
         <i class="fa fa-dashboard"></i>
-        <span><%= link_to "Messages" , messages_path %></span>
+        <%@m=Messages.where(:status=>"0",:sent_to=>current_user.id)%>
+        <span><%= link_to "Messages" , messages_path %><%=@m.count if @m.present?%> <%if @m.present?%>unread messages<%end%></span>
       </li>
       <li class="sub-menu">
         <i class="fa fa-dashboard"></i>
@@ -58,7 +59,8 @@
      <h5 class="centered"></h5>
      <li class="sub-menu">
         <i class="fa fa-dashboard"></i>
-        <span><%= link_to "Messages" , messages_path %></span>
+         <%@m=Messages.where(:status=>"0",:sent_to=>current_user.id)%>
+        <span><%= link_to "Messages" , messages_path %><%=@m.count if @m.present?%> <%if @m.present?%>unread messages<%end%></span>
       </li>
       <li class="sub-menu">
         <i class="fa fa-dashboard"></i>
@@ -88,7 +90,8 @@
     <h5 class="centered"></h5>
      <li class="sub-menu">
         <i class="fa fa-dashboard"></i>
-        <span><%= link_to "Messages" , messages_path %></span>
+         <%@m=Messages.where(:status=>"0",:sent_to=>current_user.id)%>
+        <span><%= link_to "Messages" , messages_path %><%=@m.count if @m.present?%> <%if @m.present?%>unread messages<%end%></span>
       </li>
       <li class="sub-menu">
         <i class="fa fa-dashboard"></i>
