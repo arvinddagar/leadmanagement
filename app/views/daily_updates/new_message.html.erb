@@ -8,7 +8,7 @@
             <table>
         	    <tr>
         	  	  <td class='f-label'>To</td>
-        	  	  <td><%=  select_tag "send_to", options_for_select(User.all.collect{ |u| [ u.email,u.id]})%></td>
+        	  	  <td><%= select_tag "send_to", options_for_select(User.all.collect{ |u| [ u.email,u.id]})%></td>
         	    </tr>
         	    <tr>
             	  <td class='f-label'>Message</td>

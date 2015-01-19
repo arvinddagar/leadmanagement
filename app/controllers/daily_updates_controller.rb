@@ -100,46 +100,50 @@ class DailyUpdatesController < ApplicationController
     @d=ScheduleMeeting.find(params[:daily_up]).daily_update_id
     render :json =>@d
   end
- def contract_updates
-  if params[:description].present?
-  @service=ServiceCall.create(:user_id=>params[:user_id],:description=>params[:description],:add_contract_id=>params[:add_contract_id])
-  end
- end
- def messages
- 
-  @message=[]
-  Messages.all.order('created_at DESC').each do |message|
-    if message.sent_to==current_user.id and  !@message.include?(message.id) and !@message.include?(message.parent_message_id)
-      @message<<message.parent_message_id
+  def contract_updates
+    if params[:description].present?
+      @service=ServiceCall.create(:user_id=>params[:user_id],:description=>params[:description],:add_contract_id=>params[:add_contract_id])
     end
   end
- end
- def view_more
-  Messages.where(:parent_message_id=>params[:parent_message_id]).update_all(:status=>1)
-  @message=[]
-   Messages.all.each do |message|
-    if message.id.to_s==params[:parent_message_id] or message.parent_message_id.to_s==params[:parent_message_id]
-      @message<<message
+  def messages
+    @message=[]
+    Messages.all.order('created_at DESC').each do |message|
+      if message.sent_to==current_user.id and  !@message.include?(message.id) and !@message.include?(message.parent_message_id)
+        @message<<message.parent_message_id
+      end
     end
-   end
- end
- def new_message
-  if params[:message].present?
-    if params[:commit]=="Reply"
-      @message=Messages.create(:status=>0,:parent_message_id=>params[:parent_message_id],:user_id=>params[:user_id],:sent_to=>params[:send_to],:message=>params[:message])
-    else
-      @message=Messages.create(:status=>0,:user_id=>params[:user_id],:sent_to=>params[:send_to],:message=>params[:message])
-      @message.update(:parent_message_id=>@message.id)
-    end  
   end
- end
-  private
-    def set_daily_update
-      @daily_update = DailyUpdate.find(params[:id])
+  def view_more
+    Messages.where(:parent_message_id=>params[:parent_message_id]).update_all(:status=>1)
+    @message=[]
+    Messages.all.each do |message|
+      if message.id.to_s==params[:parent_message_id] or message.parent_message_id.to_s==params[:parent_message_id]
+        @message<<message
+      end
     end
-
-    def daily_update_params
-      params.require(:daily_update).permit(:business,:status, :category_id,:contact_person,:user_id, :number, :designation, :status, :summary, :address, :email,lead_status_attributes: [:state,
+  end
+  def new_message
+    if params[:message].present?
+      if params[:commit]=="Reply"
+       @msg=Messages.find(params[:parent_message_id])
+        if @msg.sent_to==current_user.id
+          @message=Messages.create(:status=>0,:parent_message_id=>params[:parent_message_id],:user_id=>params[:user_id],:sent_to=>@msg.user_id,:message=>params[:message])
+        else
+          @message=Messages.create(:status=>0,:parent_message_id=>params[:parent_message_id],:user_id=>params[:user_id],:sent_to=>@msg.sent_to,:message=>params[:message])
+      
+        end
+      else
+        @message=Messages.create(:status=>0,:user_id=>params[:user_id],:sent_to=>params[:send_to],:message=>params[:message])
+        @message.update(:parent_message_id=>@message.id)
+      end  
+    end
+  end
+private
+  def set_daily_update
+    @daily_update = DailyUpdate.find(params[:id])
+  end
+  def daily_update_params
+    params.require(:daily_update).permit(:business,:status, :category_id,:contact_person,:user_id, :number, :designation, :status, :summary, :address, :email,lead_status_attributes: [:state,
                                                    :comment,:user_id,:schedule_next_call,:schedule_next_call_time])
-    end
+  end
 end
