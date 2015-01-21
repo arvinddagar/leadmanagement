@@ -8,7 +8,7 @@ class DailyUpdatesController < ApplicationController
     @category=Category.all
     @search = DailyUpdate.search(params[:q])
     if params[:q].nil?
-       @daily_updates = @search.result.where(:status=>"0").order('created_at DESC').page(params[:page]).per(25)
+      @daily_updates = @search.result.where(:status=>"0").order('created_at DESC').page(params[:page]).per(25)
     else
       @daily_updates = @search.result.order('created_at DESC').page(params[:page]).per(25)
     end
@@ -29,7 +29,7 @@ class DailyUpdatesController < ApplicationController
   end
 
   def meeting_logs
-    @meetings= DailyUpdate.find(params[:client]).schedule_meeting.order('meeting_date Desc')
+    @meetings = DailyUpdate.find(params[:client]).schedule_meeting.order('meeting_date Desc')
     render layout: false
   end
 
@@ -100,11 +100,13 @@ class DailyUpdatesController < ApplicationController
     @d=ScheduleMeeting.find(params[:daily_up]).daily_update_id
     render :json =>@d
   end
+
   def contract_updates
     if params[:description].present?
       @service=ServiceCall.create(:user_id=>params[:user_id],:description=>params[:description],:add_contract_id=>params[:add_contract_id])
     end
   end
+
   def messages
     @message=[]
     Messages.all.order('created_at DESC').each do |message|
@@ -113,8 +115,14 @@ class DailyUpdatesController < ApplicationController
       end
     end
   end
+
   def view_more
-    Messages.where(:parent_message_id=>params[:parent_message_id]).update_all(:status=>1)
+    @msg=Messages.where(:parent_message_id=>params[:parent_message_id])
+    @msg.each do |msg|
+      if  msg.sent_to==current_user.id
+        msg.update(:status=>1)
+      end
+    end
     @message=[]
     Messages.all.each do |message|
       if message.id.to_s==params[:parent_message_id] or message.parent_message_id.to_s==params[:parent_message_id]
@@ -122,6 +130,7 @@ class DailyUpdatesController < ApplicationController
       end
     end
   end
+
   def new_message
     if params[:message].present?
       if params[:commit]=="Reply"
@@ -130,13 +139,17 @@ class DailyUpdatesController < ApplicationController
           @message=Messages.create(:status=>0,:parent_message_id=>params[:parent_message_id],:user_id=>params[:user_id],:sent_to=>@msg.user_id,:message=>params[:message])
         else
           @message=Messages.create(:status=>0,:parent_message_id=>params[:parent_message_id],:user_id=>params[:user_id],:sent_to=>@msg.sent_to,:message=>params[:message])
-      
         end
+        redirect_to :back
       else
         @message=Messages.create(:status=>0,:user_id=>params[:user_id],:sent_to=>params[:send_to],:message=>params[:message])
         @message.update(:parent_message_id=>@message.id)
       end  
     end
+  end
+  
+  def check_msg
+   @message=ScheduleMeeting.where(:meeting_no=>params[:msg_id]).last
   end
 private
   def set_daily_update

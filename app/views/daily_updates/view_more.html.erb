@@ -4,13 +4,20 @@
     <div class="row">      
       <div class="col-md-12 mt">
         <div class="content-panel" style="width:995px; margin-left:-20px;">
-          <%@message.each do |messages|%>
+          <%@message.sort_by(&:created_at).each do |messages|%>
             <div style="padding:10px;border-style: solid; border-width: 1px; margin-left:40px;margin-right:40px;">
           	</br>
           	  <%=User.find(messages.user_id).name if messages.user_id.present?%>
           		on <%=format_date(messages.created_at)%>
           		</br></br>
-          		<%= messages.message%>
+              <%if messages.message.include?("@")%>
+                <%sp=messages.message.split('@')%>
+                <%msg=sp[1].split(' ')%>
+                <%msg1=msg.delete(msg[0])%>
+                <%=sp[0]%> <%=link_to msg1, check_msg_path(:msg_id=>msg1)%> <%=msg.join(" ")%>
+              <%else%>
+          		  <%= messages.message%>
+              <%end%>
           	</div>
           	</br>
           <%end%>
@@ -21,8 +28,8 @@
         	  	  <td><%=text_area_tag :message%></td>
         	    </tr>
                 <%=hidden_field_tag :user_id,current_user.id %>
-                 <%=hidden_field_tag :send_to,params[:sent_to]%>
-                 <%=hidden_field_tag :parent_message_id,params[:parent_message_id]%>
+                <%=hidden_field_tag :send_to,params[:sent_to]%>
+                <%=hidden_field_tag :parent_message_id,params[:parent_message_id]%>
         	    <tr>
         	      <td>
         	        <%=submit_tag 'Reply'%>

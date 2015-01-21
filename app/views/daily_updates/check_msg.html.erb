@@ -1,0 +1,36 @@
+<section id="main-content">
+  <section class="wrapper">
+    <h3><i class="fa fa-angle-right"></i>Meeting</h3>
+    <div class="row">      
+      <div class="col-md-12 mt">
+        <div class="content-panel" style="width:995px; margin-left:-20px;">
+          <table class='table'>
+            <thead>
+            	<th>Meeting no</th>
+            	<th>Meeting Date</th>
+            	<th>Meeting Time</th>
+            	<th>Assigned to</th>
+            	<th>Venue</th>
+            	<th>MOM</th>
+            </thead>
+            <tbody>
+            	<tr>
+            		<td><%=@message.meeting_no%></td>
+            	
+            		<td><%=format_date(@message.meeting_date)%></td>
+            	
+            		<td><%=format_time(@message.meeting_time)%></td>
+            
+            		<td><%=User.find(@message.assigned_to).name%></td>
+            
+            		<td><%=@message.venue%></td>
+            
+            		<td><%=@message.mom%></td>
+            	</tr>
+            </tbody>        	
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>   
+</section>

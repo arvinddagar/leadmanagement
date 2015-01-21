@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get 'daily_updates/index'
   end
     get 'past_clients'=>"admin/daily_updates#past_clients"
+     get 'check_msg'=>"daily_updates#check_msg"
     get 'add_contracts'=>'admin/daily_updates#index_contract'
     get 'new_contract' => 'admin/daily_updates#new_contract'
     get 'scheduled_call' => 'daily_updates#scheduled_call'
@@ -29,15 +30,15 @@ Rails.application.routes.draw do
     get 'meeting_logs' => 'daily_updates#meeting_logs'
     get 'not_called'=>'admin/daily_updates#not_called'
     get 'contract_updates'=>'daily_updates#contract_updates'
-     get 'messages'=>'daily_updates#messages'
-     get 'view_more'=>'daily_updates#view_more'
-      get 'new_message'=>'daily_updates#new_message'
-      post 'new_message'=>'daily_updates#new_message'
-     post 'contract_updates'=>'daily_updates#contract_updates'
+    get 'messages'=>'daily_updates#messages'
+    get 'view_more'=>'daily_updates#view_more'
+    get 'new_message'=>'daily_updates#new_message'
+    post 'new_message'=>'daily_updates#new_message'
+    post 'contract_updates'=>'daily_updates#contract_updates'
   as :admin do
     post 'notify_expiry'=>'admin/daily_updates#notify_expiry'
     post 'lead_statuses'=>'admin/daily_updates#daily_report'
-     get 'daily_report'=>'admin/daily_updates#daily_report'
+    get 'daily_report'=>'admin/daily_updates#daily_report'
     post 'admin/new_users' => 'admin/users#create'
     post 'user_daily_updates' => 'admin/daily_updates#user_daily_updates'
     post 'schedule_meeting'=>'daily_updates#schedule_meeting'
@@ -53,7 +54,6 @@ Rails.application.routes.draw do
     get 'payment_history' => 'admin/daily_updates#payment_history'
     get 'contract_expiry' => 'admin/daily_updates#contract_expiry'
     post 'contract_expiry' => 'admin/daily_updates#contract_expiry'
-    post 'create_payment' => 'admin/daily_updates#create_payment'
-    
+    post 'create_payment' => 'admin/daily_updates#create_payment'    
   end
 end

@@ -9,16 +9,14 @@
             <%Messages.find(@message).each do |messages|%>
           		<div style="padding:10px;border-style: solid; border-width: 1px; margin-left:40px;margin-right:40px;">
           			<%@m=Messages.where(:parent_message_id=>messages.parent_message_id)%>
-          			
           			<%=User.find(@m.last.user_id).name if messages.user_id.present?%>
-          			on <%=format_date(messages.created_at)%>
+          			on <%=format_date(@m.last.created_at)%>
           			</br></br>
           			<%if @m.last.status=='0'%>
-          			 <b> <%=truncate(@m.last.message, :length => 100) %>......</b>
-          			 <%else%>
-          			 <%=truncate(@m.last.message, :length => 100) %>......
-          			 <%end%>
-          			
+          			  <b><%=truncate(@m.last.message, :length => 100) %>......</b>
+          			<%else%>
+          			  <%=truncate(@m.last.message, :length => 100) %>......
+          			<%end%>
           			<%= link_to 'View more', view_more_path(:parent_message_id=>@m.last.parent_message_id,:sent_to=>@m.last.user_id) %>
           		</div>
           		</br>
@@ -27,5 +25,5 @@
         </div>
       </div>
     </div>
-  </section>   
+  </section>
 </section>
