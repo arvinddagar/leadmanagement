@@ -149,7 +149,14 @@ class DailyUpdatesController < ApplicationController
   end
   
   def check_msg
-   @message=ScheduleMeeting.where(:meeting_no=>params[:msg_id]).last
+    @message=ScheduleMeeting.where(:meeting_no=>params[:msg_id]).last
+     @meeting_date=@message.meeting_date.strftime("%v")
+     @meeting_time=@message.meeting_time.strftime("%I:%M%p")
+     @venue=@message.venue
+     @mom=@message.mom
+     @assigned_to=User.find(@message.assigned_to).name
+     @meeting_no=@message.meeting_no
+    render :json =>{:meeting_no=>@meeting_no,:assigned_to=>@assigned_to,:mon=>@mom,:venue=>@venue,:meeting_date => @meeting_date, :meeting_time => @meeting_time }
   end
 private
   def set_daily_update

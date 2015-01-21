@@ -1,0 +1,62 @@
+<button type="button" onclick="myFunctionModal(this)" class="btn announce" data-toggle="modal" data-target="#call" id="<%=msg_id%>">
+  <%=msg_id%>
+</button>
+<div class="modal fade" id="call" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Meeting</h4>
+      </div>
+      <div class="modal-body">
+       <table class='table'>
+            <thead>
+              <th>Meeting no</th>
+              <th>Meeting Date</th>
+              <th>Meeting Time</th>
+              <th>Assigned to</th>
+              <th>Venue</th>
+              <th>MOM</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="meeting_no"></div></td>
+              
+                <td><div class="meeting_date"></div></td>
+              
+                <td><div class="meeting_time"></div></td>
+            
+                <td><div class="assigned_to"></div></td>
+            
+                <td><div class="venue"></div></td>
+            
+                <td><div class="mom"></div></td>
+              </tr>
+            </tbody>          
+          </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+var x = '';
+   $(".announce").click(function(){
+    
+      $.ajax('/check_msg',{
+      type: 'get',
+        dataType: 'html',
+        data: {msg_id: $(this).attr('id')},
+        success: function(data, textStatus, jqXHR)
+          {
+             var d=JSON.parse(data);  
+            $('.meeting_no').text(d['meeting_no'])
+            $('.meeting_date').text(d['meeting_date'])
+            $('.meeting_time').text(d['meeting_time'])
+            $('.assigned_to').text(d['assigned_to'])
+            $('.venue').text(d['venue'])
+            $('.mom').text(d['mom'])
+          }
+    });
+
+   });
+</script>

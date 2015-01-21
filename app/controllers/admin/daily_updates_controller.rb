@@ -35,7 +35,6 @@ class Admin::DailyUpdatesController < ApplicationController
   
   def meetings
     @m=[]
-    #@pending_status=0
     @user=User.all
     @meetings=[]
     @search = DailyUpdate.search(params[:q])
@@ -45,17 +44,16 @@ class Admin::DailyUpdatesController < ApplicationController
         else
           @meetings<<daily.schedule_meeting.first.id
         end
-      daily.schedule_meeting.each do |sm|
-        if sm.meeting_date.present?
-        if sm.mom==nil and sm.meeting_date<Date.today 
-          #@pending_status=@pending_status+1
-          if @m.include?(sm )
-          else
-          @m<<sm
+        daily.schedule_meeting.each do |sm|
+          if sm.meeting_date.present?
+            if sm.mom==nil and sm.meeting_date<Date.today 
+              if @m.include?(sm )
+              else
+                @m<<sm
+              end
+            end
+          end
         end
-        end
-      end
-       end
       end
     end
   end

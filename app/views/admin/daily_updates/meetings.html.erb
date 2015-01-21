@@ -59,27 +59,24 @@
             <%s_no=0%>
               <h5>Total <%=@meetings.count%> meetings are held</h5>
               <h5>Total  <%=@m.count%>Pending status</h5>
-             
               <% sc_meeting(@meetings).sort_by(&:meeting_date).reverse.each do |meeting|%>
-              
                 <%if meeting.present?%>             
-                <tr>
-                <td><%=s_no=s_no+1%></td>
-                <td><%=meeting.meeting_no if meeting.meeting_no.present?%></td>
-                  <td><%= format_date(meeting.meeting_date) if meeting.meeting_date.present? %></td>
-                  <td><%= format_time(meeting.meeting_time) if meeting.meeting_time.present? %></td>
-                  <td><%= meeting.daily_update.contact_person if meeting.daily_update.present?%></br><%= meeting.daily_update.business if meeting.daily_update.present?%></br><%=meeting.daily_update.number if meeting.daily_update.present?%></td>
-                 
-                  <td style="width:20px"><%= meeting.venue %></td>
-                  <td style="width:30px"><%= meeting.notes%></td>
-                  <%if meeting.assigned_to.present?%>
-                    <td><%= User.meeting(meeting.assigned_to).name %></td>
-                  <%end%>
-                  <td><%= meeting.mom%></td>
-                  <td><%=render  :partial=> "logs", locals: {:id => meeting.daily_update.id}%></td>
-                  <td><%=render  :partial=> "edit_meetings", locals: {:id => meeting.id}%></td>
-                  <td> <%=render  :partial=> "update_status", locals: {:id => meeting.id}%></td>
-                </tr>
+                  <tr>
+                    <td><%=s_no=s_no+1%></td>
+                    <td><%=meeting.meeting_no if meeting.meeting_no.present?%></td>
+                    <td><%= format_date(meeting.meeting_date) if meeting.meeting_date.present? %></td>
+                    <td><%= format_time(meeting.meeting_time) if meeting.meeting_time.present? %></td>
+                    <td><%= meeting.daily_update.contact_person if meeting.daily_update.present?%></br><%= meeting.daily_update.business if meeting.daily_update.present?%></br><%=meeting.daily_update.number if meeting.daily_update.present?%></td>
+                    <td style="width:20px"><%= meeting.venue %></td>
+                    <td style="width:30px"><%= meeting.notes%></td>
+                    <%if meeting.assigned_to.present?%>
+                      <td><%= User.meeting(meeting.assigned_to).name %></td>
+                    <%end%>
+                    <td><%= meeting.mom%></td>
+                    <td><%=render  :partial=> "logs", locals: {:id => meeting.daily_update.id}%></td>
+                    <td><%=render  :partial=> "edit_meetings", locals: {:id => meeting.id}%></td>
+                    <td> <%=render  :partial=> "update_status", locals: {:id => meeting.id}%></td>
+                  </tr>
               <%end %>              
               <%end%>
             </tbody>

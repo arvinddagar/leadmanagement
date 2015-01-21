@@ -14,7 +14,7 @@
                 <%sp=messages.message.split('@')%>
                 <%msg=sp[1].split(' ')%>
                 <%msg1=msg.delete(msg[0])%>
-                <%=sp[0]%> <%=link_to msg1, check_msg_path(:msg_id=>msg1)%> <%=msg.join(" ")%>
+                <%=sp[0]%> <%#=link_to msg1, check_msg_path(:msg_id=>msg1)%><%=render  :partial=> "message", locals: {:msg_id=>msg1}%> <%=msg.join(" ")%>
               <%else%>
           		  <%= messages.message%>
               <%end%>
