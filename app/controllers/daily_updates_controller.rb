@@ -156,7 +156,7 @@ class DailyUpdatesController < ApplicationController
      @mom=@message.mom
      @assigned_to=User.find(@message.assigned_to).name
      @meeting_no=@message.meeting_no
-    render :json =>{:meeting_no=>@meeting_no,:assigned_to=>@assigned_to,:mon=>@mom,:venue=>@venue,:meeting_date => @meeting_date, :meeting_time => @meeting_time }
+    render :json =>{:meeting_no=>@meeting_no,:assigned_to=>@assigned_to,:mom=>@mom,:venue=>@venue,:meeting_date => @meeting_date, :meeting_time => @meeting_time }
   end
 private
   def set_daily_update

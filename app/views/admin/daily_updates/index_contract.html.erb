@@ -47,14 +47,16 @@
           <div class="actions" align="center"><%= f.submit "Search" %></div>
         <% end %>
           <div style="float:right;"><%= link_to 'New Contract', new_contract_path , :class=>"btn btn-primary",:style=>"margin-right:10px"%></div>
-            
+            <h4>There are total <%=@contracts.count%> contracts</h4>
           <table class='table'>
             <thead>
               <tr>
                 <th>S. no</th>
                 <th>Client</th>
                 <th>Domain name</th>
+                <th>Start Date</th>
                 <th>Renewal date</th>
+                <th>Days</th>
                 <th>Plan</th>
                 <th>Status</th>
                 <th> Work Status</th>
@@ -69,7 +71,11 @@
                   <td><%=s_no=s_no+1%></td>
                   <td><%= DailyUpdate.client(contract.daily_update_id).contact_person %></td>
                   <td><%= contract.domain_name %></td>
+                   <td><%= format_date(contract.created_at) %></td>
                   <td style="width:100px"><%= format_date(contract.plans.last.renewal_date.to_date) if contract.plans.last.renewal_date.present? if contract.plans.present?%></td>
+
+                  <td><%=(Date.today-contract.created_at.to_date).to_i%></td>
+                  
                   <td><%= contract.plans.last.plan_type if contract.plans.present?%></td>
                   <td><%= contract.status %>
                     <%if contract.status=="expired"%>
@@ -78,9 +84,8 @@
                   </td>                  
                    <td><%= contract.work_status %></td>
                    <td><%= contract.priority %></td>
-                   <td><%= link_to 'Updates' ,contract_updates_path(:id=>contract.id)%></td>
-                 <td><%=render  :partial=> "edit_contract", locals: {:id => contract.id}%>
-                 <td><%= link_to 'Payment history' ,payment_history_path(:id=>contract.id)%>
+                   <td><%= link_to 'Updates' ,contract_updates_path(:id=>contract.id)%></br><%= link_to 'Payment history' ,payment_history_path(:id=>contract.id)%></br><%=render  :partial=> "edit_contract", locals: {:id => contract.id}%>
+                 
                  </td>
                 </tr>
               <% end %>
