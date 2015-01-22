@@ -122,7 +122,7 @@ class Admin::DailyUpdatesController < ApplicationController
     @client=DailyUpdate.includes(:lead_status).where('lead_statuses.state =?', 'Client').references(:lead_status)
     @search = AddContract.search(params[:q])
     @contracts=@search.result
-    respond_with(@search)
+    respond_with(@contracts)
   end
 
   def edit_contract

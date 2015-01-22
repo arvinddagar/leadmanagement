@@ -55,9 +55,8 @@
                 <th>Client</th>
                 <th>Domain name</th>
                 <th>Start Date</th>
-                <th>Renewal date</th>
-                <th>Days</th>
-                <th>Plan</th>
+                <th><%= sort_link(@search, :plans_renewal_date, "Renewal Date") %></th>
+                <th class="days"><%= sort_link(@search, :created_at, "Days") %></th>                
                 <th>Status</th>
                 <th> Work Status</th>
                 <th> Priority</th>
@@ -81,7 +80,8 @@
                     <%if contract.status=="expired"%>
                       <%= button_to "Notify", notify_expiry_path(:id=>contract.daily_update_id,:contract_id=>contract.id)%>
                     <%end%>
-                  </td>                  
+                  </td>       
+                  <%=hidden_field_tag :a,0%>           
                    <td><%= contract.work_status %></td>
                    <td><%= contract.priority %></td>
                    <td><%= link_to 'Updates' ,contract_updates_path(:id=>contract.id)%></br><%= link_to 'Payment history' ,payment_history_path(:id=>contract.id)%></br><%=render  :partial=> "edit_contract", locals: {:id => contract.id}%>
@@ -95,3 +95,25 @@
     </div>
   </section>   
 </section>
+// <script>
+//   $( ".days" ).click(function() {
+   
+//    $.ajax('/index_contract',{
+//       type: 'get',
+//         dataType: 'html',
+//         data: {sort: $('#a').val()},
+//         success: function(data, textStatus, jqXHR)
+//           {
+//             if( $('#a').val()==0)
+//             {
+//                $('#a').val(1);
+//             }
+//             else
+//             {
+//                $('#a').val(0);
+//             }
+         
+//           }
+//     });
+// });
+// </script>
