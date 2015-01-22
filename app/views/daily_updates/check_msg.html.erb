@@ -15,16 +15,11 @@
             </thead>
             <tbody>
             	<tr>
-            		<td><%=@message.meeting_no%></td>
-            	
-            		<td><%=format_date(@message.meeting_date)%></td>
-            	
-            		<td><%=format_time(@message.meeting_time)%></td>
-            
-            		<td><%=User.find(@message.assigned_to).name%></td>
-            
-            		<td><%=@message.venue%></td>
-            
+            		<td><%=@message.meeting_no%></td>            	
+            		<td><%=format_date(@message.meeting_date)%></td>            	
+            		<td><%=format_time(@message.meeting_time)%></td>            
+            		<td><%=User.find(@message.assigned_to).name%></td>            
+            		<td><%=@message.venue%></td>            
             		<td><%=@message.mom%></td>
             	</tr>
             </tbody>        	

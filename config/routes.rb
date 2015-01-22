@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     get 'daily_updates/index'
   end
     get 'past_clients'=>"admin/daily_updates#past_clients"
-     get 'check_msg'=>"daily_updates#check_msg"
+    get 'check_msg'=>"daily_updates#check_msg"
     get 'add_contracts'=>'admin/daily_updates#index_contract'
     get 'new_contract' => 'admin/daily_updates#new_contract'
     get 'scheduled_call' => 'daily_updates#scheduled_call'

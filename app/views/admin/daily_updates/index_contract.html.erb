@@ -17,7 +17,7 @@
             <%= f.label :status, "Status" ,:class=>"f-label"%>
             <%= f.select :status_eq ,(AddContract::STATUS), {:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:status_eq]%></br>
             </br>
-             <%= f.label :priority, "Priority" ,:class=>"f-label"%>
+            <%= f.label :priority, "Priority" ,:class=>"f-label"%>
             <%= f.select :priority_eq ,(AddContract::PRIORITY), {:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:status_eq]%>            
             <%= f.label :work_status, "Work status",:class=>"f-label" %>
             <%= f.select :work_status_eq ,(AddContract::WORKSTATUS), {:include_blank=>"select"},:class=>'form-control',:value=>params[:q][:work_status_eq]%>
@@ -85,7 +85,6 @@
                    <td><%= contract.work_status %></td>
                    <td><%= contract.priority %></td>
                    <td><%= link_to 'Updates' ,contract_updates_path(:id=>contract.id)%></br><%= link_to 'Payment history' ,payment_history_path(:id=>contract.id)%></br><%=render  :partial=> "edit_contract", locals: {:id => contract.id}%>
-                 
                  </td>
                 </tr>
               <% end %>
