@@ -20,8 +20,8 @@ class Admin::DailyUpdatesController < ApplicationController
   
   def user_daily_updates
   	@daily_updates=User.find(params[:id]).daily_updates.order("created_at").page(params[:page]).per(25)
-  end  
-
+  end
+  
   def fetch_meetings
     @meetings=ScheduleMeeting.find(params[:meeting_id])
     render :json =>@meetings
@@ -40,9 +40,9 @@ class Admin::DailyUpdatesController < ApplicationController
     @search = DailyUpdate.search(params[:q])
     @search.result.each do |daily|
       if daily.schedule_meeting.present?
-        if @meetings.include?(daily.schedule_meeting.first.id )
+        if @meetings.include?(daily.schedule_meeting.last.id )
         else
-          @meetings<<daily.schedule_meeting.first.id
+          @meetings<<daily.schedule_meeting.last.id
         end
         daily.schedule_meeting.each do |sm|
           if sm.meeting_date.present?
@@ -210,13 +210,6 @@ class Admin::DailyUpdatesController < ApplicationController
         @sm<<sm
       end
     end
-    #@service_calls=ServiceCall.all
-    # ServiceCall.all.each do |service|
-    #   if  service.created_at.to_date==Date.today
-    #     @service_calls<<service
-    #   end
-    # end
-    # binding.pry
   end
 
   def past_clients
