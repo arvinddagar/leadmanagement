@@ -4,10 +4,10 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     if resource.admin?
      	renewal_date
-      daily_updates_path
+      todays_meetings_path
     else
       renewal_date
-      new_daily_update_path
+      todays_meetings_path
     end
   end
   def renewal_date

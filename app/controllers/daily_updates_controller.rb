@@ -158,6 +158,25 @@ class DailyUpdatesController < ApplicationController
     @meeting_no=@message.meeting_no
     render :json =>{:meeting_no=>@meeting_no,:assigned_to=>@assigned_to,:mom=>@mom,:venue=>@venue,:meeting_date => @meeting_date, :meeting_time => @meeting_time }
   end
+  def client_meetings
+    @user=User.all
+    @daily=DailyUpdate.all
+    @meetings=[]
+    @daily.each do |daily|
+      if daily.lead_status.present?
+        if daily.lead_status.last.state=='Client'
+          if daily.schedule_meeting.present?
+            @meetings<<daily.schedule_meeting.last.id
+          end
+        end
+      end
+    end
+  end
+  
+  def todays_meetings
+    @meetings=ScheduleMeeting.where(:meeting_date=>Date.today)
+    @user=User.all
+  end
 private
   def set_daily_update
     @daily_update = DailyUpdate.find(params[:id])

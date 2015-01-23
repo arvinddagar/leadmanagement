@@ -1,0 +1,55 @@
+<section id="main-content">
+  <section class="wrapper">
+    <h3><i class="fa fa-angle-right"></i>Client Meetings</h3>
+    <div class="row">
+        <div class="col-md-12">
+        </div>
+      <div class="col-md-12 mt">
+        <div class="content-panel" style="width:1000px;margin-left:-20px;">
+<table class='table'>
+            <thead>
+              <tr>
+                <th>S. no</th>
+                <th>Meeting no</th>
+                <th>Meeting Date</th>
+                <th>Meeting Time</th>
+                <th>Client Details</th>
+                <th>Venue</th>
+                <th>Notes</th>
+                <th>Assigned to</th>
+                <th>MOM</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+           
+            <tbody>
+              <%s_no=0%>
+              <%ScheduleMeeting.find(@meetings).each do |meeting|%>
+                <%if meeting.daily_update.present?%>
+                  <%if meeting.daily_update.lead_status.last.state=="Client"%>
+                  <tr>
+                    <td><%=s_no=s_no+1%></td>
+                    <td><%=meeting.meeting_no%></td>
+                    <td><%=format_date(meeting.meeting_date)%></td>
+                    <td><%=format_time(meeting.meeting_time)%></td>
+                    <td><%=meeting.daily_update.contact_person%></br>
+                    <%=meeting.daily_update.number%></br>
+                    <%=meeting.daily_update.business%></td>
+                    <td><%=meeting.venue%></td>
+                    <td><%=meeting.notes%></td>
+                     <td><%=User.find(meeting.assigned_to).name%></td>
+                    <td><%=meeting.mom%></td>      
+                    <td><%=render  :partial=> "admin/daily_updates/logs", locals: {:id => meeting.daily_update.id}%></td>             
+                    <td><%=render  :partial=> "admin/daily_updates/edit_meetings", locals: {:id => meeting.id}%></td>
+                    <td> <%=render  :partial=> "admin/daily_updates/update_status", locals: {:id => meeting.id}%></td>
+                    </tr>
+                  <%end%>
+                <%end%>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>   
+</section>

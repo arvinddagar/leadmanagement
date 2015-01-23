@@ -78,7 +78,7 @@ class Admin::DailyUpdatesController < ApplicationController
       @schedule=ScheduleMeeting.new(:meeting_no=>meeting,:meeting_date=>params[:meeting_date],:notes=>params[:notes],:assigned_to=>params[:assigned_to],:meeting_time=>params[:meeting_time],:venue=>params[:venue],:daily_update_id=>params[:daily_update_id])
       @schedule.save
     end
-    redirect_to meetings_path
+    redirect_to :back
   end
 
   def client_management

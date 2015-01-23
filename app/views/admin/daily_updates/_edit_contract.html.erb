@@ -1,5 +1,5 @@
- <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
 <button type="button" onclick="myFunctionupdate(this)" class="btn announce" data-toggle="modal" data-target="#myModal" id="<%=id%>">
 Update contract
 </button>
@@ -46,7 +46,7 @@ Update contract
                 Status
               </td>
               <td>
-                <%=  select_tag 'status', options_for_select(AddContract::STATUS)%>
+                <%= select_tag 'status', options_for_select(AddContract::STATUS)%>
               </td>
               <%=hidden_field_tag :contract_id%>
             </tr>
@@ -55,15 +55,15 @@ Update contract
                 Work Status
               </td>
               <td>
-                <%=  select_tag 'work_status', options_for_select(AddContract::WORKSTATUS)%>
+                <%= select_tag 'work_status', options_for_select(AddContract::WORKSTATUS)%>
               </td>
             </tr>
-                <tr>
+            <tr>
               <td>
                Priority
               </td>
               <td>
-                <%=  select_tag 'priority', options_for_select(AddContract::PRIORITY)%>
+                <%= select_tag 'priority', options_for_select(AddContract::PRIORITY)%>
               </td>
             </tr>
             <tr>

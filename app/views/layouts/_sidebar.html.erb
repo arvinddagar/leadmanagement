@@ -9,9 +9,14 @@
         <%@m=Messages.where(:status=>"0",:sent_to=>current_user.id)%>
         <span><%= link_to "Messages" , messages_path %><%=@m.count if @m.present?%> <%if @m.present?%>unread messages<%end%></span>
       </li>
+     
       <li class="sub-menu">
         <i class="fa fa-dashboard"></i>
         <span><%= link_to "Meetings" , meetings_path %></span>
+      </li>
+        <li class="sub-menu">
+        <i class="fa fa-dashboard"></i>
+        <span><%= link_to "Todays Meetings" , todays_meetings_path %></span>
       </li>
       <li class="sub-menu">
         <i class="fa fa-book"></i>
@@ -70,8 +75,16 @@
         <i class="fa fa-book"></i>
         <span><%= link_to "View records" , daily_updates_path %></span>
       </li>
+       <li class="sub-menu">
+        <i class="fa fa-dashboard"></i>
+        <span><%= link_to "Todays Meetings" , todays_meetings_path %></span>
+      </li>
       <li class="sub-menu">
         <span><%= link_to "Meetings" , meetings_path %></span>
+      </li>
+       <li class="sub-menu">
+        <i class="fa fa-th"></i>
+        <span><%= link_to "Client Management" , client_management_path%></span>
       </li>
       <li class="sub-menu">
         <i class="fa fa-th"></i>
@@ -79,6 +92,9 @@
       </li>
        <li class="sub-menu">
         <span><%= link_to "Scheduled calls" ,scheduled_call_path%></span>
+      </li>
+       <li class="sub-menu">
+        <span><%= link_to "Client Meetings" ,client_meetings_path%></span>
       </li>
     </ul>
   </div>
@@ -100,6 +116,10 @@
       <li class="sub-menu">
         <i class="fa fa-book"></i>
         <span><%= link_to "View records" , daily_updates_path %></span>
+      </li>
+        <li class="sub-menu">
+        <i class="fa fa-dashboard"></i>
+        <span><%= link_to "Todays Meetings" , todays_meetings_path %></span>
       </li>
       <li class="sub-menu">
         <span><%= link_to "Meetings" , meetings_path %></span>
