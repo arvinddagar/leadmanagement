@@ -59,7 +59,7 @@
             <%s_no=0%>
               <h5>Total <%=@meetings.count%> meetings are held</h5>
               <h5>Total  <%=@m.count%>Pending status</h5>
-              <% sc_meeting(@meetings).each do |meeting|%>
+              <% sc_meeting(@meetings).sort_by(&:meeting_date).each do |meeting|%>
                 <%if meeting.present?%>             
                   <tr>
                     <td><%=s_no=s_no+1%></td>
