@@ -27,6 +27,7 @@
               <%s_no=0%>
               <%@meetings.each do |meeting|%>
                 <%if meeting.daily_update.present?%>
+                <%if meeting.daily_update.lead_status.present?%>
                   <%if meeting.daily_update.lead_status.last.state=="Client"%>
                   <tr>
                     <td><%=s_no=s_no+1%></td>
@@ -42,11 +43,12 @@
                     <td> <%=render  :partial=> "admin/daily_updates/update_status", locals: {:id => meeting.id}%></td>
                     </tr>
                   <%end%>
+                  <%end%>
                 <%end%>
               <%end%>
               </td>
               </tr>
-              <tr><td><h4>Leads Meeting</h4>
+              <tr><td><h4>Lead Meetings</h4>
                <%s_no=0%>
               <%@meetings.each do |meeting|%>
                 <%if meeting.daily_update.present?%>
